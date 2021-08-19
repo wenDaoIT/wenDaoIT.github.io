@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>问道IT</title>
   
-  
+  <subtitle>这是？</subtitle>
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
@@ -33,6 +33,32 @@
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>IDEA快捷键</title>
+    <link href="https://wendaoit.github.io/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://wendaoit.github.io/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</id>
+    <published>2021-08-11T08:20:15.995Z</published>
+    <updated>2021-08-19T11:41:21.281Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a>IDEA快捷键</h2><p>选中CTRL+shift+左右</p><p>调整位置CTRL+shift+上下</p><p>主方法psvm</p><p>输出sout</p><p>Ctrl+n 查找xxx底层类和方法</p><p>Ctrl+/ 快速创建注释</p><p>Ctrl+F9 重新编译</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;IDEA快捷键&quot;&gt;&lt;a href=&quot;#IDEA快捷键&quot; class=&quot;headerlink&quot; title=&quot;IDEA快捷键&quot;&gt;&lt;/a&gt;IDEA快捷键&lt;/h2&gt;&lt;p&gt;选中CTRL+shift+左右&lt;/p&gt;
+&lt;p&gt;调整位置CTRL+shift+上下&lt;/p&gt;
+&lt;p&gt;主方</summary>
+      
+    
+    
+    
+    <category term="IDEA" scheme="https://wendaoit.github.io/categories/IDEA/"/>
+    
+    
+    <category term="-导航 -分享" scheme="https://wendaoit.github.io/tags/%E5%AF%BC%E8%88%AA-%E5%88%86%E4%BA%AB/"/>
     
   </entry>
   
