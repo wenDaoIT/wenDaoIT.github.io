@@ -6,7 +6,7 @@
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
-  <updated>2021-08-20T07:11:48.770Z</updated>
+  <updated>2021-08-20T07:30:21.947Z</updated>
   <id>https://wendaoit.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>公司融资知识科普</title>
+    <link href="https://wendaoit.github.io/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/"/>
+    <id>https://wendaoit.github.io/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</id>
+    <published>2021-08-20T07:19:01.620Z</published>
+    <updated>2021-08-20T07:30:21.947Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="双创科普知识"><a href="#双创科普知识" class="headerlink" title="双创科普知识"></a>双创科普知识</h1><p>最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等</p><p>了解一点关于投融资的知识；</p><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;双创科普知识&quot;&gt;&lt;a href=&quot;#双创科普知识&quot; class=&quot;headerlink&quot; title=&quot;双创科普知识&quot;&gt;&lt;/a&gt;双创科普知识&lt;/h1&gt;&lt;p&gt;最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等&lt;/p&gt;
+&lt;p&gt;了解一点关于投融资的知识</summary>
+      
+    
+    
+    
+    <category term="公司" scheme="https://wendaoit.github.io/categories/%E5%85%AC%E5%8F%B8/"/>
+    
+    
+    <category term="-投融资 -公司" scheme="https://wendaoit.github.io/tags/%E6%8A%95%E8%9E%8D%E8%B5%84-%E5%85%AC%E5%8F%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构Day2</title>

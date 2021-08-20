@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wendaoit.github.io/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</loc>
+    
+    <lastmod>2021-08-20</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wendaoit.github.io/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/</loc>
     
     <lastmod>2021-08-20</lastmod>
@@ -74,6 +81,13 @@
   </url>
   
   <url>
+    <loc>https://wendaoit.github.io/tags/%E6%8A%95%E8%9E%8D%E8%B5%84-%E5%85%AC%E5%8F%B8/</loc>
+    <lastmod>2021-08-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wendaoit.github.io/tags/%E9%93%BE%E8%A1%A8/</loc>
     <lastmod>2021-08-20</lastmod>
     <changefreq>daily</changefreq>
@@ -91,6 +105,13 @@
   
   <url>
     <loc>https://wendaoit.github.io/categories/IDEA/</loc>
+    <lastmod>2021-08-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wendaoit.github.io/categories/%E5%85%AC%E5%8F%B8/</loc>
     <lastmod>2021-08-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
