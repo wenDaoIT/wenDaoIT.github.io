@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>数据结构学习Day 3</title>
+    <url>/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<center>二叉搜索树</center>
+
+<span id="more"></span>
+
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol>
+<li>定义：也是一种动态数据结构 ，是一种链表</li>
+</ol>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png" alt="image-20210821130645690"></p>
+<p>一个节点也是二叉树、null也是二叉树</p>
+<h3 id="二分搜索树"><a href="#二分搜索树" class="headerlink" title="二分搜索树"></a>二分搜索树</h3><ul>
+<li> 特点：每个节点的值</li>
+<li>小于其右子树的所有结点的值；</li>
+<li>大于其左子树所有结点的值；</li>
+<li>储存的元素必须有可比较性；<del>意思是说不能存放重复数据</del></li>
+</ul>
+<h3 id="Set-AND-Map-可以理解为一种定义好的数据结构"><a href="#Set-AND-Map-可以理解为一种定义好的数据结构" class="headerlink" title="Set AND Map(可以理解为一种定义好的数据结构)"></a>Set AND Map(可以理解为一种定义好的数据结构)</h3><h4 id="Set–集合：不能有重复元素"><a href="#Set–集合：不能有重复元素" class="headerlink" title="Set–集合：不能有重复元素"></a>Set–集合：不能有重复元素</h4><p>因为二分搜索树不能存放重复元素，所以是非常好的实现“集合”的底层数据结构；</p>
+<p>二分搜索树的遍历</p>
+<p>都是从根结点出发，最后回到根结点</p>
+<ul>
+<li><p>前序遍历（）</p>
+<ul>
+<li><p>```java<br>System.out.println(node.)<br>traverse(node.right);<br>traverse(node.left);</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 中序遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    traverse(node.<span class="attribute">right</span>);</span><br><span class="line">    System<span class="selector-class">.out</span><span class="selector-class">.println</span>(node.)</span><br><span class="line">    traverse(node.<span class="attribute">left</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>（得到的结果是从小到大排列的）</p>
+</li>
+</ul>
+</li>
+<li><p>后续遍历（eg:为二分搜索树释放内存）</p>
+<ul>
+<li><pre><code class="java">traverse(node.right);
+traverse(node.left);
+System.out.println(node.)
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>-数据结构</category>
+      </categories>
+      <tags>
+        <tag>-树结构 -二叉树 -八股文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA快捷键</title>
+    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
+
+<p>选中CTRL+shift+左右</p>
+<p>调整位置CTRL+shift+上下</p>
+<p>主方法psvm</p>
+<p>输出sout</p>
+<p>Ctrl+n 查找xxx底层类和方法</p>
+<p>Ctrl+/ 快速创建注释</p>
+<p>Ctrl+F9 重新编译</p>
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>-导航 -分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>公司融资知识科普</title>
+    <url>/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</url>
+    <content><![CDATA[<center>双创科普知识</center>
+
+<span id="more"></span>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等</p>
+<p>了解一点关于投融资的知识；</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>
+]]></content>
+      <categories>
+        <category>公司</category>
+      </categories>
+      <tags>
+        <tag>-投融资 -公司</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
+    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
+<span id="more"></span>
+
+<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
+<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
+<p>　　例如：</p>
+<p>　　String a=”abc”;</p>
+<p>　　String b=”abc”;</p>
+<p>　　System.out.println(a==b);</p>
+<p>　　答案是：true</p>
+<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
+<p>　　但是如果我们接着</p>
+<p>　　String c=new String(“abc”);</p>
+<p>　　再</p>
+<p>　　System.out.println(a==c);</p>
+<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　</p>
+<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
+<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　依旧是来观察 Java 中 equals () 的源码</p>
+<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
+<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
+<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
+]]></content>
+      <categories>
+        <category>比较</category>
+      </categories>
+      <tags>
+        <tag>equals</tag>
+        <tag>compareTo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习Day1</title>
+    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
+    <content><![CDATA[<center>摘要：数组、stack、queue</center>
+
+<span id="more"></span>
+
+<h2 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h2><p>栈的底层操作——&gt;数组</p>
+<h2 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h2><h3 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h3><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
+<p>eg:撤销操作</p>
+<h4 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h4><p> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688"></p>
+<h2 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h2><h3 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h3><p>eg:办理业务</p>
+<h4 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h4><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293"></p>
+<p>循环队列</p>
+<p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<p>代码分析两个队列花费时间的差距</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
+<p>性能差距100倍！</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>-数组 -栈 -队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构Day2</title>
+    <url>/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/</url>
+    <content><![CDATA[<center>链表</center>
+
+<span id="more"></span>
+
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>数组和链表的对比：<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820090218843.png" alt="image-20210820090218843"></p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><p>​            真正的动态；头插方便</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151148173.png" alt="image-20210820151148173"></p>
+<h3 id="在链表中插入元素："><a href="#在链表中插入元素：" class="headerlink" title="在链表中插入元素："></a>在链表中插入元素：</h3><p>顺序很重要</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Node node = <span class="keyword">new</span> Node(e)</span><br><span class="line">node.next = prev.next;</span><br><span class="line">prev.next = node;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在链表中删除某个节点："><a href="#在链表中删除某个节点：" class="headerlink" title="在链表中删除某个节点："></a>在链表中删除某个节点：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Node node = <span class="keyword">new</span> Node(e)</span><br><span class="line">Node delNode = prev.next;</span><br><span class="line">prev.next=delNode.next;</span><br><span class="line">delNode.next = <span class="keyword">null</span>;</span><br><span class="line">size --;</span><br></pre></td></tr></table></figure>
+
+<h3 id="链表的时间复杂度："><a href="#链表的时间复杂度：" class="headerlink" title="链表的时间复杂度："></a>链表的时间复杂度：</h3><ol>
+<li><h5 id="添加、删除操作"><a href="#添加、删除操作" class="headerlink" title="添加、删除操作"></a>添加、删除操作</h5><ul>
+<li>addLast(e) ——-O(n)</li>
+<li>addFirst(e)——–O(1)</li>
+<li>add(index,e)——-O(n/2)=O(n)</li>
+</ul>
+</li>
+<li><h5 id="查找操作O-n"><a href="#查找操作O-n" class="headerlink" title="查找操作O(n)"></a>查找操作O(n)<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820103315983.png" alt="image-20210820103315983"></h5></li>
+</ol>
+<p>链表的应用</p>
+<ul>
+<li>用链表实现栈</li>
+<li>用链表实现队列 </li>
+</ul>
+<h3 id="递归的微观机制解读："><a href="#递归的微观机制解读：" class="headerlink" title="递归的微观机制解读："></a>递归的微观机制解读：</h3><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820143125372.png" alt="image-20210820143125372"></p>
+<p> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820143157544.png" alt="image-20210820143157544"></p>
+<p>递归调用的代价：函数调用+系统栈空间</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>-链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习Day 4</title>
+    <url>/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/</url>
+    <content><![CDATA[<center>摘要：集合和眏射</center>
+
+<p><escape><span id="more"></span></escape></p>
+<h3 id="集合和眏射更像是一个定义好的接口实现数据结构；"><a href="#集合和眏射更像是一个定义好的接口实现数据结构；" class="headerlink" title="集合和眏射更像是一个定义好的接口实现数据结构；"></a>集合和眏射更像是一个定义好的接口实现数据结构；</h3><ol>
+<li><h3 id="集合的应用eg：词汇统计、用户统计"><a href="#集合的应用eg：词汇统计、用户统计" class="headerlink" title="集合的应用eg：词汇统计、用户统计"></a>集合的应用eg：词汇统计、用户统计</h3></li>
+<li><h4 id="二分搜索树和链表分别实现set："><a href="#二分搜索树和链表分别实现set：" class="headerlink" title="二分搜索树和链表分别实现set："></a>二分搜索树和链表分别实现set：</h4><ol>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822100933883.png" alt="image-20210822100933883" style="zoom:50%;" /></li>
+<li><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822101430246.png" alt="image-20210822101430246"></p>
+</li>
+<li><h5 id="时间复杂度对比"><a href="#时间复杂度对比" class="headerlink" title="时间复杂度对比"></a>时间复杂度对比</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104120052.png" alt="image-20210822104120052" style="zoom:50%;" />
+
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822102220739.png" alt="image-20210822102220739" style="zoom:50%;" />
+
+<p>本质是因为二分搜索树是层序遍历的，而链表是依次遍历。</p>
+</li>
+<li><h5 id="最坏的情况h-n按照顺序退化成链表"><a href="#最坏的情况h-n按照顺序退化成链表" class="headerlink" title="最坏的情况h=n按照顺序退化成链表"></a>最坏的情况h=n按照顺序退化成链表</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104055949.png" alt="image-20210822104055949" style="zoom:50%;" />
+
+<p>多重集合（了解）</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Map–》dict（Key，Value）定义"><a href="#Map–》dict（Key，Value）定义" class="headerlink" title="Map–》dict（Key，Value）定义"></a>Map–》dict（Key，Value）定义</h3><p>​        形象点说就是一个xx和一个zz相对应</p>
+<h4 id="基于链表和二分搜索树的实现"><a href="#基于链表和二分搜索树的实现" class="headerlink" title="基于链表和二分搜索树的实现"></a>基于链表和二分搜索树的实现</h4><ul>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105831953.png" alt="image-20210822105831953" style="zoom:50%;" /></li>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105844028.png" alt="image-20210822105844028" style="zoom:50%;" /></li>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121555244.png" alt="image-20210822121555244" style="zoom:50%;" /></li>
+<li><p>多重眏射–多重眏射中的🗡可以重复</p>
+</li>
+</ul>
+<h3 id="集合和眏射的关系"><a href="#集合和眏射的关系" class="headerlink" title="集合和眏射的关系"></a>集合和眏射的关系</h3><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121716475.png" alt="image-20210822121716475" style="zoom:50%;" />
+
+
+
+
+
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
+<li><h6 id="满二叉树O-h-O-log2n-的推导"><a href="#满二叉树O-h-O-log2n-的推导" class="headerlink" title="满二叉树O(h)=O(log2n)的推导"></a>满二叉树O(h)=O(log2n)的推导</h6></li>
+</ul>
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822103151953.png" alt="image-20210822103151953" style="zoom:50%;" />
+
+<ul>
+<li><h6 id="leetcode第804题唯一的摩斯码；"><a href="#leetcode第804题唯一的摩斯码；" class="headerlink" title="leetcode第804题唯一的摩斯码；"></a>leetcode第804题唯一的摩斯码；</h6></li>
+<li><h6 id="leetcode第349题两个数组的交集；"><a href="#leetcode第349题两个数组的交集；" class="headerlink" title="leetcode第349题两个数组的交集；"></a>leetcode第349题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123556094.png" alt="image-20210822123556094" style="zoom: 80%;" /></li>
+<li><h6 id="leetcode第350题两个数组的交集；"><a href="#leetcode第350题两个数组的交集；" class="headerlink" title="leetcode第350题两个数组的交集；"></a>leetcode第350题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123528682.png" alt="image-20210822123528682" style="zoom: 80%;" /></li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>集合</tag>
+        <tag>眏射</tag>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+</search>

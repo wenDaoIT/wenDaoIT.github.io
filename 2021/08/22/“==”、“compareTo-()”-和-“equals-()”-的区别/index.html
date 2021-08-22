@@ -20,22 +20,21 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="二叉搜索树    二叉树 定义：也是一种动态数据结构 ，是一种链表   一个节点也是二叉树、null也是二叉树 二分搜索树  特点：每个节点的值 小于其右子树的所有结点的值； 大于其左子树所有结点的值； 储存的元素必须有可比较性；意思是说不能存放重复数据  Set AND Map(可以理解为一种定义好的数据结构)Set–集合：不能有重复元素">
+  <meta name="description" content="在比较两个对象或者数据大小的时候，经常会用到 &#x3D;&#x3D;、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。   等号 “&#x3D;&#x3D;”：　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小 　　如果等号两边放的是两个对象，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习Day 3">
-<meta property="og:url" content="https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="Java 中的 “&#x3D;&#x3D;”、“compareTo ()” 和 “equals ()” 的区别">
+<meta property="og:url" content="https://wendaoit.github.io/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="二叉搜索树    二叉树 定义：也是一种动态数据结构 ，是一种链表   一个节点也是二叉树、null也是二叉树 二分搜索树  特点：每个节点的值 小于其右子树的所有结点的值； 大于其左子树所有结点的值； 储存的元素必须有可比较性；意思是说不能存放重复数据  Set AND Map(可以理解为一种定义好的数据结构)Set–集合：不能有重复元素">
+<meta property="og:description" content="在比较两个对象或者数据大小的时候，经常会用到 &#x3D;&#x3D;、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。   等号 “&#x3D;&#x3D;”：　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小 　　如果等号两边放的是两个对象，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png">
-<meta property="article:published_time" content="2021-08-21T10:14:05.568Z">
-<meta property="article:modified_time" content="2021-08-22T01:58:06.774Z">
+<meta property="article:published_time" content="2021-08-22T10:42:00.000Z">
+<meta property="article:modified_time" content="2021-08-22T10:47:19.259Z">
 <meta property="article:author" content="zxh">
-<meta property="article:tag" content="-树结构 -二叉树 -八股文">
+<meta property="article:tag" content="equals">
+<meta property="article:tag" content="compareTo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
 
 <script id="page-configurations">
@@ -48,7 +47,7 @@
   };
 </script>
 
-  <title>数据结构学习Day 3 | 问道IT</title>
+  <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别 | 问道IT</title>
   
 
 
@@ -207,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
@@ -220,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          数据结构学习Day 3
+          Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别
         </h1>
 
         <div class="post-meta">
@@ -229,23 +228,17 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-08-21 18:14:05" itemprop="dateCreated datePublished" datetime="2021-08-21T18:14:05+08:00">2021-08-21</time>
+              <time title="创建时间：2021-08-22 18:42:00 / 修改时间：18:47:19" itemprop="dateCreated datePublished" datetime="2021-08-22T18:42:00+08:00">2021-08-22</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-22 09:58:06" itemprop="dateModified" datetime="2021-08-22T09:58:06+08:00">2021-08-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">-数据结构</span></a>
+                  <a href="/categories/%E6%AF%94%E8%BE%83/" itemprop="url" rel="index"><span itemprop="name">比较</span></a>
                 </span>
             </span>
 
@@ -262,7 +255,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>478</span>
+              <span>1.9k</span>
             </span>
 
         </div>
@@ -274,43 +267,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center>二叉搜索树</center>
-
+        <p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
 <span id="more"></span>
 
-<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol>
-<li>定义：也是一种动态数据结构 ，是一种链表</li>
-</ol>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png" alt="image-20210821130645690"></p>
-<p>一个节点也是二叉树、null也是二叉树</p>
-<h3 id="二分搜索树"><a href="#二分搜索树" class="headerlink" title="二分搜索树"></a>二分搜索树</h3><ul>
-<li> 特点：每个节点的值</li>
-<li>小于其右子树的所有结点的值；</li>
-<li>大于其左子树所有结点的值；</li>
-<li>储存的元素必须有可比较性；<del>意思是说不能存放重复数据</del></li>
-</ul>
-<h3 id="Set-AND-Map-可以理解为一种定义好的数据结构"><a href="#Set-AND-Map-可以理解为一种定义好的数据结构" class="headerlink" title="Set AND Map(可以理解为一种定义好的数据结构)"></a>Set AND Map(可以理解为一种定义好的数据结构)</h3><h4 id="Set–集合：不能有重复元素"><a href="#Set–集合：不能有重复元素" class="headerlink" title="Set–集合：不能有重复元素"></a>Set–集合：不能有重复元素</h4><p>因为二分搜索树不能存放重复元素，所以是非常好的实现“集合”的底层数据结构；</p>
-<p>二分搜索树的遍历</p>
-<p>都是从根结点出发，最后回到根结点</p>
-<ul>
-<li><p>前序遍历（）</p>
-<ul>
-<li><p>```java<br>System.out.println(node.)<br>traverse(node.right);<br>traverse(node.left);</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 中序遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    traverse(node.<span class="attribute">right</span>);</span><br><span class="line">    System<span class="selector-class">.out</span><span class="selector-class">.println</span>(node.)</span><br><span class="line">    traverse(node.<span class="attribute">left</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p>（得到的结果是从小到大排列的）</p>
-</li>
-</ul>
-</li>
-<li><p>后续遍历（eg:为二分搜索树释放内存）</p>
-<ul>
-<li><pre><code class="java">traverse(node.right);
-traverse(node.left);
-System.out.println(node.)
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
+<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
+<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
+<p>　　例如：</p>
+<p>　　String a=”abc”;</p>
+<p>　　String b=”abc”;</p>
+<p>　　System.out.println(a==b);</p>
+<p>　　答案是：true</p>
+<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
+<p>　　但是如果我们接着</p>
+<p>　　String c=new String(“abc”);</p>
+<p>　　再</p>
+<p>　　System.out.println(a==c);</p>
+<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　</p>
+<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
+<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　依旧是来观察 Java 中 equals () 的源码</p>
+<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
+<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
+<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
 
     </div>
 
@@ -336,7 +320,7 @@ System.out.println(node.)
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/" title="数据结构学习Day 3">https://wendaoit.github.io/2021/08/21/Day3数据结构学习/</a>
+    <a href="https://wendaoit.github.io/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/" title="Java 中的 “&#x3D;&#x3D;”、“compareTo ()” 和 “equals ()” 的区别">https://wendaoit.github.io/2021/08/22/“==”、“compareTo-()”-和-“equals-()”-的区别/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -356,7 +340,8 @@ System.out.println(node.)
 		</div>
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%85%AB%E8%82%A1%E6%96%87/" rel="tag"><i class="fa fa-tag"></i># -树结构 -二叉树 -八股文</a>
+              <a href="/tags/equals/" rel="tag"><i class="fa fa-tag"></i># equals</a>
+              <a href="/tags/compareTo/" rel="tag"><i class="fa fa-tag"></i># compareTo</a>
           </div>
 
         
@@ -365,13 +350,10 @@ System.out.println(node.)
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/" rel="prev" title="公司融资知识科普">
-      <i class="fa fa-chevron-left"></i> 公司融资知识科普
+    <a href="/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/" rel="prev" title="数据结构学习Day 4">
+      <i class="fa fa-chevron-left"></i> 数据结构学习Day 4
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/" rel="next" title="数据结构学习Day 4">
-      数据结构学习Day 4 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -431,7 +413,7 @@ System.out.println(node.)
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">1.1.</span> <span class="nav-text">二分搜索树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-AND-Map-%E5%8F%AF%E4%BB%A5%E7%90%86%E8%A7%A3%E4%B8%BA%E4%B8%80%E7%A7%8D%E5%AE%9A%E4%B9%89%E5%A5%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">Set AND Map(可以理解为一种定义好的数据结构)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Set%E2%80%93%E9%9B%86%E5%90%88%EF%BC%9A%E4%B8%8D%E8%83%BD%E6%9C%89%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.1.</span> <span class="nav-text">Set–集合：不能有重复元素</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E5%8F%B7-%E2%80%9C-%E2%80%9D%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">等号 “&#x3D;&#x3D;”：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compareTo"><span class="nav-number">2.</span> <span class="nav-text">compareTo()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">3.</span> <span class="nav-text">equals()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compareTo-%E5%92%8C-equals-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">compareTo () 和 equals 的区别</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -613,7 +595,7 @@ System.out.println(node.)
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/',]
       });
       });
   </script>
