@@ -40,6 +40,12 @@ System.out.println(node.)
 </ul>
 </li>
 </ul>
+<h4 id="二分搜索树BST的顺序性特性："><a href="#二分搜索树BST的顺序性特性：" class="headerlink" title="二分搜索树BST的顺序性特性："></a>二分搜索树BST的顺序性特性：</h4><ul>
+<li>求最大值和最小值</li>
+<li>求floor和ceil</li>
+<li>求Rank和select（维护SIZE）</li>
+<li>支持重复元素（进入左子树或者加一个COUNT）</li>
+</ul>
 ]]></content>
       <categories>
         <category>-数据结构</category>
@@ -251,6 +257,71 @@ System.out.println(node.)
         <tag>集合</tag>
         <tag>眏射</tag>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习Day 5</title>
+    <url>/2021/08/23/%E5%A0%86%E5%92%8C%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<center>堆和优先队列</center>
+
+<p>优先队列：出队顺序和入队顺序无关，和优先级相关；</p>
+<span id="more"></span>
+
+<p>使用堆这种底层数据结构来实现优先队列，它的时间复杂度最好最坏都是O(log n )，极高的提高了性能</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822202808409.png" alt="image-20210822202808409"></p>
+<h3 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h3><h4 id="定义：使用二叉树实现的堆；"><a href="#定义：使用二叉树实现的堆；" class="headerlink" title="定义：使用二叉树实现的堆；"></a>定义：使用二叉树实现的堆；</h4><p>二叉堆是一颗完全二叉树</p>
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822203336635.png" alt="image-20210822203336635" style="zoom:50%;" />
+
+<h5 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h5><ul>
+<li>堆中的某个结点的值总是不大于其父节点的值；（最大堆）</li>
+</ul>
+<h5 id="堆的时间复杂度"><a href="#堆的时间复杂度" class="headerlink" title="堆的时间复杂度"></a>堆的时间复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822225440370.png" alt="image-20210822225440370" style="zoom:50%;" />
+
+<h5 id="优先对列—自定义优先级"><a href="#优先对列—自定义优先级" class="headerlink" title="优先对列—自定义优先级"></a>优先对列—自定义优先级</h5><ol>
+<li><p>经典问题，时间复杂度</p>
+<ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823095849862.png" alt="image-20210823095849862"></li>
+</ul>
+</li>
+<li><p>思路：每次遍历取出元素进行储存，需要剔除最小值，所以需要一个最小堆，取出最小值，剩下的堆就是我们需要的优先队列； </p>
+</li>
+<li><p>自定义优先级</p>
+<ul>
+<li><p>自定义一个比较器</p>
+</li>
+<li><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823100344450.png" alt="image-20210823100344450"></p>
+</li>
+</ul>
+</li>
+<li><p>具体的函数实现<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823101359895.png" alt="image-20210823101359895"></p>
+</li>
+<li><p>使用import java.util.PriorityQueue;</p>
+<ul>
+<li>因为有比较器接口，直接实现，省去自定义</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823111207782.png" alt="image-20210823111207782"></li>
+</ul>
+</li>
+</ol>
+<p>二叉堆的扩展：</p>
+<ul>
+<li><p>d叉堆—-时间复杂度为logd(n)<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823111528542.png" alt="image-20210823111528542"></p>
+</li>
+<li><p>索引堆和图论有关（了解）</p>
+</li>
+<li><p>二项堆和斐波那契堆（了解）</p>
+</li>
+</ul>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h3><ul>
+<li>leetcode第347题</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>堆</tag>
+        <tag>优先队列</tag>
       </tags>
   </entry>
 </search>
