@@ -6,7 +6,7 @@
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
-  <updated>2021-08-24T02:23:09.120Z</updated>
+  <updated>2021-08-24T08:36:14.365Z</updated>
   <id>https://wendaoit.github.io/</id>
   
   <author>
@@ -17,11 +17,48 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>数据结构学习Day 5</title>
+    <title>数据结构学习7</title>
+    <link href="https://wendaoit.github.io/2021/08/24/Trie/"/>
+    <id>https://wendaoit.github.io/2021/08/24/Trie/</id>
+    <published>2021-08-24T06:07:00.000Z</published>
+    <updated>2021-08-24T08:36:14.365Z</updated>
+    
+    <content type="html"><![CDATA[<center>Trie前缀树</center><h3 id="什么是Trie"><a href="#什么是Trie" class="headerlink" title="什么是Trie?"></a>什么是Trie?</h3><p>又被称为：多叉树、字典；通常用来处理字符串</br></p><p>问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；</p><p>​        是一棵上面挂着很多单词子树的树？</p></br><span id="more"></span><p>查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；</p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png" alt="image-20210824141531294" style="zoom:50%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png" alt="image-20210824141823532" style="zoom:50%;" /><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isWord;<span class="comment">//标志是不是，不用存c</span></span><br><span class="line">Map&lt;<span class="keyword">char</span>,Node&gt; next;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png" alt="image-20210824151651138" style="zoom:50%;" /></h3><h3 id="查找存在："><a href="#查找存在：" class="headerlink" title="查找存在："></a>查找存在：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png" alt="image-20210824151908909" style="zoom:50%;" /></h3><h4 id="前缀搜索"><a href="#前缀搜索" class="headerlink" title="前缀搜索"></a>前缀搜索</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png" alt="image-20210824153154638" style="zoom:50%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png" alt="image-20210824161346343" style="zoom:50%;" /><h4 id="Trie的局限性"><a href="#Trie的局限性" class="headerlink" title="Trie的局限性"></a>Trie的局限性</h4><ul><li><p>最大的问题：空间！</p></li><li><p>因为trie中每个node中只储存一个字符，26个字母就要26个Node，孩子太多</p></li><li><p>结局办法：压缩字典树–合并、三分搜索树TST</p></li></ul><p>Others：</p><ul><li>leetcode第208题实现一个trie树</li><li>leetcode第211题添加与搜索单词</li><li>leetcode第677题 包含某个单词前缀的value的和 </li></ul><p>更多字符串问题</p><ul><li><p>后缀树–字符串模式识别（了解）</p></li><li><p>字串查询Ctrl+F</p></li><li><p>文件压缩</p></li><li><p>编译原理</p></li><li><p>DNA</p></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;center&gt;Trie前缀树&lt;/center&gt;
+
+&lt;h3 id=&quot;什么是Trie&quot;&gt;&lt;a href=&quot;#什么是Trie&quot; class=&quot;headerlink&quot; title=&quot;什么是Trie?&quot;&gt;&lt;/a&gt;什么是Trie?&lt;/h3&gt;&lt;p&gt;又被称为：多叉树、字典；通常用来处理字符串&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；&lt;/p&gt;
+&lt;p&gt;​        是一棵上面挂着很多单词子树的树？&lt;/p&gt;
+&lt;br&gt;
+
+&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；&lt;/p&gt;
+&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png&quot; alt=&quot;image-20210824141531294&quot; style=&quot;zoom:50%;&quot;&gt;
+
+&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png&quot; alt=&quot;image-20210824141823532&quot; style=&quot;zoom:50%;&quot;&gt;</summary>
+    
+    
+    
+    <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
+    
+    <category term="眏射" scheme="https://wendaoit.github.io/tags/%E7%9C%8F%E5%B0%84/"/>
+    
+    <category term="前缀树" scheme="https://wendaoit.github.io/tags/%E5%89%8D%E7%BC%80%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构学习Day 6</title>
     <link href="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     <id>https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</id>
     <published>2021-08-23T06:28:59.989Z</published>
-    <updated>2021-08-24T02:23:09.120Z</updated>
+    <updated>2021-08-24T06:11:41.756Z</updated>
     
     <content type="html"><![CDATA[<center>线段树（区间树）</center><p>为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p><span id="more"></span><h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" /><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul><li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p></li><li><p>线段树也是平衡二叉树</p></li></ul><h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" /><h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" /><h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046"></p><p>​    Lazy更新</p><h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" /><h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul><li>leetcode第303题区域和检查</li><li>leetcode第307题区域和检查美版UPDATe</li><li>树状数组（了解）BIT</li><li>RMQ问题</li></ul>]]></content>
     

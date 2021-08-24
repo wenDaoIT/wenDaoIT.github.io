@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wendaoit.github.io/about/index.html</loc>
+    <loc>https://wendaoit.github.io/2021/08/24/Trie/</loc>
     
     <lastmod>2021-08-24</lastmod>
     
@@ -10,6 +10,13 @@
   
   <url>
     <loc>https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</loc>
+    
+    <lastmod>2021-08-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wendaoit.github.io/about/index.html</loc>
     
     <lastmod>2021-08-24</lastmod>
     
@@ -215,6 +222,13 @@
   
   <url>
     <loc>https://wendaoit.github.io/tags/%E7%9C%8F%E5%B0%84/</loc>
+    <lastmod>2021-08-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wendaoit.github.io/tags/%E5%89%8D%E7%BC%80%E6%A0%91/</loc>
     <lastmod>2021-08-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -20,19 +20,29 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一个记录的blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="schedule">
-<meta property="og:url" content="https://wendaoit.github.io/schedule/index.html">
+  <meta name="description" content="Trie前缀树  什么是Trie?又被称为：多叉树、字典；通常用来处理字符串 问：同样是遍历为什么时间复杂度只和要查找的字符长度有关； ​        是一棵上面挂着很多单词子树的树？     查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习7">
+<meta property="og:url" content="https://wendaoit.github.io/2021/08/24/Trie/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="一个记录的blog">
+<meta property="og:description" content="Trie前缀树  什么是Trie?又被称为：多叉树、字典；通常用来处理字符串 问：同样是遍历为什么时间复杂度只和要查找的字符长度有关； ​        是一棵上面挂着很多单词子树的树？     查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-19T11:22:13.000Z">
-<meta property="article:modified_time" content="2021-08-19T11:22:13.899Z">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png">
+<meta property="article:published_time" content="2021-08-24T06:07:00.000Z">
+<meta property="article:modified_time" content="2021-08-24T08:36:14.365Z">
 <meta property="article:author" content="zxh">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="眏射">
+<meta property="article:tag" content="前缀树">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/schedule/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/08/24/Trie/">
 
 
 <script id="page-configurations">
@@ -40,13 +50,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>schedule | 问道IT
-</title>
+  <title>数据结构学习7 | 问道IT</title>
   
 
 
@@ -197,43 +206,190 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">schedule
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/24/Trie/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构学习7
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-24 14:07:00 / 修改时间：16:36:14" itemprop="dateCreated datePublished" datetime="2021-08-24T14:07:00+08:00">2021-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>405</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>Trie前缀树</center>
+
+<h3 id="什么是Trie"><a href="#什么是Trie" class="headerlink" title="什么是Trie?"></a>什么是Trie?</h3><p>又被称为：多叉树、字典；通常用来处理字符串</br></p>
+<p>问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；</p>
+<p>​        是一棵上面挂着很多单词子树的树？</p>
+</br>
+
+<span id="more"></span>
+
+<p>查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png" alt="image-20210824141531294" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png" alt="image-20210824141823532" style="zoom:50%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 	<span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isWord;<span class="comment">//标志是不是，不用存c</span></span><br><span class="line">	Map&lt;<span class="keyword">char</span>,Node&gt; next;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png" alt="image-20210824151651138" style="zoom:50%;" /></h3><h3 id="查找存在："><a href="#查找存在：" class="headerlink" title="查找存在："></a>查找存在：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png" alt="image-20210824151908909" style="zoom:50%;" /></h3><h4 id="前缀搜索"><a href="#前缀搜索" class="headerlink" title="前缀搜索"></a>前缀搜索</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png" alt="image-20210824153154638" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png" alt="image-20210824161346343" style="zoom:50%;" />
+
+<h4 id="Trie的局限性"><a href="#Trie的局限性" class="headerlink" title="Trie的局限性"></a>Trie的局限性</h4><ul>
+<li><p>最大的问题：空间！</p>
+</li>
+<li><p>因为trie中每个node中只储存一个字符，26个字母就要26个Node，孩子太多</p>
+</li>
+<li><p>结局办法：压缩字典树–合并、三分搜索树TST</p>
+</li>
+</ul>
+<p>Others：</p>
+<ul>
+<li>leetcode第208题实现一个trie树</li>
+<li>leetcode第211题添加与搜索单词</li>
+<li>leetcode第677题 包含某个单词前缀的value的和 </li>
+</ul>
+<p>更多字符串问题</p>
+<ul>
+<li><p>后缀树–字符串模式识别（了解）</p>
+</li>
+<li><p>字串查询Ctrl+F</p>
+</li>
+<li><p>文件压缩</p>
+</li>
+<li><p>编译原理</p>
+</li>
+<li><p>DNA</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
 </div>
 
-</header>
+        
 
-      
-      
-      
-      <div class="post-body">
-          
-      </div>
-      
-      
-      
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/08/24/Trie/" title="数据结构学习7">https://wendaoit.github.io/2021/08/24/Trie/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+			
+		</div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i># leetcode</a>
+              <a href="/tags/%E7%9C%8F%E5%B0%84/" rel="tag"><i class="fa fa-tag"></i># 眏射</a>
+              <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i># 前缀树</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="prev" title="数据结构学习Day 6">
+      <i class="fa fa-chevron-left"></i> 数据结构学习Day 6
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
+      </footer>
     
+  </article>
+  
+  
+  
 
-    
-    
-    
 
 
           </div>
@@ -285,6 +441,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTrie"><span class="nav-number">1.</span> <span class="nav-text">什么是Trie?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">添加操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%AD%98%E5%9C%A8%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">查找存在：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E6%90%9C%E7%B4%A2"><span class="nav-number">3.1.</span> <span class="nav-text">前缀搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Trie%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">Trie的局限性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -466,7 +623,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/schedule/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/24/Trie/',]
       });
       });
   </script>
