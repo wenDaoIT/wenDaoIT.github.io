@@ -6,7 +6,7 @@
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
-  <updated>2021-08-23T03:33:56.682Z</updated>
+  <updated>2021-08-24T02:19:51.266Z</updated>
   <id>https://wendaoit.github.io/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构学习Day 5</title>
+    <link href="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    <id>https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</id>
+    <published>2021-08-23T06:28:59.989Z</published>
+    <updated>2021-08-24T02:19:51.266Z</updated>
+    
+    <content type="html"><![CDATA[<center>线段树（区间树）</center><p>为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p><span id="more"></span><h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" /><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul><li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p></li><li><p>线段树也是平衡二叉树</p></li></ul><h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" /><h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" /><h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046"></p><p>​    Lazy更新</p><h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" /><h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul><li>leetcode第303题区域和检查</li><li>leetcode第307题区域和检查美版UPDATe</li><li>树状数组（了解）BIT</li><li>RMQ问题</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;center&gt;线段树（区间树）&lt;/center&gt;
+
+&lt;p&gt;为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的&lt;/p&gt;
+&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h3 id=&quot;什么是线段树？&quot;&gt;&lt;a href=&quot;#什么是线段树？&quot; class=&quot;headerlink&quot; title=&quot;什么是线段树？&quot;&gt;&lt;/a&gt;什么是线段树？&lt;/h3&gt;&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png&quot; alt=&quot;image-20210823134438439&quot; style=&quot;zoom:50%;&quot;&gt;
+
+&lt;h3 id=&quot;特点：&quot;&gt;&lt;a href=&quot;#特点：&quot; class=&quot;headerlink&quot; title=&quot;特点：&quot;&gt;&lt;/a&gt;特点：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;​    线段树不是完全二叉树&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png&quot; alt=&quot;image-20210823135312682&quot; style=&quot;zoom:50%;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;线段树也是平衡二叉树&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;用数组实现，开辟空间，定义左子树和右子树&quot;&gt;&lt;a href=&quot;#用数组实现，开辟空间，定义左子树和右子树&quot; class=&quot;headerlink&quot; title=&quot;用数组实现，开辟空间，定义左子树和右子树&quot;&gt;&lt;/a&gt;用数组实现，开辟空间，定义左子树和右子树&lt;/h3&gt;&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png&quot; alt=&quot;image-20210824101136411&quot; style=&quot;zoom:50%;&quot;&gt;
+
+&lt;h3 id=&quot;创建线段树：&quot;&gt;&lt;a href=&quot;#创建线段树：&quot; class=&quot;headerlink&quot; title=&quot;创建线段树：&quot;&gt;&lt;/a&gt;创建线段树：&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png&quot; style=&quot;zoom:50%;&quot;&gt;&lt;/h3&gt;</summary>
+    
+    
+    
+    <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="二叉树" scheme="https://wendaoit.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+    <category term="线段树" scheme="https://wendaoit.github.io/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构学习Day 5</title>
@@ -43,11 +81,11 @@
     <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
-    
     <category term="堆" scheme="https://wendaoit.github.io/tags/%E5%A0%86/"/>
     
     <category term="优先队列" scheme="https://wendaoit.github.io/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
+    
+    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -130,11 +168,11 @@
     <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
+    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
+    
     <category term="集合" scheme="https://wendaoit.github.io/tags/%E9%9B%86%E5%90%88/"/>
     
     <category term="眏射" scheme="https://wendaoit.github.io/tags/%E7%9C%8F%E5%B0%84/"/>
-    
-    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -143,9 +181,9 @@
     <link href="https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
     <id>https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/</id>
     <published>2021-08-21T10:14:05.568Z</published>
-    <updated>2021-08-23T01:41:10.177Z</updated>
+    <updated>2021-08-24T02:02:29.300Z</updated>
     
-    <content type="html"><![CDATA[<center>二叉搜索树</center><span id="more"></span><h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol><li>定义：也是一种动态数据结构 ，是一种链表</li></ol><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png" alt="image-20210821130645690"></p><p>一个节点也是二叉树、null也是二叉树</p><h3 id="二分搜索树"><a href="#二分搜索树" class="headerlink" title="二分搜索树"></a>二分搜索树</h3><ul><li> 特点：每个节点的值</li><li>小于其右子树的所有结点的值；</li><li>大于其左子树所有结点的值；</li><li>储存的元素必须有可比较性；<del>意思是说不能存放重复数据</del></li></ul><h3 id="Set-AND-Map-可以理解为一种定义好的数据结构"><a href="#Set-AND-Map-可以理解为一种定义好的数据结构" class="headerlink" title="Set AND Map(可以理解为一种定义好的数据结构)"></a>Set AND Map(可以理解为一种定义好的数据结构)</h3><h4 id="Set–集合：不能有重复元素"><a href="#Set–集合：不能有重复元素" class="headerlink" title="Set–集合：不能有重复元素"></a>Set–集合：不能有重复元素</h4><p>因为二分搜索树不能存放重复元素，所以是非常好的实现“集合”的底层数据结构；</p><p>二分搜索树的遍历</p><p>都是从根结点出发，最后回到根结点</p><ul><li><p>前序遍历（）</p><ul><li><p>```java<br>System.out.println(node.)<br>traverse(node.right);<br>traverse(node.left);</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 中序遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    traverse(node.<span class="attribute">right</span>);</span><br><span class="line">    System<span class="selector-class">.out</span><span class="selector-class">.println</span>(node.)</span><br><span class="line">    traverse(node.<span class="attribute">left</span>);</span><br></pre></td></tr></table></figure></li><li><p>（得到的结果是从小到大排列的）</p></li></ul></li><li><p>后续遍历（eg:为二分搜索树释放内存）</p><ul><li><pre><code class="java">traverse(node.right);traverse(node.left);System.out.println(node.)</code></pre></li></ul></li></ul><h4 id="二分搜索树BST的顺序性特性："><a href="#二分搜索树BST的顺序性特性：" class="headerlink" title="二分搜索树BST的顺序性特性："></a>二分搜索树BST的顺序性特性：</h4><ul><li>求最大值和最小值</li><li>求floor和ceil</li><li>求Rank和select（维护SIZE）</li><li>支持重复元素（进入左子树或者加一个COUNT）</li></ul>]]></content>
+    <content type="html"><![CDATA[<center>二叉搜索树</center><span id="more"></span><h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol><li>定义：也是一种动态数据结构 ，是一种链表</li></ol><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png" alt="image-20210821130645690"></p><p>一个节点也是二叉树、null也是二叉树</p><h3 id="二分搜索树"><a href="#二分搜索树" class="headerlink" title="二分搜索树"></a>二分搜索树</h3><ul><li> 特点：每个节点的值</li><li>小于其右子树的所有结点的值；</li><li>大于其左子树所有结点的值；</li><li>储存的元素必须有可比较性；<del>意思是说不能存放重复数据</del></li></ul><h3 id="Set-AND-Map-可以理解为一种定义好的数据结构"><a href="#Set-AND-Map-可以理解为一种定义好的数据结构" class="headerlink" title="Set AND Map(可以理解为一种定义好的数据结构)"></a>Set AND Map(可以理解为一种定义好的数据结构)</h3><h4 id="Set–集合：不能有重复元素"><a href="#Set–集合：不能有重复元素" class="headerlink" title="Set–集合：不能有重复元素"></a>Set–集合：不能有重复元素</h4><p>因为二分搜索树不能存放重复元素，所以是非常好的实现“集合”的底层数据结构；</p><p>二分搜索树的遍历</p><p>都是从根结点出发，最后回到根结点</p><ul><li><p>前序遍历</p><ul><li><p>```java<br>System.out.println(node.)<br>traverse(node.right);<br>traverse(node.left);</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- 中序遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    traverse(node.<span class="attribute">right</span>);</span><br><span class="line">    System<span class="selector-class">.out</span><span class="selector-class">.println</span>(node.)</span><br><span class="line">    traverse(node.<span class="attribute">left</span>);</span><br></pre></td></tr></table></figure></li><li><p>（得到的结果是从小到大排列的）</p></li></ul></li><li><p>后续遍历（eg:为二分搜索树释放内存）</p><ul><li><pre><code class="java">traverse(node.right);traverse(node.left);System.out.println(node.)</code></pre></li></ul></li></ul><h4 id="二分搜索树BST的顺序性特性："><a href="#二分搜索树BST的顺序性特性：" class="headerlink" title="二分搜索树BST的顺序性特性："></a>二分搜索树BST的顺序性特性：</h4><ul><li>求最大值和最小值</li><li>求floor和ceil</li><li>求Rank和select（维护SIZE）</li><li>支持重复元素（进入左子树或者加一个COUNT）</li></ul>]]></content>
     
     
     <summary type="html">&lt;center&gt;二叉搜索树&lt;/center&gt;
@@ -167,10 +205,14 @@
     
     
     
-    <category term="-数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="-树结构 -二叉树 -八股文" scheme="https://wendaoit.github.io/tags/%E6%A0%91%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    <category term="树结构" scheme="https://wendaoit.github.io/tags/%E6%A0%91%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="二叉树" scheme="https://wendaoit.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+    <category term="八股文" scheme="https://wendaoit.github.io/tags/%E5%85%AB%E8%82%A1%E6%96%87/"/>
     
   </entry>
   
