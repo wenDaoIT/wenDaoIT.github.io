@@ -6,7 +6,7 @@
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
-  <updated>2021-08-24T02:19:51.266Z</updated>
+  <updated>2021-08-24T02:23:09.120Z</updated>
   <id>https://wendaoit.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     <id>https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</id>
     <published>2021-08-23T06:28:59.989Z</published>
-    <updated>2021-08-24T02:19:51.266Z</updated>
+    <updated>2021-08-24T02:23:09.120Z</updated>
     
     <content type="html"><![CDATA[<center>线段树（区间树）</center><p>为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p><span id="more"></span><h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" /><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul><li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p></li><li><p>线段树也是平衡二叉树</p></li></ul><h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" /><h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" /><h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046"></p><p>​    Lazy更新</p><h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" /><h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul><li>leetcode第303题区域和检查</li><li>leetcode第307题区域和检查美版UPDATe</li><li>树状数组（了解）BIT</li><li>RMQ问题</li></ul>]]></content>
     
