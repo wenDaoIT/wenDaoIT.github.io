@@ -21,17 +21,30 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一个记录的blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="问道IT">
-<meta property="og:url" content="https://wendaoit.github.io/tags/%E6%8A%95%E8%9E%8D%E8%B5%84-%E5%85%AC%E5%8F%B8/index.html">
+  <meta name="description" content="并查集UnionFind一种奇怪的树形结构   非常高效的解决连接问题  判断网络中节点的链接状态  数学中集合并的实现     并查集的定义 判断是否连接，只需要判根节点是否一样  指向树的根节点 并查集主要实现的方法：  判断是否连接isConnected 把两个集合并起来  Quick Find设计思想：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并查集">
+<meta property="og:url" content="https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="一个记录的blog">
+<meta property="og:description" content="并查集UnionFind一种奇怪的树形结构   非常高效的解决连接问题  判断网络中节点的链接状态  数学中集合并的实现     并查集的定义 判断是否连接，只需要判根节点是否一样  指向树的根节点 并查集主要实现的方法：  判断是否连接isConnected 把两个集合并起来  Quick Find设计思想：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png">
+<meta property="article:published_time" content="2021-08-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-24T16:29:44.426Z">
 <meta property="article:author" content="zxh">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="并查集">
+<meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/tags/%E6%8A%95%E8%9E%8D%E8%B5%84-%E5%85%AC%E5%8F%B8/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
 
 
 <script id="page-configurations">
@@ -39,12 +52,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: -投融资 -公司 | 问道IT</title>
+  <title>并查集 | 问道IT</title>
   
 
 
@@ -196,51 +209,177 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">-投融资 -公司
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          并查集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 00:00:00 / 修改时间：00:29:44" itemprop="dateCreated datePublished" datetime="2021-08-25T00:00:00+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>494</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <center>并查集UnionFind一种奇怪的树形结构</center>
+
+<ul>
+<li><p>非常高效的解决连接问题</p>
+</li>
+<li><p>判断网络中节点的链接状态</p>
+</li>
+<li><p>数学中集合并的实现</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul>
+<li>判断是否连接，只需要判根节点是否一样</li>
+</ul>
+<p>指向树的根节点</p>
+<p>并查集主要实现的方法：</p>
+<ul>
+<li>判断是否连接isConnected</li>
+<li>把两个集合并起来</li>
+</ul>
+<h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p>
+<p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p>
+<h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p>
+<p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p>
+<p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" />
+
+<p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p>
+<p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p>
+<p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p>
+<p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p>
+<p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p>
+<p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p>
+<p>  让9指向8而不指向4的原因是：防止成为链表</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
+
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-20T15:19:01+08:00"
-              content="2021-08-20">
-          08-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/" itemprop="url">
-            <span itemprop="name">公司融资知识科普</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-    </div>
   </div>
-  
-  
-  
+</div>
 
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="并查集">https://wendaoit.github.io/2021/08/25/并查集/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+			
+		</div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i># 二叉树</a>
+              <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i># 并查集</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i># 数组</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/24/Trie/" rel="prev" title="数据结构学习7">
+      <i class="fa fa-chevron-left"></i> 数据结构学习7
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -294,6 +433,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">并查集的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Quick-Find"><span class="nav-number">2.</span> <span class="nav-text">Quick Find</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Quick-Union"><span class="nav-number">3.</span> <span class="nav-text">Quick Union</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -477,7 +617,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/tags/%E6%8A%95%E8%9E%8D%E8%B5%84-%E5%85%AC%E5%8F%B8/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/',]
       });
       });
   </script>

@@ -57,66 +57,6 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
-    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
-<span id="more"></span>
-
-<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
-<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
-<p>　　例如：</p>
-<p>　　String a=”abc”;</p>
-<p>　　String b=”abc”;</p>
-<p>　　System.out.println(a==b);</p>
-<p>　　答案是：true</p>
-<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
-<p>　　但是如果我们接着</p>
-<p>　　String c=new String(“abc”);</p>
-<p>　　再</p>
-<p>　　System.out.println(a==c);</p>
-<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
-<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-
-<p>　　</p>
-<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
-<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-
-<p>　　依旧是来观察 Java 中 equals () 的源码</p>
-<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
-<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
-<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
-]]></content>
-      <categories>
-        <category>比较</category>
-      </categories>
-      <tags>
-        <tag>equals</tag>
-        <tag>compareTo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>公司融资知识科普</title>
-    <url>/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</url>
-    <content><![CDATA[<center>双创科普知识</center>
-
-<span id="more"></span>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等</p>
-<p>了解一点关于投融资的知识；</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>
-]]></content>
-      <categories>
-        <category>公司</category>
-      </categories>
-      <tags>
-        <tag>-投融资 -公司</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IDEA快捷键</title>
     <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
     <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
@@ -134,6 +74,66 @@ System.out.println(node.)
       </categories>
       <tags>
         <tag>-导航 -分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习7</title>
+    <url>/2021/08/24/Trie/</url>
+    <content><![CDATA[<center>Trie前缀树</center>
+
+<h3 id="什么是Trie"><a href="#什么是Trie" class="headerlink" title="什么是Trie?"></a>什么是Trie?</h3><p>又被称为：多叉树、字典；通常用来处理字符串</br></p>
+<p>问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；</p>
+<p>​        是一棵上面挂着很多单词子树的树？</p>
+</br>
+
+<span id="more"></span>
+
+<p>查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png" alt="image-20210824141531294" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png" alt="image-20210824141823532" style="zoom:50%;" />
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 	<span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isWord;<span class="comment">//标志是不是，不用存c</span></span><br><span class="line">	Map&lt;<span class="keyword">char</span>,Node&gt; next;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png" alt="image-20210824151651138" style="zoom:50%;" /></h3><h3 id="查找存在："><a href="#查找存在：" class="headerlink" title="查找存在："></a>查找存在：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png" alt="image-20210824151908909" style="zoom:50%;" /></h3><h4 id="前缀搜索"><a href="#前缀搜索" class="headerlink" title="前缀搜索"></a>前缀搜索</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png" alt="image-20210824153154638" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png" alt="image-20210824161346343" style="zoom:50%;" />
+
+<h4 id="Trie的局限性"><a href="#Trie的局限性" class="headerlink" title="Trie的局限性"></a>Trie的局限性</h4><ul>
+<li><p>最大的问题：空间！</p>
+</li>
+<li><p>因为trie中每个node中只储存一个字符，26个字母就要26个Node，孩子太多</p>
+</li>
+<li><p>结局办法：压缩字典树–合并、三分搜索树TST</p>
+</li>
+</ul>
+<p>Others：</p>
+<ul>
+<li>leetcode第208题实现一个trie树</li>
+<li>leetcode第211题添加与搜索单词</li>
+<li>leetcode第677题 包含某个单词前缀的value的和 </li>
+</ul>
+<p>更多字符串问题</p>
+<ul>
+<li><p>后缀树–字符串模式识别（了解）</p>
+</li>
+<li><p>字串查询Ctrl+F</p>
+</li>
+<li><p>文件压缩</p>
+</li>
+<li><p>编译原理</p>
+</li>
+<li><p>DNA</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>前缀树</tag>
+        <tag>眏射</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -196,9 +196,119 @@ System.out.println(node.)
         <category>数据结构</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
         <tag>堆</tag>
         <tag>优先队列</tag>
-        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
+    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
+<span id="more"></span>
+
+<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
+<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
+<p>　　例如：</p>
+<p>　　String a=”abc”;</p>
+<p>　　String b=”abc”;</p>
+<p>　　System.out.println(a==b);</p>
+<p>　　答案是：true</p>
+<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
+<p>　　但是如果我们接着</p>
+<p>　　String c=new String(“abc”);</p>
+<p>　　再</p>
+<p>　　System.out.println(a==c);</p>
+<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　</p>
+<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
+<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　依旧是来观察 Java 中 equals () 的源码</p>
+<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
+<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
+<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
+]]></content>
+      <categories>
+        <category>比较</category>
+      </categories>
+      <tags>
+        <tag>equals</tag>
+        <tag>compareTo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>公司融资知识科普</title>
+    <url>/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</url>
+    <content><![CDATA[<center>双创科普知识</center>
+
+<span id="more"></span>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等</p>
+<p>了解一点关于投融资的知识；</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>
+]]></content>
+      <categories>
+        <category>公司</category>
+      </categories>
+      <tags>
+        <tag>-投融资 -公司</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>并查集</title>
+    <url>/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
+    <content><![CDATA[<center>并查集UnionFind一种奇怪的树形结构</center>
+
+<ul>
+<li><p>非常高效的解决连接问题</p>
+</li>
+<li><p>判断网络中节点的链接状态</p>
+</li>
+<li><p>数学中集合并的实现</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul>
+<li>判断是否连接，只需要判根节点是否一样</li>
+</ul>
+<p>指向树的根节点</p>
+<p>并查集主要实现的方法：</p>
+<ul>
+<li>判断是否连接isConnected</li>
+<li>把两个集合并起来</li>
+</ul>
+<h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p>
+<p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p>
+<h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p>
+<p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p>
+<p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" />
+
+<p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p>
+<p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p>
+<p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p>
+<p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p>
+<p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p>
+<p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p>
+<p>  让9指向8而不指向4的原因是：防止成为链表</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
+
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>并查集</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -268,50 +378,6 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>数据结构学习Day 6</title>
-    <url>/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
-    <content><![CDATA[<center>线段树（区间树）</center>
-
-<p>为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
-<span id="more"></span>
-
-<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
-
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
-<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
-</li>
-<li><p>线段树也是平衡二叉树</p>
-</li>
-</ul>
-<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
-
-<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
-
-<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046"></p>
-<p>​    Lazy更新</p>
-<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
-
-
-
-
-
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
-<li>leetcode第303题区域和检查</li>
-<li>leetcode第307题区域和检查美版UPDATe</li>
-<li>树状数组（了解）BIT</li>
-<li>RMQ问题</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>二叉树</tag>
-        <tag>线段树</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据结构学习Day 4</title>
     <url>/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/</url>
     <content><![CDATA[<center>摘要：集合和眏射</center>
@@ -365,69 +431,53 @@ System.out.println(node.)
         <category>数据结构</category>
       </categories>
       <tags>
+        <tag>眏射</tag>
         <tag>leetcode</tag>
         <tag>集合</tag>
-        <tag>眏射</tag>
       </tags>
   </entry>
   <entry>
-    <title>数据结构学习7</title>
-    <url>/2021/08/24/Trie/</url>
-    <content><![CDATA[<center>Trie前缀树</center>
+    <title>数据结构学习Day 6</title>
+    <url>/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
+    <content><![CDATA[<center>线段树（区间树）</center>
 
-<h3 id="什么是Trie"><a href="#什么是Trie" class="headerlink" title="什么是Trie?"></a>什么是Trie?</h3><p>又被称为：多叉树、字典；通常用来处理字符串</br></p>
-<p>问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；</p>
-<p>​        是一棵上面挂着很多单词子树的树？</p>
-</br>
-
+<p>为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
 <span id="more"></span>
 
-<p>查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png" alt="image-20210824141531294" style="zoom:50%;" />
+<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
 
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png" alt="image-20210824141823532" style="zoom:50%;" />
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 	<span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isWord;<span class="comment">//标志是不是，不用存c</span></span><br><span class="line">	Map&lt;<span class="keyword">char</span>,Node&gt; next;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png" alt="image-20210824151651138" style="zoom:50%;" /></h3><h3 id="查找存在："><a href="#查找存在：" class="headerlink" title="查找存在："></a>查找存在：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png" alt="image-20210824151908909" style="zoom:50%;" /></h3><h4 id="前缀搜索"><a href="#前缀搜索" class="headerlink" title="前缀搜索"></a>前缀搜索</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png" alt="image-20210824153154638" style="zoom:50%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png" alt="image-20210824161346343" style="zoom:50%;" />
-
-<h4 id="Trie的局限性"><a href="#Trie的局限性" class="headerlink" title="Trie的局限性"></a>Trie的局限性</h4><ul>
-<li><p>最大的问题：空间！</p>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
 </li>
-<li><p>因为trie中每个node中只储存一个字符，26个字母就要26个Node，孩子太多</p>
-</li>
-<li><p>结局办法：压缩字典树–合并、三分搜索树TST</p>
+<li><p>线段树也是平衡二叉树</p>
 </li>
 </ul>
-<p>Others：</p>
-<ul>
-<li>leetcode第208题实现一个trie树</li>
-<li>leetcode第211题添加与搜索单词</li>
-<li>leetcode第677题 包含某个单词前缀的value的和 </li>
-</ul>
-<p>更多字符串问题</p>
-<ul>
-<li><p>后缀树–字符串模式识别（了解）</p>
-</li>
-<li><p>字串查询Ctrl+F</p>
-</li>
-<li><p>文件压缩</p>
-</li>
-<li><p>编译原理</p>
-</li>
-<li><p>DNA</p>
-</li>
+<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
+
+<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
+
+<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046"></p>
+<p>​    Lazy更新</p>
+<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
+
+
+
+
+
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li>leetcode第303题区域和检查</li>
+<li>leetcode第307题区域和检查美版UPDATe</li>
+<li>树状数组（了解）BIT</li>
+<li>RMQ问题</li>
 </ul>
 ]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>leetcode</tag>
-        <tag>眏射</tag>
-        <tag>前缀树</tag>
+        <tag>二叉树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
-  <updated>2021-08-24T08:36:14.365Z</updated>
+  <updated>2021-08-24T16:29:44.426Z</updated>
   <id>https://wendaoit.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>并查集</title>
+    <link href="https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    <id>https://wendaoit.github.io/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/</id>
+    <published>2021-08-24T16:00:00.000Z</published>
+    <updated>2021-08-24T16:29:44.426Z</updated>
+    
+    <content type="html"><![CDATA[<center>并查集UnionFind一种奇怪的树形结构</center><ul><li><p>非常高效的解决连接问题</p></li><li><p>判断网络中节点的链接状态</p></li><li><p>数学中集合并的实现</p></li></ul><span id="more"></span><h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul><li>判断是否连接，只需要判根节点是否一样</li></ul><p>指向树的根节点</p><p>并查集主要实现的方法：</p><ul><li>判断是否连接isConnected</li><li>把两个集合并起来</li></ul><h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p><p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p><h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p><p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p><p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" /><p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p><p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p><p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p><p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p><p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p><p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p><p>  让9指向8而不指向4的原因是：防止成为链表</p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />]]></content>
+    
+    
+    <summary type="html">&lt;center&gt;并查集UnionFind一种奇怪的树形结构&lt;/center&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;非常高效的解决连接问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;判断网络中节点的链接状态&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数学中集合并的实现&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h4 id=&quot;并查集的定义&quot;&gt;&lt;a href=&quot;#并查集的定义&quot; class=&quot;headerlink&quot; title=&quot;并查集的定义&quot;&gt;&lt;/a&gt;并查集的定义&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;判断是否连接，只需要判根节点是否一样&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;指向树的根节点&lt;/p&gt;
+&lt;p&gt;并查集主要实现的方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;判断是否连接isConnected&lt;/li&gt;
+&lt;li&gt;把两个集合并起来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;Quick-Find&quot;&gt;&lt;a href=&quot;#Quick-Find&quot; class=&quot;headerlink&quot; title=&quot;Quick Find&quot;&gt;&lt;/a&gt;Quick Find&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;设计思想&lt;/strong&gt;：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="二叉树" scheme="https://wendaoit.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+    <category term="并查集" scheme="https://wendaoit.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    
+    <category term="数组" scheme="https://wendaoit.github.io/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构学习7</title>
@@ -45,11 +91,11 @@
     <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
+    <category term="前缀树" scheme="https://wendaoit.github.io/tags/%E5%89%8D%E7%BC%80%E6%A0%91/"/>
     
     <category term="眏射" scheme="https://wendaoit.github.io/tags/%E7%9C%8F%E5%B0%84/"/>
     
-    <category term="前缀树" scheme="https://wendaoit.github.io/tags/%E5%89%8D%E7%BC%80%E6%A0%91/"/>
+    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -118,11 +164,11 @@
     <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
+    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
+    
     <category term="堆" scheme="https://wendaoit.github.io/tags/%E5%A0%86/"/>
     
     <category term="优先队列" scheme="https://wendaoit.github.io/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
-    
-    <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -205,11 +251,11 @@
     <category term="数据结构" scheme="https://wendaoit.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
+    <category term="眏射" scheme="https://wendaoit.github.io/tags/%E7%9C%8F%E5%B0%84/"/>
+    
     <category term="leetcode" scheme="https://wendaoit.github.io/tags/leetcode/"/>
     
     <category term="集合" scheme="https://wendaoit.github.io/tags/%E9%9B%86%E5%90%88/"/>
-    
-    <category term="眏射" scheme="https://wendaoit.github.io/tags/%E7%9C%8F%E5%B0%84/"/>
     
   </entry>
   
