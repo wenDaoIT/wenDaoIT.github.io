@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wendaoit.github.io/2021/08/25/%E7%BB%8F%E5%85%B8%E7%BA%A2%E9%BB%91%E6%A0%91/</loc>
+    
+    <lastmod>2021-08-25</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wendaoit.github.io/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
     
     <lastmod>2021-08-25</lastmod>
@@ -31,13 +38,6 @@
   
   <url>
     <loc>https://wendaoit.github.io/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/</loc>
-    
-    <lastmod>2021-08-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wendaoit.github.io/2021/08/25/%E7%BB%8F%E5%85%B8%E7%BA%A2%E9%BB%91%E6%A0%91/</loc>
     
     <lastmod>2021-08-25</lastmod>
     
@@ -313,6 +313,13 @@
   
   <url>
     <loc>https://wendaoit.github.io/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/</loc>
+    <lastmod>2021-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wendaoit.github.io/tags/2-3%E6%A0%91/</loc>
     <lastmod>2021-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

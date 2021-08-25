@@ -589,24 +589,52 @@ System.out.println(node.)
   <entry>
     <title>经典红黑树</title>
     <url>/2021/08/25/%E7%BB%8F%E5%85%B8%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
-    <content><![CDATA[<center>测试</center>
+    <content><![CDATA[<center>红黑树</center>
 
 <span id="more"></span>
 
+<p>先介绍下2——3树</p>
+<h4 id="2-3树"><a href="#2-3树" class="headerlink" title="2-3树"></a>2-3树</h4><p><strong>性质</strong>：</p>
+<ul>
+<li>满足二分搜索树的基本性质</li>
+<li>节点可以存放一个或者两个元素</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825181737508.png" alt="image-20210825181737508" style="zoom:50%;" /></li>
+<li>2-3树是一棵<strong>绝对平衡</strong>的树</li>
+</ul>
+<h4 id="2-3树如何维持绝对平衡的？"><a href="#2-3树如何维持绝对平衡的？" class="headerlink" title="2-3树如何维持绝对平衡的？"></a>2-3树如何维持绝对平衡的？</h4><p>​        在插入数据的时候不会放在null的位置，if null就和parent节点暂时相融合变成3节点或者4节点如图：</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182718575.png" alt="image-20210825182718575" style="zoom: 50%;" />
 
+<pre><code> &lt;center&gt; &lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182857559.png&quot; alt=&quot;image-20210825182857559&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/center&gt;
+</code></pre>
+ <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182949188.png" alt="image-20210825182949188" style="zoom: 50%;" />
 
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825183001986.png" alt="image-20210825183001986" style="zoom: 50%;" />
+
+<h4 id="红黑树与2-3树的等价性"><a href="#红黑树与2-3树的等价性" class="headerlink" title="红黑树与2-3树的等价性"></a>红黑树与2-3树的等价性</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825183847374.png" alt="image-20210825183847374" style="zoom:67%;" />
+
+<p>b—c连接线变成红色的b变为红色的</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825190929549.png" alt="image-20210825190929549" style="zoom:80%;" />
+
+<p>定义一个红黑树</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RBTree</span>&lt;<span class="title">K</span> <span class="keyword">extends</span> <span class="title">Comprarable</span>&lt;<span class="title">K</span>&gt;, <span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">true</span>; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACk = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> K key;</span><br><span class="line">        <span class="keyword">public</span> V value;</span><br><span class="line">        <span class="keyword">public</span> Node left,right;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">boolean</span> color;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(K key,V value)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            left = <span class="keyword">null</span>;</span><br><span class="line">            right = <span class="keyword">null</span>;</span><br><span class="line">            color = RED;<span class="comment">//默认创建的节点为红色</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="《算法导论》中的红黑树"><a href="#《算法导论》中的红黑树" class="headerlink" title="《算法导论》中的红黑树"></a>《算法导论》中的红黑树</h4><ol>
+<li>每个节点或者是红色的，或者是黑色的；</li>
+<li>根节点是黑色的；</li>
+<li>每个叶子节点（最后的空节点）是黑色的；</li>
+<li>如果一个节点是红色的，那么它的孩子节点是黑色的；</li>
+<li>从任意一个节点到叶子节点，经过的黑色节点是一样的；</li>
+</ol>
+<p>保持“<strong>黑平衡</strong>”的二叉树，严格意义上，不是平衡二叉树；</p>
+<p>最大高度：2logn<strong>时间复杂度还是</strong>O(Logn)</p>
 <!--more-->
-
-
-
-
-
 ]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
       <tags>
         <tag>红黑树</tag>
+        <tag>2-3树</tag>
       </tags>
   </entry>
 </search>
