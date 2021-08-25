@@ -1,7 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>数据结构学习Day 3</title>
+    <title>AVL树</title>
+    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
+    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+
+<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
+<p>eg:满二叉树，完全二叉树，线段树</p>
+<span id="more"></span>
+
+<p>标注节点的高度</p>
+<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
+<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
+<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：插入的元素在不平衡的节点的左侧的左侧<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
+<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
+<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
+<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
+
+<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
+<p><strong>LL</strong>（左旋转）：</p>
+<p><strong>RR</strong>（右旋转）：</p>
+<p><strong>LR</strong>（先左旋转后右旋转）：</p>
+<ul>
+<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
+
+<ul>
+<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<p><strong>RL</strong>（先右旋转后左旋转）：</p>
+<ul>
+<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
+<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
+</ul>
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>删除一个元素后，会往上回溯</p>
+<p>和BST删除一样，remove之后会返回一个根节点，再对这个node进行平衡得到平衡的node；</p>
+<p>会有点耗时，因为每次删除完都要平衡遍历；</p>
+<h4 id="基于AVL树的Set和Map"><a href="#基于AVL树的Set和Map" class="headerlink" title="基于AVL树的Set和Map"></a>基于AVL树的Set和Map</h4><p>AVL树的局限性</p>
+<p>红黑树和AVL树的时间复杂度一致，但是红黑树旋转操作更少；</p>
+<!--more-->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>平衡二叉树</tag>
+        <tag>BST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA快捷键</title>
+    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
+
+<p>选中CTRL+shift+左右</p>
+<p>调整位置CTRL+shift+上下</p>
+<p>主方法psvm</p>
+<p>输出sout</p>
+<p>Ctrl+n 查找xxx底层类和方法</p>
+<p>Ctrl+/ 快速创建注释</p>
+<p>Ctrl+F9 重新编译</p>
+<!-- more -->
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>-导航 -分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉搜索树BST</title>
     <url>/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<center>二叉搜索树</center>
 
@@ -46,6 +117,8 @@ System.out.println(node.)
 <li>求Rank和select（维护SIZE）</li>
 <li>支持重复元素（进入左子树或者加一个COUNT）</li>
 </ul>
+<!--more-->
+
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -54,26 +127,6 @@ System.out.println(node.)
         <tag>树结构</tag>
         <tag>二叉树</tag>
         <tag>八股文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA快捷键</title>
-    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
-
-<p>选中CTRL+shift+左右</p>
-<p>调整位置CTRL+shift+上下</p>
-<p>主方法psvm</p>
-<p>输出sout</p>
-<p>Ctrl+n 查找xxx底层类和方法</p>
-<p>Ctrl+/ 快速创建注释</p>
-<p>Ctrl+F9 重新编译</p>
-]]></content>
-      <categories>
-        <category>IDEA</category>
-      </categories>
-      <tags>
-        <tag>-导航 -分享</tag>
       </tags>
   </entry>
   <entry>
@@ -126,6 +179,7 @@ System.out.println(node.)
 <li><p>DNA</p>
 </li>
 </ul>
+<!-- more -->
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -134,111 +188,6 @@ System.out.println(node.)
         <tag>前缀树</tag>
         <tag>眏射</tag>
         <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据结构学习Day 5</title>
-    <url>/2021/08/23/%E5%A0%86%E5%92%8C%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</url>
-    <content><![CDATA[<center>堆和优先队列</center>
-
-<p>优先队列：出队顺序和入队顺序无关，和优先级相关；</p>
-<span id="more"></span>
-
-<p>使用堆这种底层数据结构来实现优先队列，它的时间复杂度最好最坏都是O(log n )，极高的提高了性能</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822202808409.png" alt="image-20210822202808409"></p>
-<h3 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h3><h4 id="定义：使用二叉树实现的堆；"><a href="#定义：使用二叉树实现的堆；" class="headerlink" title="定义：使用二叉树实现的堆；"></a>定义：使用二叉树实现的堆；</h4><p>二叉堆是一颗完全二叉树</p>
-<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822203336635.png" alt="image-20210822203336635" style="zoom:50%;" />
-
-<h5 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h5><ul>
-<li>堆中的某个结点的值总是不大于其父节点的值；（最大堆）</li>
-</ul>
-<h5 id="堆的时间复杂度"><a href="#堆的时间复杂度" class="headerlink" title="堆的时间复杂度"></a>堆的时间复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822225440370.png" alt="image-20210822225440370" style="zoom:50%;" />
-
-<h5 id="优先对列—自定义优先级"><a href="#优先对列—自定义优先级" class="headerlink" title="优先对列—自定义优先级"></a>优先对列—自定义优先级</h5><ol>
-<li><p>经典问题，时间复杂度</p>
-<ul>
-<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823095849862.png" alt="image-20210823095849862"></li>
-</ul>
-</li>
-<li><p>思路：每次遍历取出元素进行储存，需要剔除最小值，所以需要一个最小堆，取出最小值，剩下的堆就是我们需要的优先队列； </p>
-</li>
-<li><p>自定义优先级</p>
-<ul>
-<li><p>自定义一个比较器</p>
-</li>
-<li><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823100344450.png" alt="image-20210823100344450"></p>
-</li>
-</ul>
-</li>
-<li><p>具体的函数实现<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823101359895.png" alt="image-20210823101359895"></p>
-</li>
-<li><p>使用import java.util.PriorityQueue;</p>
-<ul>
-<li>因为有比较器接口，直接实现，省去自定义</li>
-<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823111207782.png" alt="image-20210823111207782"></li>
-</ul>
-</li>
-</ol>
-<p>二叉堆的扩展：</p>
-<ul>
-<li><p>d叉堆—-时间复杂度为logd(n)<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823111528542.png" alt="image-20210823111528542"></p>
-</li>
-<li><p>索引堆和图论有关（了解）</p>
-</li>
-<li><p>二项堆和斐波那契堆（了解）</p>
-</li>
-</ul>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h3><ul>
-<li>leetcode第347题</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>堆</tag>
-        <tag>优先队列</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
-    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
-<span id="more"></span>
-
-<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
-<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
-<p>　　例如：</p>
-<p>　　String a=”abc”;</p>
-<p>　　String b=”abc”;</p>
-<p>　　System.out.println(a==b);</p>
-<p>　　答案是：true</p>
-<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
-<p>　　但是如果我们接着</p>
-<p>　　String c=new String(“abc”);</p>
-<p>　　再</p>
-<p>　　System.out.println(a==c);</p>
-<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
-<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-
-<p>　　</p>
-<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
-<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-
-<p>　　依旧是来观察 Java 中 equals () 的源码</p>
-<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
-<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
-<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
-]]></content>
-      <categories>
-        <category>比较</category>
-      </categories>
-      <tags>
-        <tag>equals</tag>
-        <tag>compareTo</tag>
       </tags>
   </entry>
   <entry>
@@ -253,6 +202,7 @@ System.out.println(node.)
 <p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p>
 <p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p>
 <p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>
+<!-- more -->
 ]]></content>
       <categories>
         <category>公司</category>
@@ -318,6 +268,8 @@ System.out.println(node.)
 <h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><ul>
 <li>leetcode</li>
 </ul>
+<!--more-->
+
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -329,29 +281,138 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>数据结构学习Day1</title>
-    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
-    <content><![CDATA[<center>摘要：数组、stack、queue</center>
-
+    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
+    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
 <span id="more"></span>
 
-<h2 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h2><p>栈的底层操作——&gt;数组</p>
-<h2 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h2><h3 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h3><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
-<p>eg:撤销操作</p>
-<h4 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h4><p> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688"></p>
-<h2 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h2><h3 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h3><p>eg:办理业务</p>
-<h4 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h4><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293"></p>
-<p>循环队列</p>
-<p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
-<p>代码分析两个队列花费时间的差距</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
-<p>性能差距100倍！</p>
+<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
+<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
+<p>　　例如：</p>
+<p>　　String a=”abc”;</p>
+<p>　　String b=”abc”;</p>
+<p>　　System.out.println(a==b);</p>
+<p>　　答案是：true</p>
+<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
+<p>　　但是如果我们接着</p>
+<p>　　String c=new String(“abc”);</p>
+<p>　　再</p>
+<p>　　System.out.println(a==c);</p>
+<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　</p>
+<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
+<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　依旧是来观察 Java 中 equals () 的源码</p>
+<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
+<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
+<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
+<!-- more -->]]></content>
+      <categories>
+        <category>比较</category>
+      </categories>
+      <tags>
+        <tag>equals</tag>
+        <tag>compareTo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>意外收获 HEXO 阅读全文</title>
+    <url>/2021/08/25/%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7-HEXO-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/</url>
+    <content><![CDATA[<center>hexo more折叠失效问题</center>
+
+<p>ps：因为hexo默认index展示全文，我根据官方三种办法配置了都没有达到我想要的效果；显得我的首页很冗余；某天下午上传文章时突然想到试一下多写几个more试试，没想到成功了；</p>
+<span id="more"></span>
+
+<p><strong>自己配置问题</strong>：</p>
+<p>我们可以把自己想要折叠的部分放在两个more之间，就可以了</p>
+<h4 id="看效果："><a href="#看效果：" class="headerlink" title="看效果："></a>看效果：</h4><ul>
+<li>这是没有解决之前的效果</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144754934.png" alt="image-20210825144754934" style="zoom:50%;" /></li>
+<li>加了两行之后<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144841763.png" alt="image-20210825144841763" style="zoom:50%;" /></li>
+<li>实现了我想要的折叠</li>
+</ul>
+<p><strong>感悟</strong>：多试一试，这个错误可能是因为我对前端知识不是很了解导致的；不过我查了很多博客都没有说这种方法；</p>
+<!--more-->
+
+<center>希望对大家能有帮助</center>]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>意外收获</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习Day 5</title>
+    <url>/2021/08/23/%E5%A0%86%E5%92%8C%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<center>堆和优先队列</center>
+
+<p>优先队列：出队顺序和入队顺序无关，和优先级相关；</p>
+<span id="more"></span>
+
+<p>使用堆这种底层数据结构来实现优先队列，它的时间复杂度最好最坏都是O(log n )，极高的提高了性能</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822202808409.png" alt="image-20210822202808409"></p>
+<h3 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h3><h4 id="定义：使用二叉树实现的堆；"><a href="#定义：使用二叉树实现的堆；" class="headerlink" title="定义：使用二叉树实现的堆；"></a>定义：使用二叉树实现的堆；</h4><p>二叉堆是一颗完全二叉树</p>
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822203336635.png" alt="image-20210822203336635" style="zoom:50%;" />
+
+<h5 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h5><ul>
+<li>堆中的某个结点的值总是不大于其父节点的值；（最大堆）</li>
+</ul>
+<h5 id="堆的时间复杂度"><a href="#堆的时间复杂度" class="headerlink" title="堆的时间复杂度"></a>堆的时间复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822225440370.png" alt="image-20210822225440370" style="zoom:50%;" />
+
+<h5 id="优先对列—自定义优先级"><a href="#优先对列—自定义优先级" class="headerlink" title="优先对列—自定义优先级"></a>优先对列—自定义优先级</h5><ol>
+<li><p>经典问题，时间复杂度</p>
+<ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823095849862.png" alt="image-20210823095849862"></li>
+</ul>
+</li>
+<li><p>思路：每次遍历取出元素进行储存，需要剔除最小值，所以需要一个最小堆，取出最小值，剩下的堆就是我们需要的优先队列； </p>
+</li>
+<li><p>自定义优先级</p>
+<ul>
+<li><p>自定义一个比较器</p>
+</li>
+<li><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823100344450.png" alt="image-20210823100344450"></p>
+</li>
+</ul>
+</li>
+<li><p>具体的函数实现<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823101359895.png" alt="image-20210823101359895"></p>
+</li>
+<li><p>使用import java.util.PriorityQueue;</p>
+<ul>
+<li>因为有比较器接口，直接实现，省去自定义</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823111207782.png" alt="image-20210823111207782"></li>
+</ul>
+</li>
+</ol>
+<p>二叉堆的扩展：</p>
+<ul>
+<li><p>d叉堆—-时间复杂度为logd(n)<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823111528542.png" alt="image-20210823111528542"></p>
+</li>
+<li><p>索引堆和图论有关（了解）</p>
+</li>
+<li><p>二项堆和斐波那契堆（了解）</p>
+</li>
+</ul>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h3><ul>
+<li>leetcode第347题</li>
+</ul>
+<!-- more -->
 ]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>-数组 -栈 -队列</tag>
+        <tag>leetcode</tag>
+        <tag>堆</tag>
+        <tag>优先队列</tag>
       </tags>
   </entry>
   <entry>
@@ -386,6 +447,7 @@ System.out.println(node.)
 <h3 id="递归的微观机制解读："><a href="#递归的微观机制解读：" class="headerlink" title="递归的微观机制解读："></a>递归的微观机制解读：</h3><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820143125372.png" alt="image-20210820143125372"></p>
 <p> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820143157544.png" alt="image-20210820143157544"></p>
 <p>递归调用的代价：函数调用+系统栈空间</p>
+<!-- more -->
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -443,6 +505,7 @@ System.out.println(node.)
 <li><h6 id="leetcode第349题两个数组的交集；"><a href="#leetcode第349题两个数组的交集；" class="headerlink" title="leetcode第349题两个数组的交集；"></a>leetcode第349题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123556094.png" alt="image-20210822123556094" style="zoom: 80%;" /></li>
 <li><h6 id="leetcode第350题两个数组的交集；"><a href="#leetcode第350题两个数组的交集；" class="headerlink" title="leetcode第350题两个数组的交集；"></a>leetcode第350题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123528682.png" alt="image-20210822123528682" style="zoom: 80%;" /></li>
 </ul>
+<!-- more -->
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -451,6 +514,32 @@ System.out.println(node.)
         <tag>眏射</tag>
         <tag>leetcode</tag>
         <tag>集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习Day1</title>
+    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
+    <content><![CDATA[<center>摘要：数组、stack、queue</center>
+
+<span id="more"></span>
+
+<h2 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h2><p>栈的底层操作——&gt;数组</p>
+<h2 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h2><h3 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h3><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
+<p>eg:撤销操作</p>
+<h4 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h4><p> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688"></p>
+<h2 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h2><h3 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h3><p>eg:办理业务</p>
+<h4 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h4><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293"></p>
+<p>循环队列</p>
+<p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<p>代码分析两个队列花费时间的差距</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
+<p>性能差距100倍！</p>
+<!-- more -->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>-数组 -栈 -队列</tag>
       </tags>
   </entry>
   <entry>
@@ -488,7 +577,7 @@ System.out.println(node.)
 <li>树状数组（了解）BIT</li>
 <li>RMQ问题</li>
 </ul>
-]]></content>
+<!-- more -->]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
@@ -498,48 +587,26 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>AVL树</title>
-    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
-    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+    <title>经典红黑树</title>
+    <url>/2021/08/25/%E7%BB%8F%E5%85%B8%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
+    <content><![CDATA[<center>测试</center>
 
-<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
-<p>eg:满二叉树，完全二叉树，线段树</p>
 <span id="more"></span>
 
-<p>标注节点的高度</p>
-<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
-<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
-<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
-<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
-<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
-<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
 
-<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
-<p><strong>LL</strong>（左旋转）：</p>
-<p><strong>RR</strong>（右旋转）：</p>
-<p><strong>LR</strong>（先左旋转后右旋转）：</p>
-<ul>
-<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
 
-<ul>
-<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
-</ul>
-</li>
-</ul>
-<p><strong>RL</strong>（先右旋转后左旋转）：</p>
-<ul>
-<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
-<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
-</ul>
+<!--more-->
+
+
+
+
+
 ]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>平衡二叉树</tag>
-        <tag>BST</tag>
+        <tag>红黑树</tag>
       </tags>
   </entry>
 </search>
