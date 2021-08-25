@@ -301,6 +301,23 @@ System.out.println(node.)
 <p>  让9指向8而不指向4的原因是：防止成为链表</p>
 <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
 
+<h4 id="基于RANK的优化"><a href="#基于RANK的优化" class="headerlink" title="基于RANK的优化"></a>基于RANK的优化</h4><p>rank[i]表示根节点为I的树的高度；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091001839.png" alt="image-20210825091001839" style="zoom:50%;" />
+
+<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">parent[p] = parent[parent[p]];</span><br></pre></td></tr></table></figure>
+
+<p><strong>设计思想</strong>：让该节点指向父亲节点的父亲节点，以降低树的高度；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092108468.png" alt="image-20210825092108468" style="zoom:80%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092132678.png" alt="image-20210825092132678" style="zoom:67%;" />
+
+<h5 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091914244.png" alt="image-20210825091914244" style="zoom:50%;" /></h5><h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>并不是严格意思上的二叉树，所以时间复杂度做<strong>了解</strong>即可</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092616066.png" alt="image-20210825092616066" style="zoom:50%;" />
+
+<p>总结：树结构的变种堆、线段树、trie、并查集；</p>
+<h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><ul>
+<li>leetcode</li>
+</ul>
 ]]></content>
       <categories>
         <category>数据结构</category>
@@ -478,6 +495,51 @@ System.out.println(node.)
       <tags>
         <tag>二叉树</tag>
         <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AVL树</title>
+    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
+    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+
+<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
+<p>eg:满二叉树，完全二叉树，线段树</p>
+<span id="more"></span>
+
+<p>标注节点的高度</p>
+<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
+<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
+<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
+<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
+<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
+<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
+
+<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
+<p><strong>LL</strong>（左旋转）：</p>
+<p><strong>RR</strong>（右旋转）：</p>
+<p><strong>LR</strong>（先左旋转后右旋转）：</p>
+<ul>
+<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
+
+<ul>
+<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<p><strong>RL</strong>（先右旋转后左旋转）：</p>
+<ul>
+<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
+<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>平衡二叉树</tag>
+        <tag>BST</tag>
       </tags>
   </entry>
 </search>

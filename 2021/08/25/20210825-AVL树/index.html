@@ -21,17 +21,30 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="问道IT">
-<meta property="og:url" content="https://wendaoit.github.io/404.html">
+  <meta name="description" content="设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树  AVL中平衡二叉树定义：对于任意一个节点，左子树和右子树的高度差不能超过1 eg:满二叉树，完全二叉树，线段树   标注节点的高度 计算平衡因子：左右子树高度差相减； 判断是否为平衡二叉树并计算平衡因子 在数据插入时维护二叉树平衡右旋转原理： 旋转之后既维持了二分搜索树的性质又实现了平衡；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AVL树">
+<meta property="og:url" content="https://wendaoit.github.io/2021/08/25/20210825-AVL%E6%A0%91/index.html">
 <meta property="og:site_name" content="问道IT">
+<meta property="og:description" content="设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树  AVL中平衡二叉树定义：对于任意一个节点，左子树和右子树的高度差不能超过1 eg:满二叉树，完全二叉树，线段树   标注节点的高度 计算平衡因子：左右子树高度差相减； 判断是否为平衡二叉树并计算平衡因子 在数据插入时维护二叉树平衡右旋转原理： 旋转之后既维持了二分搜索树的性质又实现了平衡；">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-19T11:14:01.326Z">
-<meta property="article:modified_time" content="2021-08-19T11:14:01.326Z">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png">
+<meta property="article:published_time" content="2021-08-25T01:30:00.000Z">
+<meta property="article:modified_time" content="2021-08-25T03:37:28.750Z">
 <meta property="article:author" content="zxh">
+<meta property="article:tag" content="平衡二叉树">
+<meta property="article:tag" content="BST">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/404">
+<link rel="canonical" href="https://wendaoit.github.io/2021/08/25/20210825-AVL%E6%A0%91/">
 
 
 <script id="page-configurations">
@@ -39,13 +52,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title> | 问道IT
-</title>
+  <title>AVL树 | 问道IT</title>
   
 
 
@@ -196,60 +208,175 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/25/20210825-AVL%E6%A0%91/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AVL树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 09:30:00 / 修改时间：11:37:28" itemprop="dateCreated datePublished" datetime="2021-08-25T09:30:00+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>357</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+
+<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
+<p>eg:满二叉树，完全二叉树，线段树</p>
+<span id="more"></span>
+
+<p>标注节点的高度</p>
+<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
+<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
+<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
+<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
+<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
+<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
+
+<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
+<p><strong>LL</strong>（左旋转）：</p>
+<p><strong>RR</strong>（右旋转）：</p>
+<p><strong>LR</strong>（先左旋转后右旋转）：</p>
+<ul>
+<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
+
+<ul>
+<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<p><strong>RL</strong>（先右旋转后左旋转）：</p>
+<ul>
+<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
+<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
 </div>
 
-</header>
+        
 
-      
-      
-      
-      <div class="post-body">
-          <!DOCTYPE HTML>
-<html>
-<head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="robots" content="all" />
-  <meta name="robots" content="index,follow"/>
-  <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
-</head>
-<body>
-  <script type="text/plain" src="http://www.qq.com/404/search_children.js"
-          charset="utf-8" homePageUrl="/"
-          homePageName="回到我的主页">
-  </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
-</body>
-</html>
-      </div>
-      
-      
-      
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/08/25/20210825-AVL%E6%A0%91/" title="AVL树">https://wendaoit.github.io/2021/08/25/20210825-AVL树/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+			
+		</div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i># 平衡二叉树</a>
+              <a href="/tags/BST/" rel="tag"><i class="fa fa-tag"></i># BST</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="prev" title="并查集">
+      <i class="fa fa-chevron-left"></i> 并查集
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
+      </footer>
     
+  </article>
+  
+  
+  
 
-    
-    
-    
 
 
           </div>
@@ -301,6 +428,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%95%B0%E6%8D%AE%E6%8F%92%E5%85%A5%E6%97%B6%E7%BB%B4%E6%8A%A4%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B9%B3%E8%A1%A1"><span class="nav-number">1.</span> <span class="nav-text">在数据插入时维护二叉树平衡</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -484,7 +612,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/404.html',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/25/20210825-AVL%E6%A0%91/',]
       });
       });
   </script>

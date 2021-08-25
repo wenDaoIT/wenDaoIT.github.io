@@ -202,6 +202,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/" class="post-title-link" itemprop="url">数据结构学习Day 4</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-22 09:54:00 / 修改时间：18:57:03" itemprop="dateCreated datePublished" datetime="2021-08-22T09:54:00+08:00">2021-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>289</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center>摘要：集合和眏射</center>
+
+<p><escape><span id="more"></span></escape></p>
+<h3 id="集合和眏射更像是一个定义好的接口实现数据结构；"><a href="#集合和眏射更像是一个定义好的接口实现数据结构；" class="headerlink" title="集合和眏射更像是一个定义好的接口实现数据结构；"></a>集合和眏射更像是一个定义好的接口实现数据结构；</h3><ol>
+<li><h3 id="集合的应用eg：词汇统计、用户统计"><a href="#集合的应用eg：词汇统计、用户统计" class="headerlink" title="集合的应用eg：词汇统计、用户统计"></a>集合的应用eg：词汇统计、用户统计</h3></li>
+<li><h4 id="二分搜索树和链表分别实现set："><a href="#二分搜索树和链表分别实现set：" class="headerlink" title="二分搜索树和链表分别实现set："></a>二分搜索树和链表分别实现set：</h4><ol>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822100933883.png" alt="image-20210822100933883" style="zoom:50%;"></li>
+<li><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822101430246.png" alt="image-20210822101430246"></p>
+</li>
+<li><h5 id="时间复杂度对比"><a href="#时间复杂度对比" class="headerlink" title="时间复杂度对比"></a>时间复杂度对比</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104120052.png" alt="image-20210822104120052" style="zoom:50%;">
+
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822102220739.png" alt="image-20210822102220739" style="zoom:50%;">
+
+<p>本质是因为二分搜索树是层序遍历的，而链表是依次遍历。</p>
+</li>
+<li><h5 id="最坏的情况h-n按照顺序退化成链表"><a href="#最坏的情况h-n按照顺序退化成链表" class="headerlink" title="最坏的情况h=n按照顺序退化成链表"></a>最坏的情况h=n按照顺序退化成链表</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104055949.png" alt="image-20210822104055949" style="zoom:50%;">
+
+<p>多重集合（了解）</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Map–》dict（Key，Value）定义"><a href="#Map–》dict（Key，Value）定义" class="headerlink" title="Map–》dict（Key，Value）定义"></a>Map–》dict（Key，Value）定义</h3><p>​        形象点说就是一个xx和一个zz相对应</p>
+<h4 id="基于链表和二分搜索树的实现"><a href="#基于链表和二分搜索树的实现" class="headerlink" title="基于链表和二分搜索树的实现"></a>基于链表和二分搜索树的实现</h4><ul>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105831953.png" alt="image-20210822105831953" style="zoom:50%;"></li>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105844028.png" alt="image-20210822105844028" style="zoom:50%;"></li>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121555244.png" alt="image-20210822121555244" style="zoom:50%;"></li>
+<li><p>多重眏射–多重眏射中的🗡可以重复</p>
+</li>
+</ul>
+<h3 id="集合和眏射的关系"><a href="#集合和眏射的关系" class="headerlink" title="集合和眏射的关系"></a>集合和眏射的关系</h3><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121716475.png" alt="image-20210822121716475" style="zoom:50%;">
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -746,7 +858,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -759,7 +871,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -826,7 +938,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4 分钟</span>
+    <span title="站点阅读时长">5 分钟</span>
 </div>
 
         
