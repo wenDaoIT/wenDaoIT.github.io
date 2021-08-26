@@ -21,30 +21,49 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一个记录的blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="问道IT">
-<meta property="og:url" content="https://wendaoit.github.io/page/3/index.html">
+  <meta name="description" content="数据结构之哈希表  **思想**：用空间换取时间；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希表">
+<meta property="og:url" content="https://wendaoit.github.io/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="一个记录的blog">
+<meta property="og:description" content="数据结构之哈希表  **思想**：用空间换取时间；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826093503314.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094043955.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094304154.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094531867.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826095605810.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105524706.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105804004.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111205963.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111704766.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112241539.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112414906.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826113246371.png">
+<meta property="article:published_time" content="2021-08-26T03:28:23.003Z">
+<meta property="article:modified_time" content="2021-08-26T03:36:08.069Z">
 <meta property="article:author" content="zxh">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="红黑树">
+<meta property="article:tag" content="链表">
+<meta property="article:tag" content="TreeMap">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826093503314.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/page/3/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>问道IT</title>
+  <title>哈希表 | 问道IT</title>
   
 
 
@@ -196,13 +215,14 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
@@ -214,10 +234,9 @@
       <meta itemprop="name" content="问道IT">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/" class="post-title-link" itemprop="url">数据结构Day2</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          哈希表
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -225,16 +244,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-08-20 09:32:25" itemprop="dateCreated datePublished" datetime="2021-08-20T09:32:25+08:00">2021-08-20</time>
+              <time title="创建时间：2021-08-26 11:28:23 / 修改时间：11:36:08" itemprop="dateCreated datePublished" datetime="2021-08-26T11:28:23+08:00">2021-08-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 14:57:00" itemprop="dateModified" datetime="2021-08-25T14:57:00+08:00">2021-08-25</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -245,101 +258,20 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>334</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center>链表</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
-      <meta itemprop="name" content="zxh">
-      <meta itemprop="description" content="一个记录的blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="问道IT">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/" class="post-title-link" itemprop="url">数据结构学习Day1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-eye"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-19 14:22:12" itemprop="dateCreated datePublished" datetime="2021-08-19T14:22:12+08:00">2021-08-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 14:55:52" itemprop="dateModified" datetime="2021-08-25T14:55:52+08:00">2021-08-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>190</span>
+              <span>578</span>
             </span>
 
         </div>
@@ -351,122 +283,137 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <center>摘要：数组、stack、queue</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <center>数据结构之哈希表</center>
+
+<center>**思想**：用空间换取时间；</center>
+
+<span id="more"></span>
+
+<p> <strong>定义</strong>：每一个字符都和一个索引相对应；</p>
+<p>查找的复杂度O(1)；</p>
+<p><strong>哈希函数</strong>：“键”转换成索引的<strong>转换函数</strong>；</p>
+<p><strong>哈希冲突</strong>：两个不同的键对应一个索引；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826093503314.png" alt="image-20210826093503314" style="zoom:50%;" />
+
+<p>哈希函数的设计是很重要的；</p>
+<p>  键通过哈希函数得到的索引的索引越均匀越好</p>
+<p><strong>哈希函数的设计</strong>：转成整型（并不是唯一的办法）</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094043955.png" alt="image-20210826094043955" style="zoom:67%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094304154.png" alt="image-20210826094304154" style="zoom:67%;" />
+
+<p>大整数取模一个素数，让分布更均匀 ；<strong>选一个合适的素数</strong><a target="_blank" rel="noopener" href="https://planetmath.org/goodhashtableprimes">参考网站</a></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094531867.png" alt="image-20210826094531867" style="zoom:80%;" />
+
+<p><strong>字符串设计</strong></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826095605810.png" alt="image-20210826095605810" style="zoom:80%;" />
+
+<p> 复合类型转换–和字符串类似</p>
+<p><strong>性质</strong>：</p>
+<ol>
+<li>一致性：如果a==b,则hash(a)=hash(b);</li>
+<li>高效性：计算高校简便；</li>
+<li>均匀性：哈希值均匀分布；</li>
+</ol>
+<h4 id="JAVA中的hashCode"><a href="#JAVA中的hashCode" class="headerlink" title="JAVA中的hashCode"></a>JAVA中的hashCode</h4><p> Java中每个Object自带hashCode是根据对象地址生成的，同样的内容不同的对象地址也不一样；</p>
+<p>我们可以自定义覆盖hashCode计算方法；</p>
+<p><strong>通常要比较两个类是否相等</strong>：覆盖hashcode和equals</p>
+<ul>
+<li>hashcode相等证明他们的内容相等</li>
+<li>同时如果equals相等证明地址也相同，是用一个类</li>
+</ul>
+<h4 id="哈希冲突的处理-链地址法-Seperate-Chaining"><a href="#哈希冲突的处理-链地址法-Seperate-Chaining" class="headerlink" title="哈希冲突的处理 链地址法 Seperate Chaining"></a>哈希冲突的处理 链地址法 Seperate Chaining</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105524706.png" alt="image-20210826105524706" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105804004.png" alt="image-20210826105804004" style="zoom:80%;" />
+
+<h4 id="自己做一个哈希表"><a href="#自己做一个哈希表" class="headerlink" title="自己做一个哈希表"></a>自己做一个哈希表</h4><p><strong>设计思想</strong>： </p>
+<ul>
+<li>表：顾名思义有行有列</li>
+<li>设计一个用户自定义大小的数组列</li>
+<li>每个列中的行设计链表，成TreeMap；（TreeMap的底层实现是红黑树）</li>
+</ul>
+<h4 id="定义一个表"><a href="#定义一个表" class="headerlink" title="定义一个表"></a>定义一个表<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111205963.png" alt="image-20210826111205963" style="zoom:80%;" /></h4><h4 id="add"><a href="#add" class="headerlink" title="add()"></a>add()</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111704766.png" alt="image-20210826111704766"></p>
+<h4 id="Remove"><a href="#Remove" class="headerlink" title="Remove()"></a>Remove()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112241539.png" alt="image-20210826112241539" style="zoom:67%;" />
+
+<h4 id="Set-Contains"><a href="#Set-Contains" class="headerlink" title="Set() Contains()"></a>Set() Contains()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112414906.png" alt="image-20210826112414906" style="zoom:67%;" />
+
+<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826113246371.png" alt="image-20210826113246371" style="zoom:67%;" />
+
+
+
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
+<li>leetcode第378题字符串中的第一个唯一的字符</li>
+</ul>
+<!--more-->
+
+
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+  </div>
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
-      <meta itemprop="name" content="zxh">
-      <meta itemprop="description" content="一个记录的blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="问道IT">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">IDEA快捷键</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-11 16:20:15" itemprop="dateCreated datePublished" datetime="2021-08-11T16:20:15+08:00">2021-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 14:55:26" itemprop="dateModified" datetime="2021-08-25T14:55:26+08:00">2021-08-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IDEA/" itemprop="url" rel="index"><span itemprop="name">IDEA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/" title="哈希表">https://wendaoit.github.io/2021/08/26/哈希表/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
     
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
     
-    
+</div>
+
+			
+		</div>
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag"><i class="fa fa-tag"></i># 哈希表</a>
+              <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i># 红黑树</a>
+              <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"><i class="fa fa-tag"></i># 链表</a>
+              <a href="/tags/TreeMap/" rel="tag"><i class="fa fa-tag"></i># TreeMap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7-HEXO-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/" rel="prev" title="意外收获 HEXO 阅读全文">
+      <i class="fa fa-chevron-left"></i> 意外收获 HEXO 阅读全文
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
 
 
 
@@ -519,6 +466,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JAVA%E4%B8%AD%E7%9A%84hashCode"><span class="nav-number">1.</span> <span class="nav-text">JAVA中的hashCode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%E7%9A%84%E5%A4%84%E7%90%86-%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95-Seperate-Chaining"><span class="nav-number">2.</span> <span class="nav-text">哈希冲突的处理 链地址法 Seperate Chaining</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%81%9A%E4%B8%80%E4%B8%AA%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">自己做一个哈希表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">定义一个表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add"><span class="nav-number">5.</span> <span class="nav-text">add()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Remove"><span class="nav-number">6.</span> <span class="nav-text">Remove()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-Contains"><span class="nav-number">7.</span> <span class="nav-text">Set() Contains()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test"><span class="nav-number">8.</span> <span class="nav-text">Test</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other:</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -696,6 +644,16 @@
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/',]
+      });
+      });
+  </script>
 
   
   
