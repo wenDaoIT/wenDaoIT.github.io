@@ -296,7 +296,10 @@ System.out.println(node.)
 
 <h4 id="reSize"><a href="#reSize" class="headerlink" title="reSize()"></a>reSize()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826142745265.png" alt="image-20210826142745265" style="zoom:67%;" />
 
-<p>![](C:/User</p>
+
+
+
+
 <p>哈希碰撞攻击（了解）</p>
 <h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
 <li>leetcode第378题字符串中的第一个唯一的字符</li>
@@ -723,7 +726,10 @@ System.out.println(node.)
 </ul>
 <p>统计性能更优（增删改查平均情况下更优）</p>
 <p>​        整个红黑树的查找，插入和删除都是 O (logN) 的，原因就是整个红黑树的高度是 logN，查找从根到叶，走过的路径是树的高度，删除和插入操作是从叶到根的，所以经过的路径都是 logN。</p>
-<p>红黑树</p>
+<h4 id="红黑树的底层应用"><a href="#红黑树的底层应用" class="headerlink" title="红黑树的底层应用"></a>红黑树的底层应用</h4><ul>
+<li> linux 中进程的调度用的是红黑树；</li>
+<li>Java 中 HashMap、TreeMap、TreeSet（都在内存中操作）也都是用红黑树实现；</li>
+</ul>
 <h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><ul>
 <li>好文：<a href="https://segmentfault.com/a/1190000023651273">数据结构之红黑树</a></li>
 </ul>
