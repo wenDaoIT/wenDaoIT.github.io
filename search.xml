@@ -289,8 +289,15 @@ System.out.println(node.)
 
 <h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826113246371.png" alt="image-20210826113246371" style="zoom:67%;" />
 
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826140549596.png" alt="image-20210826140549596" style="zoom:67%;" />
 
+<p>为实现O(1)级别的复杂度，和静态数组一样，需要reSize</p>
+<h6 id="动态空间处理"><a href="#动态空间处理" class="headerlink" title="动态空间处理"></a>动态空间处理</h6><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826140834209.png" alt="image-20210826140834209" style="zoom:50%;" />
 
+<h4 id="reSize"><a href="#reSize" class="headerlink" title="reSize()"></a>reSize()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826142745265.png" alt="image-20210826142745265" style="zoom:67%;" />
+
+<p>![](C:/User</p>
+<p>哈希碰撞攻击（了解）</p>
 <h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
 <li>leetcode第378题字符串中的第一个唯一的字符</li>
 </ul>
@@ -704,8 +711,24 @@ System.out.println(node.)
 </ol>
 <p>保持“<strong>黑平衡</strong>”的二叉树，严格意义上，不是平衡二叉树；</p>
 <p>最大高度：2logn<strong>时间复杂度还是</strong>O(Logn)</p>
-<p>红黑树添加新元素（了解）</p>
+<h4 id="红黑树中添加元素"><a href="#红黑树中添加元素" class="headerlink" title="红黑树中添加元素"></a>红黑树中添加元素</h4><ul>
+<li>红黑树添加新元素（了解）</li>
+</ul>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826143441667.png" alt="image-20210826143441667" style="zoom:67%;" />
+
+<h4 id="红黑树的性能总结"><a href="#红黑树的性能总结" class="headerlink" title="红黑树的性能总结"></a>红黑树的性能总结</h4><ul>
+<li>对于完全随机的数据，普通的二分搜索树很好用；</li>
+<li>对于查询较多的使用情况，AVL树很好用；</li>
+<li>红黑树牺牲了平衡性（2logn的高度）</li>
+</ul>
+<p>统计性能更优（增删改查平均情况下更优）</p>
+<p>​        整个红黑树的查找，插入和删除都是 O (logN) 的，原因就是整个红黑树的高度是 logN，查找从根到叶，走过的路径是树的高度，删除和插入操作是从叶到根的，所以经过的路径都是 logN。</p>
+<p>红黑树</p>
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><ul>
+<li>好文：<a href="https://segmentfault.com/a/1190000023651273">数据结构之红黑树</a></li>
+</ul>
 <!--more-->
+
 ]]></content>
       <categories>
         <category>数据结构</category>
