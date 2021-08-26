@@ -23,7 +23,7 @@
 
   <meta name="description" content="摘要：数组、stack、queue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习Day1">
+<meta property="og:title" content="数组、stack、queue">
 <meta property="og:url" content="https://wendaoit.github.io/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/index.html">
 <meta property="og:site_name" content="问道IT">
 <meta property="og:description" content="摘要：数组、stack、queue">
@@ -32,9 +32,11 @@
 <meta property="og:image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png">
 <meta property="og:image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png">
 <meta property="article:published_time" content="2021-08-19T06:22:12.047Z">
-<meta property="article:modified_time" content="2021-08-25T06:55:52.471Z">
+<meta property="article:modified_time" content="2021-08-26T09:08:14.695Z">
 <meta property="article:author" content="zxh">
-<meta property="article:tag" content="-数组 -栈 -队列">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="队列">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png">
 
@@ -51,7 +53,7 @@
   };
 </script>
 
-  <title>数据结构学习Day1 | 问道IT</title>
+  <title>数组、stack、queue | 问道IT</title>
   
 
 
@@ -223,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          数据结构学习Day1
+          数组、stack、queue
         </h1>
 
         <div class="post-meta">
@@ -240,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 14:55:52" itemprop="dateModified" datetime="2021-08-25T14:55:52+08:00">2021-08-25</time>
+                <time title="修改时间：2021-08-26 17:08:14" itemprop="dateModified" datetime="2021-08-26T17:08:14+08:00">2021-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,7 +267,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>190</span>
+              <span>253</span>
             </span>
 
         </div>
@@ -281,14 +283,19 @@
 
 <span id="more"></span>
 
-<h2 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h2><p>栈的底层操作——&gt;数组</p>
-<h2 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h2><h3 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h3><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
+<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
+<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
 <p>eg:撤销操作</p>
-<h4 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h4><p> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688"></p>
-<h2 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h2><h3 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h3><p>eg:办理业务</p>
-<h4 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h4><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293"></p>
-<p>循环队列</p>
-<p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
+
+<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
+<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
+
+  
+
+<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
+<p>参：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
 <p>代码分析两个队列花费时间的差距</p>
 <p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
 <p>性能差距100倍！</p>
@@ -317,7 +324,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wendaoit.github.io/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/" title="数据结构学习Day1">https://wendaoit.github.io/2021/08/19/数据结构学习Day1/</a>
+    <a href="https://wendaoit.github.io/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/" title="数组、stack、queue">https://wendaoit.github.io/2021/08/19/数据结构学习Day1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -337,7 +344,9 @@
 		</div>
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E7%BB%84-%E6%A0%88-%E9%98%9F%E5%88%97/" rel="tag"><i class="fa fa-tag"></i># -数组 -栈 -队列</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i># 数组</a>
+              <a href="/tags/%E6%A0%88/" rel="tag"><i class="fa fa-tag"></i># 栈</a>
+              <a href="/tags/%E9%98%9F%E5%88%97/" rel="tag"><i class="fa fa-tag"></i># 队列</a>
           </div>
 
         
@@ -350,8 +359,8 @@
       <i class="fa fa-chevron-left"></i> IDEA快捷键
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/" rel="next" title="数据结构Day2">
-      数据结构Day2 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/" rel="next" title="链表">
+      链表 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -412,7 +421,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E2%80%94%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">线性结构—数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E2%80%94%E6%A0%88"><span class="nav-number">2.</span> <span class="nav-text">线性结构—栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A%E5%90%8E%E8%BF%9B%E5%85%88%E5%87%BALIFO"><span class="nav-number">2.1.</span> <span class="nav-text">特点：后进先出LIFO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.1.1.</span> <span class="nav-text">栈的复杂度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E2%80%94%E9%98%9F%E5%88%97Queue"><span class="nav-number">3.</span> <span class="nav-text">线性结构—队列Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BAFIFO"><span class="nav-number">3.1.</span> <span class="nav-text">特点：先进先出FIFO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.1.1.</span> <span class="nav-text">队列复杂度</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E2%80%94%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">线性结构—数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E2%80%94%E6%A0%88"><span class="nav-number">2.</span> <span class="nav-text">线性结构—栈</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A%E5%90%8E%E8%BF%9B%E5%85%88%E5%87%BALIFO"><span class="nav-number">2.1.</span> <span class="nav-text">特点：后进先出LIFO</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.2.</span> <span class="nav-text">栈的复杂度</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E2%80%94%E9%98%9F%E5%88%97Queue"><span class="nav-number">3.</span> <span class="nav-text">线性结构—队列Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BAFIFO"><span class="nav-number">3.1.</span> <span class="nav-text">特点：先进先出FIFO</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.2.</span> <span class="nav-text">队列复杂度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="nav-number">3.3.</span> <span class="nav-text">循环队列</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
