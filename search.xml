@@ -174,7 +174,10 @@ show status like &#39;%slow_queries%&#39;
 <h4 id="RR级别下如何避免幻读"><a href="#RR级别下如何避免幻读" class="headerlink" title="RR级别下如何避免幻读"></a>RR级别下如何避免幻读</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161106338.png" alt="image-20210827161106338"></p>
 <p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161358934.png" alt="image-20210827161358934"></p>
 <p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161434810.png" alt="image-20210827161434810"></p>
-<!--more-->]]></content>
+<!--more-->
+
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>讲的很透彻的一篇好文：<a href="https://www.huaweicloud.com/articles/ffc11869bfea5f6793631f9b30369be0.html">理解事务的 4 种隔离级别</a></p>
+]]></content>
       <categories>
         <category>数据库</category>
       </categories>
@@ -937,5 +940,18 @@ System.out.println(node.)
         <tag>红黑树</tag>
         <tag>2-3树</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>数据库语法review</title>
+    <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E6%B3%95review/</url>
+    <content><![CDATA[<center>数据库语法review</center>
+
+<h4 id="DML-、DDL、DCL-区别以及定义"><a href="#DML-、DDL、DCL-区别以及定义" class="headerlink" title="DML 、DDL、DCL 区别以及定义"></a>DML 、DDL、DCL 区别以及定义</h4><p>DML（Data Manipulation Language，数据操作语言）：用于检索或者修改数据。<br>DML 包括： SELECT：用于检索数据；<br>INSERT：用于增加数据到数据库；<br>UPDATE：用于从数据库中修改现存的数据<br>DELETE：用于从数据库中删除数据。</p>
+<p>DDL（Data Definition Language，数据定义语言）： 用于定义数据的结构，比如 创建、修改或者删除数据库对象。<br>DDL 包括：DDL 语句可以用于创建用户和重建数据库对象。下面是 DDL 命令：<br>CREATE TABLE：创建表<br>ALTER TABLE<br>DROP TABLE：删除表<br>CREATE INDEX<br>DROP INDEX</p>
+<p>DCL（Data Control Language，数据控制语言）：用于定义数据库用户的权限。<br>DCL 包括：<br>ALTER PASSWORD<br>GRANT<br>REVOKE<br>CREATE SYNONYM</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
   </entry>
 </search>
