@@ -82,9 +82,10 @@ show status like &#39;%slow_queries%&#39;
 </ul>
 <h4 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h4><p>最左匹配原则<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827111109861.png" alt="image-20210827111109861"  /></p>
 <p>成因</p>
-<p>索引是建立得越多越好吗？</p>
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827111437715.png" alt="image-20210827111437715"></p>
-<!--more-->]]></content>
+<h4 id="索引是建立得越多越好吗？"><a href="#索引是建立得越多越好吗？" class="headerlink" title="索引是建立得越多越好吗？"></a>索引是建立得越多越好吗？</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827111437715.png" alt="image-20210827111437715"></p>
+<!--more-->
+
+]]></content>
       <categories>
         <category>数据库</category>
       </categories>
@@ -93,6 +94,94 @@ show status like &#39;%slow_queries%&#39;
         <tag>hash</tag>
         <tag>B树</tag>
         <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库学习1</title>
+    <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/</url>
+    <content><![CDATA[<center>锁模块</center>
+
+  <span id="more"></span>
+
+<h4 id="MyISAM-与InnoDB关于锁方面得区别是什么？"><a href="#MyISAM-与InnoDB关于锁方面得区别是什么？" class="headerlink" title="MyISAM 与InnoDB关于锁方面得区别是什么？"></a>MyISAM 与InnoDB关于锁方面得区别是什么？</h4><ul>
+<li><h5 id="MyISAM默认用的是表级锁-不支持行级锁；"><a href="#MyISAM默认用的是表级锁-不支持行级锁；" class="headerlink" title="MyISAM默认用的是表级锁,不支持行级锁；"></a>MyISAM默认用的是表级锁,不支持行级锁；</h5><ul>
+<li><p>范围查询的时候默认给表上read🔒(共享锁)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">lock tables students read <span class="operator">|</span> write;</span><br></pre></td></tr></table></figure>
+
+<p>write🔒（排他锁）</p>
+<p>上锁之后读和写都要等 </p>
+</li>
+</ul>
+</li>
+<li><h5 id="InnoDB默认用的是行级锁，也支持表级锁；"><a href="#InnoDB默认用的是行级锁，也支持表级锁；" class="headerlink" title="InnoDB默认用的是行级锁，也支持表级锁；"></a>InnoDB默认用的是行级锁，也支持表级锁；</h5><ul>
+<li><p>手动上锁，只对该行上锁；</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> students_innodb <span class="keyword">where</span> id<span class="operator">=</span><span class="number">3</span> lock <span class="keyword">in</span> share mode;</span><br></pre></td></tr></table></figure>
+
+<p>共享锁可以兼容；</p>
+<p>当查找不走索引的时候上的是表级锁；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827142925274.png" alt="image-20210827142925274" style="zoom:67%;" /></li>
+</ul>
+</li>
+</ul>
+<h4 id="那是不是锁越细越多越好？"><a href="#那是不是锁越细越多越好？" class="headerlink" title="那是不是锁越细越多越好？"></a>那是不是锁越细越多越好？</h4><p>🔒越多花费的资源越多；在数据较少的情况下用非聚集索引MyISAM很快</p>
+<h4 id="MyISAM适合的场景"><a href="#MyISAM适合的场景" class="headerlink" title="MyISAM适合的场景"></a>MyISAM适合的场景</h4><ol>
+<li>频繁执行全表count语句；</li>
+<li>对数据进行增删改的频率不高，查询非常频繁；</li>
+<li>没有事务；</li>
+</ol>
+<h4 id="InnoDB适合的场景"><a href="#InnoDB适合的场景" class="headerlink" title="InnoDB适合的场景"></a>InnoDB适合的场景</h4><ol>
+<li>增删改查都比较频繁；</li>
+<li>可靠性要求较高，要求支持事务；</li>
+</ol>
+<h4 id="数据库🔒的分类："><a href="#数据库🔒的分类：" class="headerlink" title="数据库🔒的分类："></a>数据库🔒的分类：</h4><ul>
+<li>按照粒度划分：表级锁，行级锁，页级🔒；</li>
+<li>按照级别划分：共享锁、排它锁；</li>
+<li>按照枷锁方式：自动锁、显式锁；</li>
+<li>按操作划分：DML锁、DDL锁；</li>
+<li>按使用方式划分：乐观锁，悲观锁；</li>
+</ul>
+<p>悲观锁:一般用数据库自己带的锁；</p>
+<p>乐观锁:使用数据版本控制，只有在增删改查的时候才会去判断冲突；</p>
+<h4 id="数据库事务的四大特征：ACID"><a href="#数据库事务的四大特征：ACID" class="headerlink" title="数据库事务的四大特征：ACID"></a>数据库事务的四大特征：ACID</h4><ul>
+<li>A原子性(Atomic)</li>
+<li>一致性（Consistency）</li>
+<li><strong>隔离性(Isolation)</strong></li>
+<li>持久性（Durability)</li>
+</ul>
+<h4 id="事务隔离级别以及各级别下的并发访问问题"><a href="#事务隔离级别以及各级别下的并发访问问题" class="headerlink" title="事务隔离级别以及各级别下的并发访问问题"></a>事务隔离级别以及各级别下的并发访问问题</h4><p>MySQL默认是repeatable-read Orcal默认是read-committed</p>
+<ul>
+<li>更新 丢失———mysql所有事务隔离级别在数据库层面上均可避免；<ul>
+<li>eg:存钱失败</li>
+</ul>
+</li>
+<li>脏读——设置read-committed事务隔离级别以上可避免；<ul>
+<li>指的是一个session读取了另一个未提交的事务，另一个事务回滚之后造成翻车；</li>
+<li>解决：set session transaction level read committed;</li>
+</ul>
+</li>
+<li>不可重复读——repeatable-read事务隔离级别以上可避免；<ul>
+<li>多次查询结果变化了超出预期；</li>
+</ul>
+</li>
+<li> 幻读——serializable事务隔离级别可避免； </li>
+<li>Serializable 是最高的事务隔离级别，在该级别下，事务串行化顺序执行，可以避免脏读、不可重复读与幻读。但是这种事务隔离级别效率低下，比较耗数据库性能，一般不使用。</li>
+</ul>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827153216400.png" alt="image-20210827153216400" style="zoom:67%;" />
+
+<h4 id="当前读和快照读"><a href="#当前读和快照读" class="headerlink" title="当前读和快照读"></a>当前读和快照读</h4> <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827154029335.png" alt="image-20210827154029335" style="zoom:67%;" />
+
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827160905898.png" alt="image-20210827160905898"></p>
+<h4 id="RR级别下如何避免幻读"><a href="#RR级别下如何避免幻读" class="headerlink" title="RR级别下如何避免幻读"></a>RR级别下如何避免幻读</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161106338.png" alt="image-20210827161106338"></p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161358934.png" alt="image-20210827161358934"></p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161434810.png" alt="image-20210827161434810"></p>
+<!--more-->]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>🔒</tag>
+        <tag>数据库</tag>
+        <tag>并发</tag>
       </tags>
   </entry>
   <entry>
@@ -224,88 +313,6 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>Trie前缀树</title>
-    <url>/2021/08/24/Trie/</url>
-    <content><![CDATA[<center>Trie前缀树</center>
-
-<h3 id="什么是Trie"><a href="#什么是Trie" class="headerlink" title="什么是Trie?"></a>什么是Trie?</h3><p>又被称为：多叉树、字典；通常用来处理字符串</br></p>
-<p>问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；</p>
-<p>​        是一棵上面挂着很多单词子树的树？</p>
-</br>
-
-<span id="more"></span>
-
-<p>查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png" alt="image-20210824141531294" style="zoom:50%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png" alt="image-20210824141823532" style="zoom:50%;" />
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 	<span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isWord;<span class="comment">//标志是不是，不用存c</span></span><br><span class="line">	Map&lt;<span class="keyword">char</span>,Node&gt; next;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png" alt="image-20210824151651138" style="zoom:50%;" /></h3><h3 id="查找存在："><a href="#查找存在：" class="headerlink" title="查找存在："></a>查找存在：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png" alt="image-20210824151908909" style="zoom:50%;" /></h3><h4 id="前缀搜索"><a href="#前缀搜索" class="headerlink" title="前缀搜索"></a>前缀搜索</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png" alt="image-20210824153154638" style="zoom:50%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png" alt="image-20210824161346343" style="zoom:50%;" />
-
-<h4 id="Trie的局限性"><a href="#Trie的局限性" class="headerlink" title="Trie的局限性"></a>Trie的局限性</h4><ul>
-<li><p>最大的问题：空间！</p>
-</li>
-<li><p>因为trie中每个node中只储存一个字符，26个字母就要26个Node，孩子太多</p>
-</li>
-<li><p>结局办法：压缩字典树–合并、三分搜索树TST</p>
-</li>
-</ul>
-<p>Others：</p>
-<ul>
-<li>leetcode第208题实现一个trie树</li>
-<li>leetcode第211题添加与搜索单词</li>
-<li>leetcode第677题 包含某个单词前缀的value的和 </li>
-</ul>
-<p>更多字符串问题</p>
-<ul>
-<li><p>后缀树–字符串模式识别（了解）</p>
-</li>
-<li><p>字串查询Ctrl+F</p>
-</li>
-<li><p>文件压缩</p>
-</li>
-<li><p>编译原理</p>
-</li>
-<li><p>DNA</p>
-</li>
-</ul>
-<!-- more -->
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>前缀树</tag>
-        <tag>眏射</tag>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>公司融资知识科普</title>
-    <url>/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</url>
-    <content><![CDATA[<center>双创科普知识</center>
-
-<span id="more"></span>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等</p>
-<p>了解一点关于投融资的知识；</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>
-<!-- more -->
-]]></content>
-      <categories>
-        <category>公司</category>
-      </categories>
-      <tags>
-        <tag>-投融资 -公司</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
     <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
@@ -433,72 +440,85 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>并查集</title>
-    <url>/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
-    <content><![CDATA[<center>并查集UnionFind一种奇怪的树形结构</center>
+    <title>公司融资知识科普</title>
+    <url>/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</url>
+    <content><![CDATA[<center>双创科普知识</center>
 
-<ul>
-<li><p>非常高效的解决连接问题</p>
-</li>
-<li><p>判断网络中节点的链接状态</p>
-</li>
-<li><p>数学中集合并的实现</p>
-</li>
-</ul>
 <span id="more"></span>
 
-<h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul>
-<li>判断是否连接，只需要判根节点是否一样</li>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>最近在找公司面试，发现有的公司不需要融资，有的还分为天使、ABCD等</p>
+<p>了解一点关于投融资的知识；</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151547131.png" alt="image-20210820151547131"></p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820151737303.png" alt="image-20210820151737303"></p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210820152018932.png" alt="image-20210820152018932"></p>
+<!-- more -->
+]]></content>
+      <categories>
+        <category>公司</category>
+      </categories>
+      <tags>
+        <tag>-投融资 -公司</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Trie前缀树</title>
+    <url>/2021/08/24/Trie/</url>
+    <content><![CDATA[<center>Trie前缀树</center>
+
+<h3 id="什么是Trie"><a href="#什么是Trie" class="headerlink" title="什么是Trie?"></a>什么是Trie?</h3><p>又被称为：多叉树、字典；通常用来处理字符串</br></p>
+<p>问：同样是遍历为什么时间复杂度只和要查找的字符长度有关；</p>
+<p>​        是一棵上面挂着很多单词子树的树？</p>
+</br>
+
+<span id="more"></span>
+
+<p>查询的时间复杂度与一共有多少条无关，与查找的字符串的长度有关；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141531294.png" alt="image-20210824141531294" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824141823532.png" alt="image-20210824141823532" style="zoom:50%;" />
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 	<span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isWord;<span class="comment">//标志是不是，不用存c</span></span><br><span class="line">	Map&lt;<span class="keyword">char</span>,Node&gt; next;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151651138.png" alt="image-20210824151651138" style="zoom:50%;" /></h3><h3 id="查找存在："><a href="#查找存在：" class="headerlink" title="查找存在："></a>查找存在：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824151908909.png" alt="image-20210824151908909" style="zoom:50%;" /></h3><h4 id="前缀搜索"><a href="#前缀搜索" class="headerlink" title="前缀搜索"></a>前缀搜索</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824153154638.png" alt="image-20210824153154638" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824161346343.png" alt="image-20210824161346343" style="zoom:50%;" />
+
+<h4 id="Trie的局限性"><a href="#Trie的局限性" class="headerlink" title="Trie的局限性"></a>Trie的局限性</h4><ul>
+<li><p>最大的问题：空间！</p>
+</li>
+<li><p>因为trie中每个node中只储存一个字符，26个字母就要26个Node，孩子太多</p>
+</li>
+<li><p>结局办法：压缩字典树–合并、三分搜索树TST</p>
+</li>
 </ul>
-<p>指向树的根节点</p>
-<p>并查集主要实现的方法：</p>
+<p>Others：</p>
 <ul>
-<li>判断是否连接isConnected</li>
-<li>把两个集合并起来</li>
+<li>leetcode第208题实现一个trie树</li>
+<li>leetcode第211题添加与搜索单词</li>
+<li>leetcode第677题 包含某个单词前缀的value的和 </li>
 </ul>
-<h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p>
-<p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p>
-<h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p>
-<p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p>
-<p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" />
-
-<p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p>
-<p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p>
-<p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p>
-<p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p>
-<p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p>
-<p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p>
-<p>  让9指向8而不指向4的原因是：防止成为链表</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
-
-<h4 id="基于RANK的优化"><a href="#基于RANK的优化" class="headerlink" title="基于RANK的优化"></a>基于RANK的优化</h4><p>rank[i]表示根节点为I的树的高度；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091001839.png" alt="image-20210825091001839" style="zoom:50%;" />
-
-<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">parent[p] = parent[parent[p]];</span><br></pre></td></tr></table></figure>
-
-<p><strong>设计思想</strong>：让该节点指向父亲节点的父亲节点，以降低树的高度；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092108468.png" alt="image-20210825092108468" style="zoom:80%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092132678.png" alt="image-20210825092132678" style="zoom:67%;" />
-
-<h5 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091914244.png" alt="image-20210825091914244" style="zoom:50%;" /></h5><h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>并不是严格意思上的二叉树，所以时间复杂度做<strong>了解</strong>即可</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092616066.png" alt="image-20210825092616066" style="zoom:50%;" />
-
-<p>总结：树结构的变种堆、线段树、trie、并查集；</p>
-<h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><ul>
-<li>leetcode</li>
+<p>更多字符串问题</p>
+<ul>
+<li><p>后缀树–字符串模式识别（了解）</p>
+</li>
+<li><p>字串查询Ctrl+F</p>
+</li>
+<li><p>文件压缩</p>
+</li>
+<li><p>编译原理</p>
+</li>
+<li><p>DNA</p>
+</li>
 </ul>
-<!--more-->
-
+<!-- more -->
 ]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>二叉树</tag>
-        <tag>并查集</tag>
-        <tag>数组</tag>
+        <tag>前缀树</tag>
+        <tag>眏射</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -599,6 +619,108 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
+    <title>并查集</title>
+    <url>/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
+    <content><![CDATA[<center>并查集UnionFind一种奇怪的树形结构</center>
+
+<ul>
+<li><p>非常高效的解决连接问题</p>
+</li>
+<li><p>判断网络中节点的链接状态</p>
+</li>
+<li><p>数学中集合并的实现</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul>
+<li>判断是否连接，只需要判根节点是否一样</li>
+</ul>
+<p>指向树的根节点</p>
+<p>并查集主要实现的方法：</p>
+<ul>
+<li>判断是否连接isConnected</li>
+<li>把两个集合并起来</li>
+</ul>
+<h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p>
+<p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p>
+<h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p>
+<p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p>
+<p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" />
+
+<p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p>
+<p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p>
+<p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p>
+<p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p>
+<p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p>
+<p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p>
+<p>  让9指向8而不指向4的原因是：防止成为链表</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
+
+<h4 id="基于RANK的优化"><a href="#基于RANK的优化" class="headerlink" title="基于RANK的优化"></a>基于RANK的优化</h4><p>rank[i]表示根节点为I的树的高度；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091001839.png" alt="image-20210825091001839" style="zoom:50%;" />
+
+<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">parent[p] = parent[parent[p]];</span><br></pre></td></tr></table></figure>
+
+<p><strong>设计思想</strong>：让该节点指向父亲节点的父亲节点，以降低树的高度；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092108468.png" alt="image-20210825092108468" style="zoom:80%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092132678.png" alt="image-20210825092132678" style="zoom:67%;" />
+
+<h5 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091914244.png" alt="image-20210825091914244" style="zoom:50%;" /></h5><h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>并不是严格意思上的二叉树，所以时间复杂度做<strong>了解</strong>即可</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092616066.png" alt="image-20210825092616066" style="zoom:50%;" />
+
+<p>总结：树结构的变种堆、线段树、trie、并查集；</p>
+<h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><ul>
+<li>leetcode</li>
+</ul>
+<!--more-->
+
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>并查集</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数组、stack、queue</title>
+    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
+    <content><![CDATA[<center>摘要：数组、stack、queue</center>
+
+<span id="more"></span>
+
+<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
+<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
+<p>eg:撤销操作</p>
+<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
+
+<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
+<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
+
+  
+
+<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
+<p>参：<a href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
+<p>代码分析两个队列花费时间的差距</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
+<p>性能差距100倍！</p>
+<!-- more -->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>栈</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>链表</title>
     <url>/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/</url>
     <content><![CDATA[<center>链表</center>
@@ -639,39 +761,6 @@ System.out.println(node.)
       </categories>
       <tags>
         <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组、stack、queue</title>
-    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
-    <content><![CDATA[<center>摘要：数组、stack、queue</center>
-
-<span id="more"></span>
-
-<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
-<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
-<p>eg:撤销操作</p>
-<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
-
-<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
-<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
-
-  
-
-<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
-<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
-<p>参：<a href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
-<p>代码分析两个队列花费时间的差距</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
-<p>性能差距100倍！</p>
-<!-- more -->]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>栈</tag>
-        <tag>队列</tag>
       </tags>
   </entry>
   <entry>
@@ -718,6 +807,67 @@ System.out.println(node.)
         <tag>二叉树</tag>
         <tag>链表</tag>
         <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>集合和眏射</title>
+    <url>/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/</url>
+    <content><![CDATA[<center>摘要：集合和眏射</center>
+
+<p><escape><span id="more"></span></escape></p>
+<h3 id="集合和眏射更像是一个定义好的接口实现数据结构；"><a href="#集合和眏射更像是一个定义好的接口实现数据结构；" class="headerlink" title="集合和眏射更像是一个定义好的接口实现数据结构；"></a>集合和眏射更像是一个定义好的接口实现数据结构；</h3><ol>
+<li><h3 id="集合的应用eg：词汇统计、用户统计"><a href="#集合的应用eg：词汇统计、用户统计" class="headerlink" title="集合的应用eg：词汇统计、用户统计"></a>集合的应用eg：词汇统计、用户统计</h3></li>
+<li><h4 id="二分搜索树和链表分别实现set："><a href="#二分搜索树和链表分别实现set：" class="headerlink" title="二分搜索树和链表分别实现set："></a>二分搜索树和链表分别实现set：</h4><ol>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822100933883.png" alt="image-20210822100933883" style="zoom:50%;" /></li>
+<li><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822101430246.png" alt="image-20210822101430246"></p>
+</li>
+<li><h5 id="时间复杂度对比"><a href="#时间复杂度对比" class="headerlink" title="时间复杂度对比"></a>时间复杂度对比</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104120052.png" alt="image-20210822104120052" style="zoom:50%;" />
+
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822102220739.png" alt="image-20210822102220739" style="zoom:50%;" />
+
+<p>本质是因为二分搜索树是层序遍历的，而链表是依次遍历。</p>
+</li>
+<li><h5 id="最坏的情况h-n按照顺序退化成链表"><a href="#最坏的情况h-n按照顺序退化成链表" class="headerlink" title="最坏的情况h=n按照顺序退化成链表"></a>最坏的情况h=n按照顺序退化成链表</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104055949.png" alt="image-20210822104055949" style="zoom:50%;" />
+
+<p>多重集合（了解）</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Map–-gt-dict（Key，Value）定义"><a href="#Map–-gt-dict（Key，Value）定义" class="headerlink" title="Map–&gt;dict（Key，Value）定义"></a>Map–&gt;dict（Key，Value）定义</h3><p>​        形象点说就是一个xx和一个zz相对应</p>
+<h4 id="基于链表和二分搜索树的实现"><a href="#基于链表和二分搜索树的实现" class="headerlink" title="基于链表和二分搜索树的实现"></a>基于链表和二分搜索树的实现</h4><ul>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105831953.png" alt="image-20210822105831953" style="zoom:50%;" /></li>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105844028.png" alt="image-20210822105844028" style="zoom:50%;" /></li>
+<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121555244.png" alt="image-20210822121555244" style="zoom:50%;" /></li>
+<li><p>多重眏射–多重眏射中的🗡可以重复</p>
+</li>
+</ul>
+<h3 id="集合和眏射的关系"><a href="#集合和眏射的关系" class="headerlink" title="集合和眏射的关系"></a>集合和眏射的关系</h3><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121716475.png" alt="image-20210822121716475" style="zoom: 80%;" />
+
+
+
+
+
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
+<li><h6 id="满二叉树O-h-O-log2n-的推导"><a href="#满二叉树O-h-O-log2n-的推导" class="headerlink" title="满二叉树O(h)=O(log2n)的推导"></a>满二叉树O(h)=O(log2n)的推导</h6></li>
+</ul>
+<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822103151953.png" alt="image-20210822103151953" style="zoom: 80%;" />
+
+<ul>
+<li><h6 id="leetcode第804题唯一的摩斯码；"><a href="#leetcode第804题唯一的摩斯码；" class="headerlink" title="leetcode第804题唯一的摩斯码；"></a>leetcode第804题唯一的摩斯码；</h6></li>
+<li><h6 id="leetcode第349题两个数组的交集；"><a href="#leetcode第349题两个数组的交集；" class="headerlink" title="leetcode第349题两个数组的交集；"></a>leetcode第349题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123556094.png" alt="image-20210822123556094" style="zoom: 80%;" /></li>
+<li><h6 id="leetcode第350题两个数组的交集；"><a href="#leetcode第350题两个数组的交集；" class="headerlink" title="leetcode第350题两个数组的交集；"></a>leetcode第350题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123528682.png" alt="image-20210822123528682" style="zoom: 80%;" /></li>
+</ul>
+<!-- more -->
+
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>眏射</tag>
+        <tag>leetcode</tag>
+        <tag>集合</tag>
       </tags>
   </entry>
   <entry>
@@ -786,67 +936,6 @@ System.out.println(node.)
       <tags>
         <tag>红黑树</tag>
         <tag>2-3树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>集合和眏射</title>
-    <url>/2021/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day4/</url>
-    <content><![CDATA[<center>摘要：集合和眏射</center>
-
-<p><escape><span id="more"></span></escape></p>
-<h3 id="集合和眏射更像是一个定义好的接口实现数据结构；"><a href="#集合和眏射更像是一个定义好的接口实现数据结构；" class="headerlink" title="集合和眏射更像是一个定义好的接口实现数据结构；"></a>集合和眏射更像是一个定义好的接口实现数据结构；</h3><ol>
-<li><h3 id="集合的应用eg：词汇统计、用户统计"><a href="#集合的应用eg：词汇统计、用户统计" class="headerlink" title="集合的应用eg：词汇统计、用户统计"></a>集合的应用eg：词汇统计、用户统计</h3></li>
-<li><h4 id="二分搜索树和链表分别实现set："><a href="#二分搜索树和链表分别实现set：" class="headerlink" title="二分搜索树和链表分别实现set："></a>二分搜索树和链表分别实现set：</h4><ol>
-<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822100933883.png" alt="image-20210822100933883" style="zoom:50%;" /></li>
-<li><p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822101430246.png" alt="image-20210822101430246"></p>
-</li>
-<li><h5 id="时间复杂度对比"><a href="#时间复杂度对比" class="headerlink" title="时间复杂度对比"></a>时间复杂度对比</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104120052.png" alt="image-20210822104120052" style="zoom:50%;" />
-
-<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822102220739.png" alt="image-20210822102220739" style="zoom:50%;" />
-
-<p>本质是因为二分搜索树是层序遍历的，而链表是依次遍历。</p>
-</li>
-<li><h5 id="最坏的情况h-n按照顺序退化成链表"><a href="#最坏的情况h-n按照顺序退化成链表" class="headerlink" title="最坏的情况h=n按照顺序退化成链表"></a>最坏的情况h=n按照顺序退化成链表</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822104055949.png" alt="image-20210822104055949" style="zoom:50%;" />
-
-<p>多重集合（了解）</p>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="Map–-gt-dict（Key，Value）定义"><a href="#Map–-gt-dict（Key，Value）定义" class="headerlink" title="Map–&gt;dict（Key，Value）定义"></a>Map–&gt;dict（Key，Value）定义</h3><p>​        形象点说就是一个xx和一个zz相对应</p>
-<h4 id="基于链表和二分搜索树的实现"><a href="#基于链表和二分搜索树的实现" class="headerlink" title="基于链表和二分搜索树的实现"></a>基于链表和二分搜索树的实现</h4><ul>
-<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105831953.png" alt="image-20210822105831953" style="zoom:50%;" /></li>
-<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822105844028.png" alt="image-20210822105844028" style="zoom:50%;" /></li>
-<li><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121555244.png" alt="image-20210822121555244" style="zoom:50%;" /></li>
-<li><p>多重眏射–多重眏射中的🗡可以重复</p>
-</li>
-</ul>
-<h3 id="集合和眏射的关系"><a href="#集合和眏射的关系" class="headerlink" title="集合和眏射的关系"></a>集合和眏射的关系</h3><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822121716475.png" alt="image-20210822121716475" style="zoom: 80%;" />
-
-
-
-
-
-<h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
-<li><h6 id="满二叉树O-h-O-log2n-的推导"><a href="#满二叉树O-h-O-log2n-的推导" class="headerlink" title="满二叉树O(h)=O(log2n)的推导"></a>满二叉树O(h)=O(log2n)的推导</h6></li>
-</ul>
-<img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822103151953.png" alt="image-20210822103151953" style="zoom: 80%;" />
-
-<ul>
-<li><h6 id="leetcode第804题唯一的摩斯码；"><a href="#leetcode第804题唯一的摩斯码；" class="headerlink" title="leetcode第804题唯一的摩斯码；"></a>leetcode第804题唯一的摩斯码；</h6></li>
-<li><h6 id="leetcode第349题两个数组的交集；"><a href="#leetcode第349题两个数组的交集；" class="headerlink" title="leetcode第349题两个数组的交集；"></a>leetcode第349题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123556094.png" alt="image-20210822123556094" style="zoom: 80%;" /></li>
-<li><h6 id="leetcode第350题两个数组的交集；"><a href="#leetcode第350题两个数组的交集；" class="headerlink" title="leetcode第350题两个数组的交集；"></a>leetcode第350题两个数组的交集；</h6><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210822123528682.png" alt="image-20210822123528682" style="zoom: 80%;" /></li>
-</ul>
-<!-- more -->
-
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>眏射</tag>
-        <tag>leetcode</tag>
-        <tag>集合</tag>
       </tags>
   </entry>
 </search>
