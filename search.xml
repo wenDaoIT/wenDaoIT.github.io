@@ -1,6 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据库学习</title>
+    <url>/2021/08/27/2021-08-27-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<center>关系数据库管理系统</center>
+
+<center>索引</center>
+
+<span id="more"></span>
+
+<h4 id="RDBMS数据库的设计"><a href="#RDBMS数据库的设计" class="headerlink" title="RDBMS数据库的设计"></a>RDBMS数据库的设计</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827091357390.png" alt="image-20210827091357390" style="zoom:67%;" />
+
+<h4 id="索引模块"><a href="#索引模块" class="headerlink" title="索引模块"></a>索引模块</h4><h5 id="为什么要使用索引"><a href="#为什么要使用索引" class="headerlink" title="为什么要使用索引"></a>为什么要使用索引</h5><ul>
+<li>快速查询数据</li>
+</ul>
+<h5 id="索引的数据结构"><a href="#索引的数据结构" class="headerlink" title="索引的数据结构"></a>索引的数据结构</h5><ul>
+<li>生成索引，建立二叉查找树进行二分查找；</li>
+<li>生成索引，建立B-树结构进行查找；</li>
+<li>生成索引，建立B+树结构进行查找；</li>
+<li>生成索引，建立Hash结构进行查找；</li>
+</ul>
+<h4 id="优化索引"><a href="#优化索引" class="headerlink" title="优化索引"></a>优化索引</h4><p>树的高度决定了IO次数，所以为了降低IO次数，减少时间复杂度，我们要降低树的高度，使用<strong>B树</strong>；</p>
+<h5 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h5><p>定义 <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827093415124.png" alt="image-20210827093415124" style="zoom:67%;" /></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827093438280.png" alt="image-20210827093438280" style="zoom:67%;" />
+
+<p>合并打乱上借下移保持平衡</p>
+<h5 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h5><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827094011929.png" alt="image-20210827094011929" style="zoom:67%;" />
+
+<p>Q代表指针</p>
+<h6 id="B-树更适合用来做储存索引"><a href="#B-树更适合用来做储存索引" class="headerlink" title="B+树更适合用来做储存索引"></a>B+树更适合用来做储存索引</h6><ul>
+<li>b+树的磁盘读写代价更低；</li>
+<li>B+树查询效率更加稳定</li>
+<li>b+树更有利于对数据库的扫描；</li>
+</ul>
+<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827094523203.png" alt="image-20210827094523203" style="zoom:67%;" />
+
+<h6 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h6><ul>
+<li>仅仅能满足“=”，“in”，不能使用范围查询；</li>
+<li>无法被用来避免数据的排序操作；</li>
+<li>不能利用部分索引键查询；eg:组合索引；</li>
+<li>不能避免表扫描；</li>
+<li>遇到大量Hash值相等的情况后性能并不一定就会比B+效率高；</li>
+</ul>
+<h5 id="BitMap索引位图索引"><a href="#BitMap索引位图索引" class="headerlink" title="BitMap索引位图索引"></a>BitMap索引位图索引</h5><p>orcle</p>
+<p>优点：一个节点能储存大量数据，类似于叠加cpu；</p>
+<p>缺点：锁特别多；不适合高并发；</p>
+<h4 id="密集索引和稀疏索引的区别"><a href="#密集索引和稀疏索引的区别" class="headerlink" title="密集索引和稀疏索引的区别"></a>密集索引和稀疏索引的区别</h4><ul>
+<li>密集索引文件中的每个搜索码值都对应<strong>一个</strong>索引值；</li>
+<li>稀疏索引文件只为索引码的某些值建立索引项；（叶子节点只保存了叶子节点的zhu键值和地址信息）</li>
+</ul>
+<p>Mysql都是稀疏索引；</p>
+<p>InnoDB都是密集索引</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827095635682.png" alt="image-20210827095635682" style="zoom:67%;" />
+
+<h6 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h6><p>相同点：都不支持hash索引</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827095907794.png" alt="image-20210827095907794" style="zoom:67%;" />
+
+<p>密集索引直接在节点存储行，通过主键可以直接查询，使用辅助查询的话运行两次B+树即可；</p>
+<p>而稀疏索引，主树和辅助树储存的信息都一样，所以不用访问主树即可找到；索引和数据是分开的；</p>
+<h4 id="如何调优索引"><a href="#如何调优索引" class="headerlink" title="如何调优索引"></a>如何调优索引</h4><h5 id="定位并优化慢查询Sql"><a href="#定位并优化慢查询Sql" class="headerlink" title="定位并优化慢查询Sql;"></a>定位并优化慢查询Sql;</h5><p>思路</p>
+<ul>
+<li><h6 id="根据慢日志定位慢查询sql；"><a href="#根据慢日志定位慢查询sql；" class="headerlink" title="根据慢日志定位慢查询sql；"></a>根据慢日志定位慢查询sql；</h6><ul>
+<li><pre><code class="mysql">show variables like &#39;%quer%&#39;
+set global slow_query_log = on;
+set global slow_query_time = 1;
+show status like &#39;%slow_queries%&#39;
+</code></pre>
+<p>改配置文件</p>
+</li>
+</ul>
+</li>
+<li><h6 id="使用explain等工具分析sql-（在语句前加上explain）"><a href="#使用explain等工具分析sql-（在语句前加上explain）" class="headerlink" title="使用explain等工具分析sql （在语句前加上explain）"></a>使用explain等工具分析sql （在语句前加上explain）</h6><p>Explain关键字段解释</p>
+<p>type：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827101928786.png" alt="image-20210827101928786" style="zoom:67%;" /></p>
+<p>extra：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827102024813.png" alt="image-20210827102024813" style="zoom:67%;" /></p>
+</li>
+<li><p>修改sql或者尽量让sql走索引</p>
+<ul>
+<li>​    走index效率提高33%<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827102803560.png" alt="image-20210827102803560" style="zoom:67%;" /></li>
+</ul>
+</li>
+</ul>
+<h4 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h4><p>最左匹配原则<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827111109861.png" alt="image-20210827111109861"  /></p>
+<p>成因</p>
+<p>索引是建立得越多越好吗？</p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827111437715.png" alt="image-20210827111437715"></p>
+<!--more-->]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>hash</tag>
+        <tag>B树</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AVL树</title>
+    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
+    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+
+<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
+<p>eg:满二叉树，完全二叉树，线段树</p>
+<span id="more"></span>
+
+<p>标注节点的高度</p>
+<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
+<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
+<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：插入的元素在不平衡的节点的左侧的左侧<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
+<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
+<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
+<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
+
+<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
+<p><strong>LL</strong>（左旋转）：</p>
+<p><strong>RR</strong>（右旋转）：</p>
+<p><strong>LR</strong>（先左旋转后右旋转）：</p>
+<ul>
+<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
+
+<ul>
+<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<p><strong>RL</strong>（先右旋转后左旋转）：</p>
+<ul>
+<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
+<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
+</ul>
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>删除一个元素后，会往上回溯</p>
+<p>和BST删除一样，remove之后会返回一个根节点，再对这个node进行平衡得到平衡的node；</p>
+<p>会有点耗时，因为每次删除完都要平衡遍历；</p>
+<h4 id="基于AVL树的Set和Map"><a href="#基于AVL树的Set和Map" class="headerlink" title="基于AVL树的Set和Map"></a>基于AVL树的Set和Map</h4><p>AVL树的局限性</p>
+<p>红黑树和AVL树的时间复杂度一致，但是红黑树旋转操作更少；</p>
+<!--more-->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>平衡二叉树</tag>
+        <tag>BST</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>二叉搜索树BST</title>
     <url>/2021/08/21/Day3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<center>二叉搜索树</center>
@@ -52,59 +197,30 @@ System.out.println(node.)
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>树结构</tag>
         <tag>二叉树</tag>
+        <tag>树结构</tag>
         <tag>八股文</tag>
       </tags>
   </entry>
   <entry>
-    <title>AVL树</title>
-    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
-    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+    <title>IDEA快捷键</title>
+    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
 
-<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
-<p>eg:满二叉树，完全二叉树，线段树</p>
-<span id="more"></span>
-
-<p>标注节点的高度</p>
-<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
-<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
-<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：插入的元素在不平衡的节点的左侧的左侧<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
-<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
-<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
-<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
-
-<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
-<p><strong>LL</strong>（左旋转）：</p>
-<p><strong>RR</strong>（右旋转）：</p>
-<p><strong>LR</strong>（先左旋转后右旋转）：</p>
-<ul>
-<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
-
-<ul>
-<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
-</ul>
-</li>
-</ul>
-<p><strong>RL</strong>（先右旋转后左旋转）：</p>
-<ul>
-<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
-<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
-</ul>
-<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>删除一个元素后，会往上回溯</p>
-<p>和BST删除一样，remove之后会返回一个根节点，再对这个node进行平衡得到平衡的node；</p>
-<p>会有点耗时，因为每次删除完都要平衡遍历；</p>
-<h4 id="基于AVL树的Set和Map"><a href="#基于AVL树的Set和Map" class="headerlink" title="基于AVL树的Set和Map"></a>基于AVL树的Set和Map</h4><p>AVL树的局限性</p>
-<p>红黑树和AVL树的时间复杂度一致，但是红黑树旋转操作更少；</p>
-<!--more-->]]></content>
+<p>选中CTRL+shift+左右</p>
+<p>调整位置CTRL+shift+上下</p>
+<p>主方法psvm</p>
+<p>输出sout</p>
+<p>Ctrl+n 查找xxx底层类和方法</p>
+<p>Ctrl+/ 快速创建注释</p>
+<p>Ctrl+F9 重新编译</p>
+<!-- more -->
+]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>IDEA</category>
       </categories>
       <tags>
-        <tag>平衡二叉树</tag>
-        <tag>BST</tag>
+        <tag>-导航 -分享</tag>
       </tags>
   </entry>
   <entry>
@@ -169,27 +285,6 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>IDEA快捷键</title>
-    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
-
-<p>选中CTRL+shift+左右</p>
-<p>调整位置CTRL+shift+上下</p>
-<p>主方法psvm</p>
-<p>输出sout</p>
-<p>Ctrl+n 查找xxx底层类和方法</p>
-<p>Ctrl+/ 快速创建注释</p>
-<p>Ctrl+F9 重新编译</p>
-<!-- more -->
-]]></content>
-      <categories>
-        <category>IDEA</category>
-      </categories>
-      <tags>
-        <tag>-导航 -分享</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>公司融资知识科普</title>
     <url>/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/</url>
     <content><![CDATA[<center>双创科普知识</center>
@@ -211,11 +306,51 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
+    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
+    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
+<span id="more"></span>
+
+<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
+<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
+<p>　　例如：</p>
+<p>　　String a=”abc”;</p>
+<p>　　String b=”abc”;</p>
+<p>　　System.out.println(a==b);</p>
+<p>　　答案是：true</p>
+<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
+<p>　　但是如果我们接着</p>
+<p>　　String c=new String(“abc”);</p>
+<p>　　再</p>
+<p>　　System.out.println(a==c);</p>
+<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　</p>
+<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
+<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　依旧是来观察 Java 中 equals () 的源码</p>
+<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
+<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
+<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
+<!-- more -->]]></content>
+      <categories>
+        <category>比较</category>
+      </categories>
+      <tags>
+        <tag>equals</tag>
+        <tag>compareTo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>哈希表</title>
     <url>/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
     <content><![CDATA[<center>数据结构之哈希表</center>
 
-<center>**思想**：用空间换取时间；</center>
+<center>思想：用空间换取时间；</center>
 
 <span id="more"></span>
 
@@ -298,43 +433,72 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>Java 中的 “==”、“compareTo ()” 和 “equals ()” 的区别</title>
-    <url>/2021/08/22/%E2%80%9C==%E2%80%9D%E3%80%81%E2%80%9CcompareTo-()%E2%80%9D-%E5%92%8C-%E2%80%9Cequals-()%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>在比较两个对象或者数据大小的时候，经常会用到 ==、compareTo () 和 equals (), 尤其是在接入了 Comparable 接口后重写 compareTo 方法等场景，所以我们来理一下这三个的区别。</p>
+    <title>并查集</title>
+    <url>/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
+    <content><![CDATA[<center>并查集UnionFind一种奇怪的树形结构</center>
+
+<ul>
+<li><p>非常高效的解决连接问题</p>
+</li>
+<li><p>判断网络中节点的链接状态</p>
+</li>
+<li><p>数学中集合并的实现</p>
+</li>
+</ul>
 <span id="more"></span>
 
-<h3 id="等号-“-”："><a href="#等号-“-”：" class="headerlink" title="等号 “==”："></a>等号 “==”：</h3><p>　　等号是最简单也最容易理解的，如果等号的两边是基本数据类型，比如 int，double，那么等号就用来单纯的比较他们的数值大小</p>
-<p>　　如果等号两边放的是两个对象，那么就会比较他们在内存当中的地址。</p>
-<p>　　例如：</p>
-<p>　　String a=”abc”;</p>
-<p>　　String b=”abc”;</p>
-<p>　　System.out.println(a==b);</p>
-<p>　　答案是：true</p>
-<p>　　因为相同的字符串内容，在地址上是一样。在 Java 中，String 是有一个 String pool 的，里面存放了可以共享的字符串对象，在声明一个 String 对象后，会首先去找是否存在相同的 String 内容，如果有的话是不会创建新的对象的。在这里 b 实际上是引用了 a 的对象的值，他自己并没有创建对象，所以这里的答案是 true。</p>
-<p>　　但是如果我们接着</p>
-<p>　　String c=new String(“abc”);</p>
-<p>　　再</p>
-<p>　　System.out.println(a==c);</p>
-<p>　　那答案就是 false，因为这二者的地址并不是一致的。</p>
-<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo()"></a>compareTo()</h3><p>　　在 Java 里观察 compareTo () 的源码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len1 = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c1 = v1[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> c2 = v2[k];</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">　　<span class="keyword">return</span> c1 - c2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　k++;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> len1 - len2;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul>
+<li>判断是否连接，只需要判根节点是否一样</li>
+</ul>
+<p>指向树的根节点</p>
+<p>并查集主要实现的方法：</p>
+<ul>
+<li>判断是否连接isConnected</li>
+<li>把两个集合并起来</li>
+</ul>
+<h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p>
+<p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p>
+<h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p>
+<p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p>
+<p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" />
 
-<p>　　</p>
-<p>　　可以观察出，这里实际上是获取的字符串 (也可以是其他对象) 的长度，然后作减法，这里的减法就是 ASCII 码的减法，所以 compareTo () 会返回数字，如果两个字符串内容相同，会返回 0，字符串 a 大于字符串 b，会返回相差的 ASCII 码的正数，字符串 a 小于字符串 b，会返回相差的 ASCII 码的负数。</p>
-<p>　　所以 System.out.println (a.compareTo (b)) 的答案是：0</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line"></span><br><span class="line">　　String anotherString = (String)anObject;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> n = value.length;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v1[] = value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　i++;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+<p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p>
+<p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p>
+<p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p>
+<p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p>
+<p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p>
+<p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p>
+<p>  让9指向8而不指向4的原因是：防止成为链表</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
 
-<p>　　依旧是来观察 Java 中 equals () 的源码</p>
-<p>　　可以观察出，equals 是先用等号 (==) 直接来比较两个对象在内存当中的地址，如果相等会直接返回 true，如果这两个对象的地址不一样，就会考虑这两个对象是不是 String 类型的，如果是 String 类型的，那先比较两个字符串长度是否一样，如果长度不一致，那 100% 不相等，直接返回 false。长度一致则逐个比较</p>
-<h3 id="compareTo-和-equals-的区别"><a href="#compareTo-和-equals-的区别" class="headerlink" title="compareTo () 和 equals 的区别"></a>compareTo () 和 equals 的区别</h3><p>　　compareTo () 会返回二者的差值，即返回的是一个数字；而 equals 就简单一些，只返回 true 或者 false。</p>
-<p>　　最后，compareTo () 和 equals () 都可以判断其他基本数据类型，比如说 Integer，Java 的源码中对这两者方法都做了一些重载，可以根据参数的类型去自动匹配相应的方法，他们的原理也非常简单，只是一些简单的减法或者 (?：) 这类判断。</p>
-<!-- more -->]]></content>
+<h4 id="基于RANK的优化"><a href="#基于RANK的优化" class="headerlink" title="基于RANK的优化"></a>基于RANK的优化</h4><p>rank[i]表示根节点为I的树的高度；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091001839.png" alt="image-20210825091001839" style="zoom:50%;" />
+
+<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">parent[p] = parent[parent[p]];</span><br></pre></td></tr></table></figure>
+
+<p><strong>设计思想</strong>：让该节点指向父亲节点的父亲节点，以降低树的高度；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092108468.png" alt="image-20210825092108468" style="zoom:80%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092132678.png" alt="image-20210825092132678" style="zoom:67%;" />
+
+<h5 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091914244.png" alt="image-20210825091914244" style="zoom:50%;" /></h5><h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>并不是严格意思上的二叉树，所以时间复杂度做<strong>了解</strong>即可</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092616066.png" alt="image-20210825092616066" style="zoom:50%;" />
+
+<p>总结：树结构的变种堆、线段树、trie、并查集；</p>
+<h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><ul>
+<li>leetcode</li>
+</ul>
+<!--more-->
+
+]]></content>
       <categories>
-        <category>比较</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>equals</tag>
-        <tag>compareTo</tag>
+        <tag>二叉树</tag>
+        <tag>并查集</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -406,72 +570,32 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>并查集</title>
-    <url>/2021/08/25/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
-    <content><![CDATA[<center>并查集UnionFind一种奇怪的树形结构</center>
+    <title>意外收获 HEXO 阅读全文</title>
+    <url>/2021/08/25/%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7-HEXO-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/</url>
+    <content><![CDATA[<center>hexo more折叠失效问题</center>
 
-<ul>
-<li><p>非常高效的解决连接问题</p>
-</li>
-<li><p>判断网络中节点的链接状态</p>
-</li>
-<li><p>数学中集合并的实现</p>
-</li>
-</ul>
+<p>ps：因为hexo默认index展示全文，我根据官方三种办法配置了都没有达到我想要的效果；显得我的首页很冗余；某天下午上传文章时突然想到试一下多写几个more试试，没想到成功了；</p>
 <span id="more"></span>
 
-<h4 id="并查集的定义"><a href="#并查集的定义" class="headerlink" title="并查集的定义"></a>并查集的定义</h4><ul>
-<li>判断是否连接，只需要判根节点是否一样</li>
+<p><strong>自己配置问题</strong>：</p>
+<p>我们可以把自己想要折叠的部分放在两个more之间，就可以了</p>
+<h4 id="看效果："><a href="#看效果：" class="headerlink" title="看效果："></a>看效果：</h4><ul>
+<li>这是没有解决之前的效果</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144754934.png" alt="image-20210825144754934" style="zoom:50%;" /></li>
+<li>加了两行之后<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144841763.png" alt="image-20210825144841763" style="zoom:50%;" /></li>
+<li>实现了我想要的折叠</li>
 </ul>
-<p>指向树的根节点</p>
-<p>并查集主要实现的方法：</p>
-<ul>
-<li>判断是否连接isConnected</li>
-<li>把两个集合并起来</li>
-</ul>
-<h4 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick Find"></a>Quick Find</h4><p><strong>设计思想</strong>：定义一个数组，给里面每个值定义一个标识符，标识是否在一个集合中；并操作，如果不在一个集合中，使用for循环让他们的标识符一致，这就形成了并操作</p>
-<p><strong>具体实现</strong>: <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824233819160.png" alt="image-20210824233819160" style="zoom:50%;" /></p>
-<h4 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick Union"></a>Quick Union</h4><p>改善并操作O(n)的时间复杂度，使用树来实现平均复杂度为O(logn)</p>
-<p><strong>设计思想</strong>：将每一个元素看作一个节点，判断是不是连接，就判断他们的指向的根节点是否一样；并操作：将这个树的根节点指向另一棵树的根节点即可；</p>
-<p><strong>具体实现</strong>：初始化数组，使每个元素指向它自己</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824234558192.png" alt="image-20210824234558192" style="zoom: 80%;" />
-
-<p>find方法<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235303840.png" alt="image-20210824235303840" style="zoom:50%;" /></p>
-<p>find方法因为是树形结构所以查找过程中不是相邻的，是索引的查找，需要在不同的地址之间跳转；</p>
-<p>union操作<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824235737247.png" alt="image-20210824235737247"></p>
-<p> 缺点：这棵树可能会很大，很深；时间复杂度很高</p>
-<p>优化：考虑size；将高度低的那棵树指向高度高的那棵树，这样来控制树的高度；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001742406.png" alt="image-20210825001742406" style="zoom:80%;" /></p>
-<p>性能提升大概500倍<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825001855868.png" alt="image-20210825001855868" style="zoom:80%;" /></p>
-<p>  让9指向8而不指向4的原因是：防止成为链表</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824221259227.png" alt="image-20210824221259227" style="zoom:50%;" />
-
-<h4 id="基于RANK的优化"><a href="#基于RANK的优化" class="headerlink" title="基于RANK的优化"></a>基于RANK的优化</h4><p>rank[i]表示根节点为I的树的高度；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091001839.png" alt="image-20210825091001839" style="zoom:50%;" />
-
-<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">parent[p] = parent[parent[p]];</span><br></pre></td></tr></table></figure>
-
-<p><strong>设计思想</strong>：让该节点指向父亲节点的父亲节点，以降低树的高度；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092108468.png" alt="image-20210825092108468" style="zoom:80%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092132678.png" alt="image-20210825092132678" style="zoom:67%;" />
-
-<h5 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825091914244.png" alt="image-20210825091914244" style="zoom:50%;" /></h5><h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>并不是严格意思上的二叉树，所以时间复杂度做<strong>了解</strong>即可</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825092616066.png" alt="image-20210825092616066" style="zoom:50%;" />
-
-<p>总结：树结构的变种堆、线段树、trie、并查集；</p>
-<h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><ul>
-<li>leetcode</li>
-</ul>
+<p><strong>感悟</strong>：多试一试，这个错误可能是因为我对前端知识不是很了解导致的；不过我查了很多博客都没有说这种方法；</p>
 <!--more-->
 
-]]></content>
+<center>希望对大家能有帮助</center>]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>hexo</category>
       </categories>
       <tags>
-        <tag>二叉树</tag>
-        <tag>并查集</tag>
-        <tag>数组</tag>
+        <tag>hexo</tag>
+        <tag>意外收获</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -518,32 +642,150 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>意外收获 HEXO 阅读全文</title>
-    <url>/2021/08/25/%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7-HEXO-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/</url>
-    <content><![CDATA[<center>hexo more折叠失效问题</center>
+    <title>数组、stack、queue</title>
+    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
+    <content><![CDATA[<center>摘要：数组、stack、queue</center>
 
-<p>ps：因为hexo默认index展示全文，我根据官方三种办法配置了都没有达到我想要的效果；显得我的首页很冗余；某天下午上传文章时突然想到试一下多写几个more试试，没想到成功了；</p>
 <span id="more"></span>
 
-<p><strong>自己配置问题</strong>：</p>
-<p>我们可以把自己想要折叠的部分放在两个more之间，就可以了</p>
-<h4 id="看效果："><a href="#看效果：" class="headerlink" title="看效果："></a>看效果：</h4><ul>
-<li>这是没有解决之前的效果</li>
-<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144754934.png" alt="image-20210825144754934" style="zoom:50%;" /></li>
-<li>加了两行之后<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144841763.png" alt="image-20210825144841763" style="zoom:50%;" /></li>
-<li>实现了我想要的折叠</li>
-</ul>
-<p><strong>感悟</strong>：多试一试，这个错误可能是因为我对前端知识不是很了解导致的；不过我查了很多博客都没有说这种方法；</p>
-<!--more-->
+<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
+<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
+<p>eg:撤销操作</p>
+<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
 
-<center>希望对大家能有帮助</center>]]></content>
+<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
+<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
+
+  
+
+<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
+<p>参：<a href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
+<p>代码分析两个队列花费时间的差距</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
+<p>性能差距100倍！</p>
+<!-- more -->]]></content>
       <categories>
-        <category>hexo</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>意外收获</tag>
-        <tag>前端</tag>
+        <tag>数组</tag>
+        <tag>栈</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线段树（区间树）</title>
+    <url>/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
+    <content><![CDATA[<center>线段树（区间树）</center>
+
+<p>​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
+<span id="more"></span>
+
+<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
+
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
+</li>
+<li><p>线段树也是平衡二叉树</p>
+</li>
+</ul>
+<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
+
+<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
+
+<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046" style="zoom:80%;" />
+
+<p>​    Lazy更新</p>
+<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
+
+
+
+
+
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li>leetcode第303题区域和检查</li>
+<li>leetcode第307题区域和检查美版UPDATe</li>
+<li>树状数组（了解）BIT</li>
+<li>RMQ问题</li>
+</ul>
+<!-- more -->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>链表</tag>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>经典红黑树</title>
+    <url>/2021/08/25/%E7%BB%8F%E5%85%B8%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
+    <content><![CDATA[<center>红黑树</center>
+
+<span id="more"></span>
+
+<p>先介绍下2——3树</p>
+<h4 id="2-3树"><a href="#2-3树" class="headerlink" title="2-3树"></a>2-3树</h4><p><strong>性质</strong>：</p>
+<ul>
+<li>满足二分搜索树的基本性质</li>
+<li>节点可以存放一个或者两个元素</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825181737508.png" alt="image-20210825181737508" style="zoom:50%;" /></li>
+<li>2-3树是一棵<strong>绝对平衡</strong>的树</li>
+</ul>
+<h4 id="2-3树如何维持绝对平衡的？"><a href="#2-3树如何维持绝对平衡的？" class="headerlink" title="2-3树如何维持绝对平衡的？"></a>2-3树如何维持绝对平衡的？</h4><p>​        在插入数据的时候不会放在null的位置，if null就和parent节点暂时相融合变成3节点或者4节点如图：</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182718575.png" alt="image-20210825182718575" style="zoom: 50%;" />
+
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182857559.png" alt="image-20210825182857559" style="zoom: 50%;" /> <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182949188.png" alt="image-20210825182949188" style="zoom: 50%;" /></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825183001986.png" alt="image-20210825183001986" style="zoom: 50%;" />
+
+<h4 id="红黑树与2-3树的等价性"><a href="#红黑树与2-3树的等价性" class="headerlink" title="红黑树与2-3树的等价性"></a>红黑树与2-3树的等价性</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825183847374.png" alt="image-20210825183847374" style="zoom:67%;" />
+
+<p>b—c连接线变成红色的b变为红色的</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825190929549.png" alt="image-20210825190929549" style="zoom:80%;" />
+
+<p>定义一个红黑树</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RBTree</span>&lt;<span class="title">K</span> <span class="keyword">extends</span> <span class="title">Comprarable</span>&lt;<span class="title">K</span>&gt;, <span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">true</span>; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACk = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> K key;</span><br><span class="line">        <span class="keyword">public</span> V value;</span><br><span class="line">        <span class="keyword">public</span> Node left,right;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">boolean</span> color;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(K key,V value)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            left = <span class="keyword">null</span>;</span><br><span class="line">            right = <span class="keyword">null</span>;</span><br><span class="line">            color = RED;<span class="comment">//默认创建的节点为红色</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="《算法导论》中的红黑树"><a href="#《算法导论》中的红黑树" class="headerlink" title="《算法导论》中的红黑树"></a>《算法导论》中的红黑树</h4><ol>
+<li>每个节点或者是红色的，或者是黑色的；</li>
+<li>根节点是黑色的；</li>
+<li>每个叶子节点（最后的空节点）是黑色的；</li>
+<li>如果一个节点是红色的，那么它的孩子节点是黑色的；</li>
+<li>从任意一个节点到叶子节点，经过的黑色节点是一样的；</li>
+</ol>
+<p>保持“<strong>黑平衡</strong>”的二叉树，严格意义上，不是平衡二叉树；</p>
+<p>最大高度：2logn<strong>时间复杂度还是</strong>O(Logn)</p>
+<h4 id="红黑树中添加元素"><a href="#红黑树中添加元素" class="headerlink" title="红黑树中添加元素"></a>红黑树中添加元素</h4><ul>
+<li>红黑树添加新元素（了解）</li>
+</ul>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826143441667.png" alt="image-20210826143441667" style="zoom:67%;" />
+
+<h4 id="红黑树的性能总结"><a href="#红黑树的性能总结" class="headerlink" title="红黑树的性能总结"></a>红黑树的性能总结</h4><ul>
+<li>对于完全随机的数据，普通的二分搜索树很好用；</li>
+<li>对于查询较多的使用情况，AVL树很好用；</li>
+<li>红黑树牺牲了平衡性（2logn的高度）</li>
+</ul>
+<p>统计性能更优（增删改查平均情况下更优）</p>
+<p>​        整个红黑树的查找，插入和删除都是 O (logN) 的，原因就是整个红黑树的高度是 logN，查找从根到叶，走过的路径是树的高度，删除和插入操作是从叶到根的，所以经过的路径都是 logN。</p>
+<h4 id="红黑树的底层应用"><a href="#红黑树的底层应用" class="headerlink" title="红黑树的底层应用"></a>红黑树的底层应用</h4><ul>
+<li> linux 中进程的调度用的是红黑树；</li>
+<li>Java 中 HashMap、TreeMap、TreeSet（都在内存中操作）也都是用红黑树实现；</li>
+</ul>
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><ul>
+<li>好文：<a href="https://segmentfault.com/a/1190000023651273">数据结构之红黑树</a></li>
+</ul>
+<!--more-->
+
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>红黑树</tag>
+        <tag>2-3树</tag>
       </tags>
   </entry>
   <entry>
@@ -605,155 +847,6 @@ System.out.println(node.)
         <tag>眏射</tag>
         <tag>leetcode</tag>
         <tag>集合</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线段树（区间树）</title>
-    <url>/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
-    <content><![CDATA[<center>线段树（区间树）</center>
-
-<p>​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
-<span id="more"></span>
-
-<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
-
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
-<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
-</li>
-<li><p>线段树也是平衡二叉树</p>
-</li>
-</ul>
-<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
-
-<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
-
-<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046" style="zoom:80%;" />
-
-<p>​    Lazy更新</p>
-<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
-
-
-
-
-
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
-<li>leetcode第303题区域和检查</li>
-<li>leetcode第307题区域和检查美版UPDATe</li>
-<li>树状数组（了解）BIT</li>
-<li>RMQ问题</li>
-</ul>
-<!-- more -->]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>二叉树</tag>
-        <tag>线段树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>经典红黑树</title>
-    <url>/2021/08/25/%E7%BB%8F%E5%85%B8%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
-    <content><![CDATA[<center>红黑树</center>
-
-<span id="more"></span>
-
-<p>先介绍下2——3树</p>
-<h4 id="2-3树"><a href="#2-3树" class="headerlink" title="2-3树"></a>2-3树</h4><p><strong>性质</strong>：</p>
-<ul>
-<li>满足二分搜索树的基本性质</li>
-<li>节点可以存放一个或者两个元素</li>
-<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825181737508.png" alt="image-20210825181737508" style="zoom:50%;" /></li>
-<li>2-3树是一棵<strong>绝对平衡</strong>的树</li>
-</ul>
-<h4 id="2-3树如何维持绝对平衡的？"><a href="#2-3树如何维持绝对平衡的？" class="headerlink" title="2-3树如何维持绝对平衡的？"></a>2-3树如何维持绝对平衡的？</h4><p>​        在插入数据的时候不会放在null的位置，if null就和parent节点暂时相融合变成3节点或者4节点如图：</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182718575.png" alt="image-20210825182718575" style="zoom: 50%;" />
-
-<pre><code> &lt;center&gt; &lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182857559.png&quot; alt=&quot;image-20210825182857559&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/center&gt;
-</code></pre>
- <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825182949188.png" alt="image-20210825182949188" style="zoom: 50%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825183001986.png" alt="image-20210825183001986" style="zoom: 50%;" />
-
-<h4 id="红黑树与2-3树的等价性"><a href="#红黑树与2-3树的等价性" class="headerlink" title="红黑树与2-3树的等价性"></a>红黑树与2-3树的等价性</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825183847374.png" alt="image-20210825183847374" style="zoom:67%;" />
-
-<p>b—c连接线变成红色的b变为红色的</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825190929549.png" alt="image-20210825190929549" style="zoom:80%;" />
-
-<p>定义一个红黑树</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RBTree</span>&lt;<span class="title">K</span> <span class="keyword">extends</span> <span class="title">Comprarable</span>&lt;<span class="title">K</span>&gt;, <span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">true</span>; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACk = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> K key;</span><br><span class="line">        <span class="keyword">public</span> V value;</span><br><span class="line">        <span class="keyword">public</span> Node left,right;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">boolean</span> color;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(K key,V value)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            left = <span class="keyword">null</span>;</span><br><span class="line">            right = <span class="keyword">null</span>;</span><br><span class="line">            color = RED;<span class="comment">//默认创建的节点为红色</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="《算法导论》中的红黑树"><a href="#《算法导论》中的红黑树" class="headerlink" title="《算法导论》中的红黑树"></a>《算法导论》中的红黑树</h4><ol>
-<li>每个节点或者是红色的，或者是黑色的；</li>
-<li>根节点是黑色的；</li>
-<li>每个叶子节点（最后的空节点）是黑色的；</li>
-<li>如果一个节点是红色的，那么它的孩子节点是黑色的；</li>
-<li>从任意一个节点到叶子节点，经过的黑色节点是一样的；</li>
-</ol>
-<p>保持“<strong>黑平衡</strong>”的二叉树，严格意义上，不是平衡二叉树；</p>
-<p>最大高度：2logn<strong>时间复杂度还是</strong>O(Logn)</p>
-<h4 id="红黑树中添加元素"><a href="#红黑树中添加元素" class="headerlink" title="红黑树中添加元素"></a>红黑树中添加元素</h4><ul>
-<li>红黑树添加新元素（了解）</li>
-</ul>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826143441667.png" alt="image-20210826143441667" style="zoom:67%;" />
-
-<h4 id="红黑树的性能总结"><a href="#红黑树的性能总结" class="headerlink" title="红黑树的性能总结"></a>红黑树的性能总结</h4><ul>
-<li>对于完全随机的数据，普通的二分搜索树很好用；</li>
-<li>对于查询较多的使用情况，AVL树很好用；</li>
-<li>红黑树牺牲了平衡性（2logn的高度）</li>
-</ul>
-<p>统计性能更优（增删改查平均情况下更优）</p>
-<p>​        整个红黑树的查找，插入和删除都是 O (logN) 的，原因就是整个红黑树的高度是 logN，查找从根到叶，走过的路径是树的高度，删除和插入操作是从叶到根的，所以经过的路径都是 logN。</p>
-<h4 id="红黑树的底层应用"><a href="#红黑树的底层应用" class="headerlink" title="红黑树的底层应用"></a>红黑树的底层应用</h4><ul>
-<li> linux 中进程的调度用的是红黑树；</li>
-<li>Java 中 HashMap、TreeMap、TreeSet（都在内存中操作）也都是用红黑树实现；</li>
-</ul>
-<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><ul>
-<li>好文：<a href="https://segmentfault.com/a/1190000023651273">数据结构之红黑树</a></li>
-</ul>
-<!--more-->
-
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>红黑树</tag>
-        <tag>2-3树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组、stack、queue</title>
-    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
-    <content><![CDATA[<center>摘要：数组、stack、queue</center>
-
-<span id="more"></span>
-
-<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
-<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
-<p>eg:撤销操作</p>
-<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
-
-<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
-<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
-
-  
-
-<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
-<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
-<p>参：<a href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
-<p>代码分析两个队列花费时间的差距</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
-<p>性能差距100倍！</p>
-<!-- more -->]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>栈</tag>
-        <tag>队列</tag>
       </tags>
   </entry>
 </search>
