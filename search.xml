@@ -946,12 +946,32 @@ System.out.println(node.)
     <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E6%B3%95review/</url>
     <content><![CDATA[<center>数据库语法review</center>
 
-<h4 id="DML-、DDL、DCL-区别以及定义"><a href="#DML-、DDL、DCL-区别以及定义" class="headerlink" title="DML 、DDL、DCL 区别以及定义"></a>DML 、DDL、DCL 区别以及定义</h4><p>DML（Data Manipulation Language，数据操作语言）：用于检索或者修改数据。<br>DML 包括： SELECT：用于检索数据；<br>INSERT：用于增加数据到数据库；<br>UPDATE：用于从数据库中修改现存的数据<br>DELETE：用于从数据库中删除数据。</p>
-<p>DDL（Data Definition Language，数据定义语言）： 用于定义数据的结构，比如 创建、修改或者删除数据库对象。<br>DDL 包括：DDL 语句可以用于创建用户和重建数据库对象。下面是 DDL 命令：<br>CREATE TABLE：创建表<br>ALTER TABLE<br>DROP TABLE：删除表<br>CREATE INDEX<br>DROP INDEX</p>
-<p>DCL（Data Control Language，数据控制语言）：用于定义数据库用户的权限。<br>DCL 包括：<br>ALTER PASSWORD<br>GRANT<br>REVOKE<br>CREATE SYNONYM</p>
+<span id="more"></span>
+
+<h4 id="DML-、DDL、DCL-区别以及定义"><a href="#DML-、DDL、DCL-区别以及定义" class="headerlink" title="DML 、DDL、DCL 区别以及定义"></a>DML 、DDL、DCL 区别以及定义</h4><p><strong>DML</strong>（Data Manipulation Language，数据操作语言）：用于检索或者修改数据。<br>DML 包括： SELECT：用于检索数据；<br>INSERT：用于增加数据到数据库；<br>UPDATE：用于从数据库中修改现存的数据<br>DELETE：用于从数据库中删除数据。</p>
+<p><strong>DDL</strong>（Data Definition Language，数据定义语言）： 用于定义数据的结构，比如 创建、修改或者删除数据库对象。<br>DDL 包括：DDL 语句可以用于创建用户和重建数据库对象。下面是 DDL 命令：<br>CREATE TABLE：创建表<br>ALTER TABLE<br>DROP TABLE：删除表<br>CREATE INDEX<br>DROP INDEX</p>
+<p><strong>DCL</strong>（Data Control Language，数据控制语言）：用于定义数据库用户的权限。<br>DCL 包括：<br>ALTER PASSWORD<br>GRANT<br>REVOKE<br>CREATE SYNONYM</p>
+<h4 id="关键语法"><a href="#关键语法" class="headerlink" title="关键语法"></a>关键语法</h4><p>统计相关：count，sum，max，min，avg</p>
+<ul>
+<li>GROUP BY<ul>
+<li>满足“SELECT子句中的列名必须为分组列或列函数”</li>
+<li>列函数对于group by 子句定义的每个组各返回一个结果；</li>
+<li>结果缓存到一张临时表里</li>
+</ul>
+</li>
+<li>HAVING<ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210828205356082.png" alt="image-20210828205356082"></li>
+</ul>
+</li>
+</ul>
+<!--more-->
+
 ]]></content>
       <categories>
         <category>数据库</category>
       </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
   </entry>
 </search>
