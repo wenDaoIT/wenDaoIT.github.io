@@ -1,6 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据库语法review</title>
+    <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E6%B3%95review/</url>
+    <content><![CDATA[<center>数据库语法review</center>
+
+<span id="more"></span>
+
+<h4 id="DML-、DDL、DCL-区别以及定义"><a href="#DML-、DDL、DCL-区别以及定义" class="headerlink" title="DML 、DDL、DCL 区别以及定义"></a>DML 、DDL、DCL 区别以及定义</h4><p><strong>DML</strong>（Data Manipulation Language，数据操作语言）：用于检索或者修改数据。<br>DML 包括： SELECT：用于检索数据；<br>INSERT：用于增加数据到数据库；<br>UPDATE：用于从数据库中修改现存的数据<br>DELETE：用于从数据库中删除数据。</p>
+<p><strong>DDL</strong>（Data Definition Language，数据定义语言）： 用于定义数据的结构，比如 创建、修改或者删除数据库对象。<br>DDL 包括：DDL 语句可以用于创建用户和重建数据库对象。下面是 DDL 命令：<br>CREATE TABLE：创建表<br>ALTER TABLE<br>DROP TABLE：删除表<br>CREATE INDEX<br>DROP INDEX</p>
+<p><strong>DCL</strong>（Data Control Language，数据控制语言）：用于定义数据库用户的权限。<br>DCL 包括：<br>ALTER PASSWORD<br>GRANT<br>REVOKE<br>CREATE SYNONYM</p>
+<h4 id="关键语法"><a href="#关键语法" class="headerlink" title="关键语法"></a>关键语法</h4><p>统计相关：count，sum，max，min，avg</p>
+<ul>
+<li>GROUP BY<ul>
+<li>满足“SELECT子句中的列名必须为分组列或列函数”</li>
+<li>列函数对于group by 子句定义的每个组各返回一个结果；</li>
+<li>结果缓存到一张临时表里</li>
+</ul>
+</li>
+<li>HAVING<ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210828205356082.png" alt="image-20210828205356082"></li>
+</ul>
+</li>
+</ul>
+<!--more-->
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库学习1</title>
+    <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/</url>
+    <content><![CDATA[<center>锁模块</center>
+
+  <span id="more"></span>
+
+<h4 id="MyISAM-与InnoDB关于锁方面得区别是什么？"><a href="#MyISAM-与InnoDB关于锁方面得区别是什么？" class="headerlink" title="MyISAM 与InnoDB关于锁方面得区别是什么？"></a>MyISAM 与InnoDB关于锁方面得区别是什么？</h4><ul>
+<li><h5 id="MyISAM默认用的是表级锁-不支持行级锁；"><a href="#MyISAM默认用的是表级锁-不支持行级锁；" class="headerlink" title="MyISAM默认用的是表级锁,不支持行级锁；"></a>MyISAM默认用的是表级锁,不支持行级锁；</h5><ul>
+<li><p>范围查询的时候默认给表上read🔒(共享锁)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">lock tables students read <span class="operator">|</span> write;</span><br></pre></td></tr></table></figure>
+
+<p>write🔒（排他锁）</p>
+<p>上锁之后读和写都要等 </p>
+</li>
+</ul>
+</li>
+<li><h5 id="InnoDB默认用的是行级锁，也支持表级锁；"><a href="#InnoDB默认用的是行级锁，也支持表级锁；" class="headerlink" title="InnoDB默认用的是行级锁，也支持表级锁；"></a>InnoDB默认用的是行级锁，也支持表级锁；</h5><ul>
+<li><p>手动上锁，只对该行上锁；</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> students_innodb <span class="keyword">where</span> id<span class="operator">=</span><span class="number">3</span> lock <span class="keyword">in</span> share mode;</span><br></pre></td></tr></table></figure>
+
+<p>共享锁可以兼容；</p>
+<p>当查找不走索引的时候上的是表级锁；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827142925274.png" alt="image-20210827142925274" style="zoom:67%;" /></li>
+</ul>
+</li>
+</ul>
+<h4 id="那是不是锁越细越多越好？"><a href="#那是不是锁越细越多越好？" class="headerlink" title="那是不是锁越细越多越好？"></a>那是不是锁越细越多越好？</h4><p>🔒越多花费的资源越多；在数据较少的情况下用非聚集索引MyISAM很快</p>
+<h4 id="MyISAM适合的场景"><a href="#MyISAM适合的场景" class="headerlink" title="MyISAM适合的场景"></a>MyISAM适合的场景</h4><ol>
+<li>频繁执行全表count语句；</li>
+<li>对数据进行增删改的频率不高，查询非常频繁；</li>
+<li>没有事务；</li>
+</ol>
+<h4 id="InnoDB适合的场景"><a href="#InnoDB适合的场景" class="headerlink" title="InnoDB适合的场景"></a>InnoDB适合的场景</h4><ol>
+<li>增删改查都比较频繁；</li>
+<li>可靠性要求较高，要求支持事务；</li>
+</ol>
+<h4 id="数据库🔒的分类："><a href="#数据库🔒的分类：" class="headerlink" title="数据库🔒的分类："></a>数据库🔒的分类：</h4><ul>
+<li>按照粒度划分：表级锁，行级锁，页级🔒；</li>
+<li>按照级别划分：共享锁、排它锁；</li>
+<li>按照枷锁方式：自动锁、显式锁；</li>
+<li>按操作划分：DML锁、DDL锁；</li>
+<li>按使用方式划分：乐观锁，悲观锁；</li>
+</ul>
+<p>悲观锁:一般用数据库自己带的锁；</p>
+<p>乐观锁:使用数据版本控制，只有在增删改查的时候才会去判断冲突；</p>
+<h4 id="数据库事务的四大特征：ACID"><a href="#数据库事务的四大特征：ACID" class="headerlink" title="数据库事务的四大特征：ACID"></a>数据库事务的四大特征：ACID</h4><ul>
+<li>A原子性(Atomic)</li>
+<li>一致性（Consistency）</li>
+<li><strong>隔离性(Isolation)</strong></li>
+<li>持久性（Durability)</li>
+</ul>
+<h4 id="事务隔离级别以及各级别下的并发访问问题"><a href="#事务隔离级别以及各级别下的并发访问问题" class="headerlink" title="事务隔离级别以及各级别下的并发访问问题"></a>事务隔离级别以及各级别下的并发访问问题</h4><p>MySQL默认是repeatable-read Orcal默认是read-committed</p>
+<ul>
+<li>更新 丢失———mysql所有事务隔离级别在数据库层面上均可避免；<ul>
+<li>eg:存钱失败</li>
+</ul>
+</li>
+<li>脏读——设置read-committed事务隔离级别以上可避免；<ul>
+<li>指的是一个session读取了另一个未提交的事务，另一个事务回滚之后造成翻车；</li>
+<li>解决：set session transaction level read committed;</li>
+</ul>
+</li>
+<li>不可重复读——repeatable-read事务隔离级别以上可避免；<ul>
+<li>多次查询结果变化了超出预期；</li>
+</ul>
+</li>
+<li> 幻读——serializable事务隔离级别可避免； </li>
+<li>Serializable 是最高的事务隔离级别，在该级别下，事务串行化顺序执行，可以避免脏读、不可重复读与幻读。但是这种事务隔离级别效率低下，比较耗数据库性能，一般不使用。</li>
+</ul>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827153216400.png" alt="image-20210827153216400" style="zoom:67%;" />
+
+<h4 id="当前读和快照读"><a href="#当前读和快照读" class="headerlink" title="当前读和快照读"></a>当前读和快照读</h4> <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827154029335.png" alt="image-20210827154029335" style="zoom:67%;" />
+
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827160905898.png" alt="image-20210827160905898"></p>
+<h4 id="RR级别下如何避免幻读"><a href="#RR级别下如何避免幻读" class="headerlink" title="RR级别下如何避免幻读"></a>RR级别下如何避免幻读</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161106338.png" alt="image-20210827161106338"></p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161358934.png" alt="image-20210827161358934"></p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161434810.png" alt="image-20210827161434810"></p>
+<!--more-->
+
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>讲的很透彻的一篇好文：<a href="https://www.huaweicloud.com/articles/ffc11869bfea5f6793631f9b30369be0.html">理解事务的 4 种隔离级别</a></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>🔒</tag>
+        <tag>并发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AVL树</title>
+    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
+    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
+
+<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
+<p>eg:满二叉树，完全二叉树，线段树</p>
+<span id="more"></span>
+
+<p>标注节点的高度</p>
+<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
+<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
+<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：插入的元素在不平衡的节点的左侧的左侧<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
+<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
+<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
+<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
+
+<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
+<p><strong>LL</strong>（左旋转）：</p>
+<p><strong>RR</strong>（右旋转）：</p>
+<p><strong>LR</strong>（先左旋转后右旋转）：</p>
+<ul>
+<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
+
+<ul>
+<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<p><strong>RL</strong>（先右旋转后左旋转）：</p>
+<ul>
+<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
+<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
+</ul>
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>删除一个元素后，会往上回溯</p>
+<p>和BST删除一样，remove之后会返回一个根节点，再对这个node进行平衡得到平衡的node；</p>
+<p>会有点耗时，因为每次删除完都要平衡遍历；</p>
+<h4 id="基于AVL树的Set和Map"><a href="#基于AVL树的Set和Map" class="headerlink" title="基于AVL树的Set和Map"></a>基于AVL树的Set和Map</h4><p>AVL树的局限性</p>
+<p>红黑树和AVL树的时间复杂度一致，但是红黑树旋转操作更少；</p>
+<!--more-->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>平衡二叉树</tag>
+        <tag>BST</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据库学习</title>
     <url>/2021/08/27/2021-08-27-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<center>关系数据库管理系统</center>
@@ -94,147 +268,6 @@ show status like &#39;%slow_queries%&#39;
         <tag>hash</tag>
         <tag>B树</tag>
         <tag>二叉树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据库学习1</title>
-    <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/</url>
-    <content><![CDATA[<center>锁模块</center>
-
-  <span id="more"></span>
-
-<h4 id="MyISAM-与InnoDB关于锁方面得区别是什么？"><a href="#MyISAM-与InnoDB关于锁方面得区别是什么？" class="headerlink" title="MyISAM 与InnoDB关于锁方面得区别是什么？"></a>MyISAM 与InnoDB关于锁方面得区别是什么？</h4><ul>
-<li><h5 id="MyISAM默认用的是表级锁-不支持行级锁；"><a href="#MyISAM默认用的是表级锁-不支持行级锁；" class="headerlink" title="MyISAM默认用的是表级锁,不支持行级锁；"></a>MyISAM默认用的是表级锁,不支持行级锁；</h5><ul>
-<li><p>范围查询的时候默认给表上read🔒(共享锁)</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">lock tables students read <span class="operator">|</span> write;</span><br></pre></td></tr></table></figure>
-
-<p>write🔒（排他锁）</p>
-<p>上锁之后读和写都要等 </p>
-</li>
-</ul>
-</li>
-<li><h5 id="InnoDB默认用的是行级锁，也支持表级锁；"><a href="#InnoDB默认用的是行级锁，也支持表级锁；" class="headerlink" title="InnoDB默认用的是行级锁，也支持表级锁；"></a>InnoDB默认用的是行级锁，也支持表级锁；</h5><ul>
-<li><p>手动上锁，只对该行上锁；</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> students_innodb <span class="keyword">where</span> id<span class="operator">=</span><span class="number">3</span> lock <span class="keyword">in</span> share mode;</span><br></pre></td></tr></table></figure>
-
-<p>共享锁可以兼容；</p>
-<p>当查找不走索引的时候上的是表级锁；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827142925274.png" alt="image-20210827142925274" style="zoom:67%;" /></li>
-</ul>
-</li>
-</ul>
-<h4 id="那是不是锁越细越多越好？"><a href="#那是不是锁越细越多越好？" class="headerlink" title="那是不是锁越细越多越好？"></a>那是不是锁越细越多越好？</h4><p>🔒越多花费的资源越多；在数据较少的情况下用非聚集索引MyISAM很快</p>
-<h4 id="MyISAM适合的场景"><a href="#MyISAM适合的场景" class="headerlink" title="MyISAM适合的场景"></a>MyISAM适合的场景</h4><ol>
-<li>频繁执行全表count语句；</li>
-<li>对数据进行增删改的频率不高，查询非常频繁；</li>
-<li>没有事务；</li>
-</ol>
-<h4 id="InnoDB适合的场景"><a href="#InnoDB适合的场景" class="headerlink" title="InnoDB适合的场景"></a>InnoDB适合的场景</h4><ol>
-<li>增删改查都比较频繁；</li>
-<li>可靠性要求较高，要求支持事务；</li>
-</ol>
-<h4 id="数据库🔒的分类："><a href="#数据库🔒的分类：" class="headerlink" title="数据库🔒的分类："></a>数据库🔒的分类：</h4><ul>
-<li>按照粒度划分：表级锁，行级锁，页级🔒；</li>
-<li>按照级别划分：共享锁、排它锁；</li>
-<li>按照枷锁方式：自动锁、显式锁；</li>
-<li>按操作划分：DML锁、DDL锁；</li>
-<li>按使用方式划分：乐观锁，悲观锁；</li>
-</ul>
-<p>悲观锁:一般用数据库自己带的锁；</p>
-<p>乐观锁:使用数据版本控制，只有在增删改查的时候才会去判断冲突；</p>
-<h4 id="数据库事务的四大特征：ACID"><a href="#数据库事务的四大特征：ACID" class="headerlink" title="数据库事务的四大特征：ACID"></a>数据库事务的四大特征：ACID</h4><ul>
-<li>A原子性(Atomic)</li>
-<li>一致性（Consistency）</li>
-<li><strong>隔离性(Isolation)</strong></li>
-<li>持久性（Durability)</li>
-</ul>
-<h4 id="事务隔离级别以及各级别下的并发访问问题"><a href="#事务隔离级别以及各级别下的并发访问问题" class="headerlink" title="事务隔离级别以及各级别下的并发访问问题"></a>事务隔离级别以及各级别下的并发访问问题</h4><p>MySQL默认是repeatable-read Orcal默认是read-committed</p>
-<ul>
-<li>更新 丢失———mysql所有事务隔离级别在数据库层面上均可避免；<ul>
-<li>eg:存钱失败</li>
-</ul>
-</li>
-<li>脏读——设置read-committed事务隔离级别以上可避免；<ul>
-<li>指的是一个session读取了另一个未提交的事务，另一个事务回滚之后造成翻车；</li>
-<li>解决：set session transaction level read committed;</li>
-</ul>
-</li>
-<li>不可重复读——repeatable-read事务隔离级别以上可避免；<ul>
-<li>多次查询结果变化了超出预期；</li>
-</ul>
-</li>
-<li> 幻读——serializable事务隔离级别可避免； </li>
-<li>Serializable 是最高的事务隔离级别，在该级别下，事务串行化顺序执行，可以避免脏读、不可重复读与幻读。但是这种事务隔离级别效率低下，比较耗数据库性能，一般不使用。</li>
-</ul>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827153216400.png" alt="image-20210827153216400" style="zoom:67%;" />
-
-<h4 id="当前读和快照读"><a href="#当前读和快照读" class="headerlink" title="当前读和快照读"></a>当前读和快照读</h4> <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827154029335.png" alt="image-20210827154029335" style="zoom:67%;" />
-
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827160905898.png" alt="image-20210827160905898"></p>
-<h4 id="RR级别下如何避免幻读"><a href="#RR级别下如何避免幻读" class="headerlink" title="RR级别下如何避免幻读"></a>RR级别下如何避免幻读</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161106338.png" alt="image-20210827161106338"></p>
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161358934.png" alt="image-20210827161358934"></p>
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161434810.png" alt="image-20210827161434810"></p>
-<!--more-->
-
-<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>讲的很透彻的一篇好文：<a href="https://www.huaweicloud.com/articles/ffc11869bfea5f6793631f9b30369be0.html">理解事务的 4 种隔离级别</a></p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>🔒</tag>
-        <tag>数据库</tag>
-        <tag>并发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AVL树</title>
-    <url>/2021/08/25/20210825-AVL%E6%A0%91/</url>
-    <content><![CDATA[<center>设置一个机制来防止二叉树最坏情况变成链表；优化二分搜索树</center>
-
-<p>AVL中<strong>平衡二叉树定义</strong>：对于任意一个节点，左子树和右子树的高度差不能超过1</p>
-<p>eg:满二叉树，完全二叉树，线段树</p>
-<span id="more"></span>
-
-<p>标注节点的高度</p>
-<p><strong>计算平衡因子</strong>：左右子树高度差相减；<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825094757417.png" alt="image-20210825094757417" style="zoom:50%;" /></p>
-<p>判断是否为平衡二叉树并计算平衡因子<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825100642246.png" alt="image-20210825100642246" style="zoom:80%;" /></p>
-<h4 id="在数据插入时维护二叉树平衡"><a href="#在数据插入时维护二叉树平衡" class="headerlink" title="在数据插入时维护二叉树平衡"></a>在数据插入时维护二叉树平衡</h4><p>右旋转原理：插入的元素在不平衡的节点的左侧的左侧<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825102959561.png" alt="image-20210825102959561" style="zoom:50%;" /></p>
-<p>旋转之后既维持了二分搜索树的性质又实现了平衡；</p>
-<p> 方法实现：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825104604755.png" alt="image-20210825104604755" style="zoom: 80%;" /></p>
-<p><strong>左旋转</strong>：插入的元素在不平衡的节点的右侧的右侧</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x.left = y;</span><br><span class="line">y.right = T3</span><br></pre></td></tr></table></figure>
-
-<p>当节点都比X大时，不能单纯的进行左旋转右旋转</p>
-<p><strong>LL</strong>（左旋转）：</p>
-<p><strong>RR</strong>（右旋转）：</p>
-<p><strong>LR</strong>（先左旋转后右旋转）：</p>
-<ul>
-<li><p>插入的元素在不平衡的节点的左侧的右侧</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113128961.png" alt="image-20210825113128961" style="zoom:50%;" />
-
-<ul>
-<li>​    转化成了LL的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113303838.png" alt="image-20210825113303838" style="zoom:50%;" /></li>
-</ul>
-</li>
-</ul>
-<p><strong>RL</strong>（先右旋转后左旋转）：</p>
-<ul>
-<li>添加的节点在不平衡节点的右子树的左侧，先对右节点进行右旋转化为RR，然后对RR进行左旋转<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113410716.png" alt="image-20210825113410716"></li>
-<li>转换成RR的情况<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825113434322.png" alt="image-20210825113434322" style="zoom:50%;" /></li>
-</ul>
-<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>删除一个元素后，会往上回溯</p>
-<p>和BST删除一样，remove之后会返回一个根节点，再对这个node进行平衡得到平衡的node；</p>
-<p>会有点耗时，因为每次删除完都要平衡遍历；</p>
-<h4 id="基于AVL树的Set和Map"><a href="#基于AVL树的Set和Map" class="headerlink" title="基于AVL树的Set和Map"></a>基于AVL树的Set和Map</h4><p>AVL树的局限性</p>
-<p>红黑树和AVL树的时间复杂度一致，但是红黑树旋转操作更少；</p>
-<!--more-->]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>平衡二叉树</tag>
-        <tag>BST</tag>
       </tags>
   </entry>
   <entry>
@@ -353,93 +386,6 @@ System.out.println(node.)
       <tags>
         <tag>equals</tag>
         <tag>compareTo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>哈希表</title>
-    <url>/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
-    <content><![CDATA[<center>数据结构之哈希表</center>
-
-<center>思想：用空间换取时间；</center>
-
-<span id="more"></span>
-
-<p> <strong>定义</strong>：每一个字符都和一个索引相对应；</p>
-<p>查找的复杂度O(1)；</p>
-<p><strong>哈希函数</strong>：“键”转换成索引的<strong>转换函数</strong>；</p>
-<p><strong>哈希冲突</strong>：两个不同的键对应一个索引；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826093503314.png" alt="image-20210826093503314" style="zoom:50%;" />
-
-<p>哈希函数的设计是很重要的；</p>
-<p>  键通过哈希函数得到的索引的索引越均匀越好</p>
-<p><strong>哈希函数的设计</strong>：转成整型（并不是唯一的办法）</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094043955.png" alt="image-20210826094043955" style="zoom:67%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094304154.png" alt="image-20210826094304154" style="zoom:67%;" />
-
-<p>大整数取模一个素数，让分布更均匀 ；<strong>选一个合适的素数</strong><a href="https://planetmath.org/goodhashtableprimes">参考网站</a></p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094531867.png" alt="image-20210826094531867" style="zoom:80%;" />
-
-<p><strong>字符串设计</strong></p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826095605810.png" alt="image-20210826095605810" style="zoom:80%;" />
-
-<p> 复合类型转换–和字符串类似</p>
-<p><strong>性质</strong>：</p>
-<ol>
-<li>一致性：如果a==b,则hash(a)=hash(b);</li>
-<li>高效性：计算高校简便；</li>
-<li>均匀性：哈希值均匀分布；</li>
-</ol>
-<h4 id="JAVA中的hashCode"><a href="#JAVA中的hashCode" class="headerlink" title="JAVA中的hashCode"></a>JAVA中的hashCode</h4><p> Java中每个Object自带hashCode是根据对象地址生成的，同样的内容不同的对象地址也不一样；</p>
-<p>我们可以自定义覆盖hashCode计算方法；</p>
-<p><strong>通常要比较两个类是否相等</strong>：覆盖hashcode和equals</p>
-<ul>
-<li>hashcode相等证明他们的内容相等</li>
-<li>同时如果equals相等证明地址也相同，是用一个类</li>
-</ul>
-<h4 id="哈希冲突的处理-链地址法-Seperate-Chaining"><a href="#哈希冲突的处理-链地址法-Seperate-Chaining" class="headerlink" title="哈希冲突的处理 链地址法 Seperate Chaining"></a>哈希冲突的处理 链地址法 Seperate Chaining</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105524706.png" alt="image-20210826105524706" style="zoom:50%;" />
-
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105804004.png" alt="image-20210826105804004" style="zoom:80%;" />
-
-<h4 id="自己做一个哈希表"><a href="#自己做一个哈希表" class="headerlink" title="自己做一个哈希表"></a>自己做一个哈希表</h4><p><strong>设计思想</strong>： </p>
-<ul>
-<li>表：顾名思义有行有列</li>
-<li>设计一个用户自定义大小的数组列</li>
-<li>每个列中的行设计链表，成TreeMap；（TreeMap的底层实现是红黑树）</li>
-</ul>
-<h4 id="定义一个表"><a href="#定义一个表" class="headerlink" title="定义一个表"></a>定义一个表<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111205963.png" alt="image-20210826111205963" style="zoom:80%;" /></h4><h4 id="add"><a href="#add" class="headerlink" title="add()"></a>add()</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111704766.png" alt="image-20210826111704766"></p>
-<h4 id="Remove"><a href="#Remove" class="headerlink" title="Remove()"></a>Remove()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112241539.png" alt="image-20210826112241539" style="zoom:67%;" />
-
-<h4 id="Set-Contains"><a href="#Set-Contains" class="headerlink" title="Set() Contains()"></a>Set() Contains()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112414906.png" alt="image-20210826112414906" style="zoom:67%;" />
-
-<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826113246371.png" alt="image-20210826113246371" style="zoom:67%;" />
-
-<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826140549596.png" alt="image-20210826140549596" style="zoom:67%;" />
-
-<p>为实现O(1)级别的复杂度，和静态数组一样，需要reSize</p>
-<h6 id="动态空间处理"><a href="#动态空间处理" class="headerlink" title="动态空间处理"></a>动态空间处理</h6><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826140834209.png" alt="image-20210826140834209" style="zoom:50%;" />
-
-<h4 id="reSize"><a href="#reSize" class="headerlink" title="reSize()"></a>reSize()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826142745265.png" alt="image-20210826142745265" style="zoom:67%;" />
-
-
-
-
-
-<p>哈希碰撞攻击（了解）</p>
-<h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
-<li>leetcode第378题字符串中的第一个唯一的字符</li>
-</ul>
-<!--more-->
-
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>哈希表</tag>
-        <tag>红黑树</tag>
-        <tag>链表</tag>
-        <tag>TreeMap</tag>
       </tags>
   </entry>
   <entry>
@@ -593,32 +539,90 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>意外收获 HEXO 阅读全文</title>
-    <url>/2021/08/25/%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7-HEXO-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/</url>
-    <content><![CDATA[<center>hexo more折叠失效问题</center>
+    <title>哈希表</title>
+    <url>/2021/08/26/%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
+    <content><![CDATA[<center>数据结构之哈希表</center>
 
-<p>ps：因为hexo默认index展示全文，我根据官方三种办法配置了都没有达到我想要的效果；显得我的首页很冗余；某天下午上传文章时突然想到试一下多写几个more试试，没想到成功了；</p>
+<center>思想：用空间换取时间；</center>
+
 <span id="more"></span>
 
-<p><strong>自己配置问题</strong>：</p>
-<p>我们可以把自己想要折叠的部分放在两个more之间，就可以了</p>
-<h4 id="看效果："><a href="#看效果：" class="headerlink" title="看效果："></a>看效果：</h4><ul>
-<li>这是没有解决之前的效果</li>
-<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144754934.png" alt="image-20210825144754934" style="zoom:50%;" /></li>
-<li>加了两行之后<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144841763.png" alt="image-20210825144841763" style="zoom:50%;" /></li>
-<li>实现了我想要的折叠</li>
+<p> <strong>定义</strong>：每一个字符都和一个索引相对应；</p>
+<p>查找的复杂度O(1)；</p>
+<p><strong>哈希函数</strong>：“键”转换成索引的<strong>转换函数</strong>；</p>
+<p><strong>哈希冲突</strong>：两个不同的键对应一个索引；</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826093503314.png" alt="image-20210826093503314" style="zoom:50%;" />
+
+<p>哈希函数的设计是很重要的；</p>
+<p>  键通过哈希函数得到的索引的索引越均匀越好</p>
+<p><strong>哈希函数的设计</strong>：转成整型（并不是唯一的办法）</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094043955.png" alt="image-20210826094043955" style="zoom:67%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094304154.png" alt="image-20210826094304154" style="zoom:67%;" />
+
+<p>大整数取模一个素数，让分布更均匀 ；<strong>选一个合适的素数</strong><a href="https://planetmath.org/goodhashtableprimes">参考网站</a></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826094531867.png" alt="image-20210826094531867" style="zoom:80%;" />
+
+<p><strong>字符串设计</strong></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826095605810.png" alt="image-20210826095605810" style="zoom:80%;" />
+
+<p> 复合类型转换–和字符串类似</p>
+<p><strong>性质</strong>：</p>
+<ol>
+<li>一致性：如果a==b,则hash(a)=hash(b);</li>
+<li>高效性：计算高校简便；</li>
+<li>均匀性：哈希值均匀分布；</li>
+</ol>
+<h4 id="JAVA中的hashCode"><a href="#JAVA中的hashCode" class="headerlink" title="JAVA中的hashCode"></a>JAVA中的hashCode</h4><p> Java中每个Object自带hashCode是根据对象地址生成的，同样的内容不同的对象地址也不一样；</p>
+<p>我们可以自定义覆盖hashCode计算方法；</p>
+<p><strong>通常要比较两个类是否相等</strong>：覆盖hashcode和equals</p>
+<ul>
+<li>hashcode相等证明他们的内容相等</li>
+<li>同时如果equals相等证明地址也相同，是用一个类</li>
 </ul>
-<p><strong>感悟</strong>：多试一试，这个错误可能是因为我对前端知识不是很了解导致的；不过我查了很多博客都没有说这种方法；</p>
+<h4 id="哈希冲突的处理-链地址法-Seperate-Chaining"><a href="#哈希冲突的处理-链地址法-Seperate-Chaining" class="headerlink" title="哈希冲突的处理 链地址法 Seperate Chaining"></a>哈希冲突的处理 链地址法 Seperate Chaining</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105524706.png" alt="image-20210826105524706" style="zoom:50%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826105804004.png" alt="image-20210826105804004" style="zoom:80%;" />
+
+<h4 id="自己做一个哈希表"><a href="#自己做一个哈希表" class="headerlink" title="自己做一个哈希表"></a>自己做一个哈希表</h4><p><strong>设计思想</strong>： </p>
+<ul>
+<li>表：顾名思义有行有列</li>
+<li>设计一个用户自定义大小的数组列</li>
+<li>每个列中的行设计链表，成TreeMap；（TreeMap的底层实现是红黑树）</li>
+</ul>
+<h4 id="定义一个表"><a href="#定义一个表" class="headerlink" title="定义一个表"></a>定义一个表<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111205963.png" alt="image-20210826111205963" style="zoom:80%;" /></h4><h4 id="add"><a href="#add" class="headerlink" title="add()"></a>add()</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826111704766.png" alt="image-20210826111704766"></p>
+<h4 id="Remove"><a href="#Remove" class="headerlink" title="Remove()"></a>Remove()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112241539.png" alt="image-20210826112241539" style="zoom:67%;" />
+
+<h4 id="Set-Contains"><a href="#Set-Contains" class="headerlink" title="Set() Contains()"></a>Set() Contains()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826112414906.png" alt="image-20210826112414906" style="zoom:67%;" />
+
+<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826113246371.png" alt="image-20210826113246371" style="zoom:67%;" />
+
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826140549596.png" alt="image-20210826140549596" style="zoom:67%;" />
+
+<p>为实现O(1)级别的复杂度，和静态数组一样，需要reSize</p>
+<h6 id="动态空间处理"><a href="#动态空间处理" class="headerlink" title="动态空间处理"></a>动态空间处理</h6><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826140834209.png" alt="image-20210826140834209" style="zoom:50%;" />
+
+<h4 id="reSize"><a href="#reSize" class="headerlink" title="reSize()"></a>reSize()</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210826142745265.png" alt="image-20210826142745265" style="zoom:67%;" />
+
+
+
+
+
+<p>哈希碰撞攻击（了解）</p>
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other:"></a>Other:</h4><ul>
+<li>leetcode第378题字符串中的第一个唯一的字符</li>
+</ul>
 <!--more-->
 
-<center>希望对大家能有帮助</center>]]></content>
+]]></content>
       <categories>
-        <category>hexo</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>意外收获</tag>
-        <tag>前端</tag>
+        <tag>哈希表</tag>
+        <tag>红黑树</tag>
+        <tag>链表</tag>
+        <tag>TreeMap</tag>
       </tags>
   </entry>
   <entry>
@@ -691,36 +695,32 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>数组、stack、queue</title>
-    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
-    <content><![CDATA[<center>摘要：数组、stack、queue</center>
+    <title>意外收获 HEXO 阅读全文</title>
+    <url>/2021/08/25/%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7-HEXO-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/</url>
+    <content><![CDATA[<center>hexo more折叠失效问题</center>
 
+<p>ps：因为hexo默认index展示全文，我根据官方三种办法配置了都没有达到我想要的效果；显得我的首页很冗余；某天下午上传文章时突然想到试一下多写几个more试试，没想到成功了；</p>
 <span id="more"></span>
 
-<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
-<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
-<p>eg:撤销操作</p>
-<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
+<p><strong>自己配置问题</strong>：</p>
+<p>我们可以把自己想要折叠的部分放在两个more之间，就可以了</p>
+<h4 id="看效果："><a href="#看效果：" class="headerlink" title="看效果："></a>看效果：</h4><ul>
+<li>这是没有解决之前的效果</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144754934.png" alt="image-20210825144754934" style="zoom:50%;" /></li>
+<li>加了两行之后<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210825144841763.png" alt="image-20210825144841763" style="zoom:50%;" /></li>
+<li>实现了我想要的折叠</li>
+</ul>
+<p><strong>感悟</strong>：多试一试，这个错误可能是因为我对前端知识不是很了解导致的；不过我查了很多博客都没有说这种方法；</p>
+<!--more-->
 
-<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
-<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
-
-  
-
-<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
-<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
-<p>参：<a href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
-<p>代码分析两个队列花费时间的差距</p>
-<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
-<p>性能差距100倍！</p>
-<!-- more -->]]></content>
+<center>希望对大家能有帮助</center>]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>hexo</category>
       </categories>
       <tags>
-        <tag>数组</tag>
-        <tag>栈</tag>
-        <tag>队列</tag>
+        <tag>hexo</tag>
+        <tag>意外收获</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -764,52 +764,6 @@ System.out.println(node.)
       </categories>
       <tags>
         <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线段树（区间树）</title>
-    <url>/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
-    <content><![CDATA[<center>线段树（区间树）</center>
-
-<p>​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
-<span id="more"></span>
-
-<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
-
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
-<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
-</li>
-<li><p>线段树也是平衡二叉树</p>
-</li>
-</ul>
-<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
-
-<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
-
-<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046" style="zoom:80%;" />
-
-<p>​    Lazy更新</p>
-<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
-
-
-
-
-
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
-<li>leetcode第303题区域和检查</li>
-<li>leetcode第307题区域和检查美版UPDATe</li>
-<li>树状数组（了解）BIT</li>
-<li>RMQ问题</li>
-</ul>
-<!-- more -->]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>二叉树</tag>
-        <tag>链表</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -871,6 +825,85 @@ System.out.println(node.)
         <tag>眏射</tag>
         <tag>leetcode</tag>
         <tag>集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数组、stack、queue</title>
+    <url>/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/</url>
+    <content><![CDATA[<center>摘要：数组、stack、queue</center>
+
+<span id="more"></span>
+
+<h4 id="线性结构—数组"><a href="#线性结构—数组" class="headerlink" title="线性结构—数组"></a>线性结构—数组</h4><p>栈的底层操作——&gt;数组</p>
+<h4 id="线性结构—栈"><a href="#线性结构—栈" class="headerlink" title="线性结构—栈"></a>线性结构—栈</h4><h5 id="特点：后进先出LIFO"><a href="#特点：后进先出LIFO" class="headerlink" title="特点：后进先出LIFO"></a>特点：后进先出LIFO</h5><p>只能从栈顶添加，取出；（操作的是数组的子集）</p>
+<p>eg:撤销操作</p>
+<h5 id="栈的复杂度"><a href="#栈的复杂度" class="headerlink" title="栈的复杂度"></a>栈的复杂度</h5> <img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819151959688.png" alt="image-20210819151959688" style="zoom:67%;" />
+
+<h4 id="线性结构—队列Queue"><a href="#线性结构—队列Queue" class="headerlink" title="线性结构—队列Queue"></a>线性结构—队列Queue</h4><h5 id="特点：先进先出FIFO"><a href="#特点：先进先出FIFO" class="headerlink" title="特点：先进先出FIFO"></a>特点：先进先出FIFO</h5><p>eg:办理业务</p>
+<h5 id="队列复杂度"><a href="#队列复杂度" class="headerlink" title="队列复杂度"></a>队列复杂度</h5><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819161236293.png" alt="image-20210819161236293" style="zoom:67%;" />
+
+  
+
+<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>​        ——解决dequeue复杂度为O(n)的问题，首尾相接，复杂度变为O(1)</p>
+<p>tail溢出是发生在入队操作中，解决办法：tail = (tail + 1) % capacity</p>
+<p>参：<a href="https://juejin.cn/post/6844903805264347149">Java版-数据结构-队列（循环队列</a></p>
+<p>代码分析两个队列花费时间的差距</p>
+<p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210819232113828.png" alt="image-20210819232113828"></p>
+<p>性能差距100倍！</p>
+<!-- more -->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>栈</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线段树（区间树）</title>
+    <url>/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
+    <content><![CDATA[<center>线段树（区间树）</center>
+
+<p>​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
+<span id="more"></span>
+
+<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
+
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
+</li>
+<li><p>线段树也是平衡二叉树</p>
+</li>
+</ul>
+<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
+
+<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
+
+<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046" style="zoom:80%;" />
+
+<p>​    Lazy更新</p>
+<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
+
+
+
+
+
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li>leetcode第303题区域和检查</li>
+<li>leetcode第307题区域和检查美版UPDATe</li>
+<li>树状数组（了解）BIT</li>
+<li>RMQ问题</li>
+</ul>
+<!-- more -->]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>链表</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -942,36 +975,49 @@ System.out.println(node.)
       </tags>
   </entry>
   <entry>
-    <title>数据库语法review</title>
-    <url>/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E6%B3%95review/</url>
-    <content><![CDATA[<center>数据库语法review</center>
+    <title>JUC</title>
+    <url>/2021/08/30/2021-08-30-JUC/</url>
+    <content><![CDATA[<center>JUC学习</center>
 
 <span id="more"></span>
 
-<h4 id="DML-、DDL、DCL-区别以及定义"><a href="#DML-、DDL、DCL-区别以及定义" class="headerlink" title="DML 、DDL、DCL 区别以及定义"></a>DML 、DDL、DCL 区别以及定义</h4><p><strong>DML</strong>（Data Manipulation Language，数据操作语言）：用于检索或者修改数据。<br>DML 包括： SELECT：用于检索数据；<br>INSERT：用于增加数据到数据库；<br>UPDATE：用于从数据库中修改现存的数据<br>DELETE：用于从数据库中删除数据。</p>
-<p><strong>DDL</strong>（Data Definition Language，数据定义语言）： 用于定义数据的结构，比如 创建、修改或者删除数据库对象。<br>DDL 包括：DDL 语句可以用于创建用户和重建数据库对象。下面是 DDL 命令：<br>CREATE TABLE：创建表<br>ALTER TABLE<br>DROP TABLE：删除表<br>CREATE INDEX<br>DROP INDEX</p>
-<p><strong>DCL</strong>（Data Control Language，数据控制语言）：用于定义数据库用户的权限。<br>DCL 包括：<br>ALTER PASSWORD<br>GRANT<br>REVOKE<br>CREATE SYNONYM</p>
-<h4 id="关键语法"><a href="#关键语法" class="headerlink" title="关键语法"></a>关键语法</h4><p>统计相关：count，sum，max，min，avg</p>
+<h4 id="JUC学习"><a href="#JUC学习" class="headerlink" title="JUC学习"></a>JUC学习</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20200624155932327.png" alt="在这里插入图片描述"></p>
+<h5 id="进程-线程"><a href="#进程-线程" class="headerlink" title="进程 | 线程"></a>进程 | 线程</h5><ol>
+<li>在高内聚低耦合的条件下，<strong>线程</strong>      <strong>操作</strong>        <strong>资源类</strong></li>
+<li>判断/干活/通知</li>
+<li>防止虚假唤醒(判断只能用while，不能用if)<ul>
+<li>知识小总结：多线程编程套路+while判断+新版写法</li>
+</ul>
+</li>
+<li>标志位</li>
+</ol>
 <ul>
-<li>GROUP BY<ul>
-<li>满足“SELECT子句中的列名必须为分组列或列函数”</li>
-<li>列函数对于group by 子句定义的每个组各返回一个结果；</li>
-<li>结果缓存到一张临时表里</li>
-</ul>
+<li><h6 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">State</span></span>&#123;</span><br><span class="line">	NEW,<span class="comment">//新建</span></span><br><span class="line">    RUNNABLE,<span class="comment">//可运行</span></span><br><span class="line">    BLOCK,<span class="comment">//wait(),sleep(),</span></span><br><span class="line">   	WAITING,<span class="comment">//不见不散</span></span><br><span class="line">    TIME_WAITING,<span class="comment">//过时不候</span></span><br><span class="line">    TERMINATED;	<span class="comment">//已终止</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><h6 id="Lambda-Express"><a href="#Lambda-Express" class="headerlink" title="Lambda  Express"></a>Lambda  Express</h6><ol>
+<li><p>拷贝小括号，写死右箭头，落地大括号；() -&gt;{sout};</p>
 </li>
-<li>HAVING<ul>
-<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210828205356082.png" alt="image-20210828205356082"></li>
-</ul>
+<li><p>```java<br>@FunctionalInterface</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="number">3.</span> <span class="literal">default</span></span><br><span class="line"></span><br><span class="line">  <span class="number">4.</span> 静态方法实现</span><br><span class="line"></span><br><span class="line"><span class="meta">#### Condition精准顺序访问控制（自己上锁）</span></span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="keyword">class</span> <span class="title">ShareData</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> number = <span class="number">1</span>;<span class="comment">//A:1,B:2,C:3</span></span><br><span class="line">    <span class="keyword">private</span> Lock <span class="keyword">lock</span> = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="keyword">private</span> Condition c1 = <span class="keyword">lock</span>.newCondition();</span><br><span class="line">    <span class="keyword">private</span> Condition c2 = <span class="keyword">lock</span>.newCondition();</span><br><span class="line">    <span class="keyword">private</span> Condition c3 = <span class="keyword">lock</span>.newCondition();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printc1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">lock</span>.<span class="keyword">lock</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.判断</span></span><br><span class="line">            <span class="keyword">while</span> (number != <span class="number">1</span>)&#123;</span><br><span class="line">                c1.<span class="keyword">await</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.干活</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">                System.<span class="keyword">out</span>.println(Thread.currentThread().getName()+<span class="string">&quot;\t&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.通知</span></span><br><span class="line">            number = <span class="number">2</span>;</span><br><span class="line">            <span class="comment">//通知第2个</span></span><br><span class="line">            c2.signal();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">lock</span>.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printc2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">lock</span>.<span class="keyword">lock</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.判断</span></span><br><span class="line">            <span class="keyword">while</span> (number != <span class="number">2</span>)&#123;</span><br><span class="line">                c2.<span class="keyword">await</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.干活</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.<span class="keyword">out</span>.println(Thread.currentThread().getName()+<span class="string">&quot;\t&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.通知</span></span><br><span class="line">            number = <span class="number">3</span>;</span><br><span class="line">            <span class="comment">//如何通知第3个</span></span><br><span class="line">            c3.signal();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">lock</span>.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printc3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">lock</span>.<span class="keyword">lock</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.判断</span></span><br><span class="line">            <span class="keyword">while</span> (number != <span class="number">3</span>)&#123;</span><br><span class="line">                c3.<span class="keyword">await</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.干活</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">15</span>; i++) &#123;</span><br><span class="line">                System.<span class="keyword">out</span>.println(Thread.currentThread().getName()+<span class="string">&quot;\t&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.通知</span></span><br><span class="line">            number = <span class="number">1</span>;</span><br><span class="line">            <span class="comment">//如何通知第1个</span></span><br><span class="line">            c1.signal();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">lock</span>.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 备注：多线程之间按顺序调用，实现A-&gt;B-&gt;C</span></span><br><span class="line"><span class="comment"> * 三个线程启动，要求如下：</span></span><br><span class="line"><span class="comment"> * AA打印5次，BB打印10次，CC打印15次</span></span><br><span class="line"><span class="comment"> * 接着</span></span><br><span class="line"><span class="comment"> * AA打印5次，BB打印10次，CC打印15次</span></span><br><span class="line"><span class="comment"> * 来10轮</span></span><br><span class="line"><span class="comment"> *      1.高内聚低耦合前提下，线程操作资源类</span></span><br><span class="line"><span class="comment"> *      2.判断/干活/通知</span></span><br><span class="line"><span class="comment"> *      3.多线程交互中，防止虚假唤醒(判断只能用while，不能用if)</span></span><br><span class="line"><span class="comment"> *      4.标志位（主要控制）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConditionDemo</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">        ShareData shareData = <span class="keyword">new</span> ShareData();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                shareData.printc1();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                shareData.printc2();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                shareData.printc3();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;C&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 </li>
 </ul>
-<!--more-->
-
-]]></content>
+<h4 id="八🔒理论"><a href="#八🔒理论" class="headerlink" title="八🔒理论"></a>八🔒理论</h4><p>并发 | 并行</p>
+<p>Others:</p>
+<ul>
+<li>idea 中自定义生成代码快捷键</li>
+<li><a href="https://www.lagou.com/lgeduarticle/141121.html">JAVA 线程虚假唤醒</a></li>
+</ul>
+<!--more-->]]></content>
       <categories>
-        <category>数据库</category>
+        <category>JUC</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
+        <tag>并发</tag>
+        <tag>JUC</tag>
+        <tag>进程</tag>
+        <tag>线程</tag>
+        <tag>Lambda</tag>
+        <tag>锁</tag>
       </tags>
   </entry>
 </search>
