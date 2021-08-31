@@ -22,30 +22,22 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="锁模块">
+  <meta name="description" content="稀疏数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库学习1">
-<meta property="og:url" content="https://wendaoit.github.io/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/index.html">
+<meta property="og:title" content="算法学习">
+<meta property="og:url" content="https://wendaoit.github.io/2021/08/31/2021-08-31-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="锁模块">
+<meta property="og:description" content="稀疏数组">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827142925274.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827153216400.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827154029335.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827160905898.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161106338.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161358934.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161434810.png">
-<meta property="article:published_time" content="2021-08-26T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-08-27T08:38:27.053Z">
+<meta property="article:published_time" content="2021-08-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T05:58:33.968Z">
 <meta property="article:author" content="zxh">
-<meta property="article:tag" content="数据库">
-<meta property="article:tag" content="🔒">
-<meta property="article:tag" content="并发">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="print">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827142925274.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/08/31/2021-08-31-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
@@ -58,7 +50,7 @@
   };
 </script>
 
-  <title>数据库学习1 | 问道IT</title>
+  <title>算法学习 | 问道IT</title>
   
 
 
@@ -217,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/31/2021-08-31-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
@@ -230,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          数据库学习1
+          算法学习
         </h1>
 
         <div class="post-meta">
@@ -241,7 +233,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-27 00:00:00 / 修改时间：16:38:27" itemprop="dateCreated datePublished" datetime="2021-08-27T00:00:00+08:00">2021-08-27</time>
+              <time title="创建时间：2021-08-31 00:00:00 / 修改时间：13:58:33" itemprop="dateCreated datePublished" datetime="2021-08-31T00:00:00+08:00">2021-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,7 +241,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -266,7 +258,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>2.7k</span>
             </span>
 
         </div>
@@ -278,84 +270,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center>锁模块</center>
+        <center>稀疏数组</center>
 
-  <span id="more"></span>
+<span id="more"></span>
 
-<h4 id="MyISAM-与InnoDB关于锁方面得区别是什么？"><a href="#MyISAM-与InnoDB关于锁方面得区别是什么？" class="headerlink" title="MyISAM 与InnoDB关于锁方面得区别是什么？"></a>MyISAM 与InnoDB关于锁方面得区别是什么？</h4><ul>
-<li><h5 id="MyISAM默认用的是表级锁-不支持行级锁；"><a href="#MyISAM默认用的是表级锁-不支持行级锁；" class="headerlink" title="MyISAM默认用的是表级锁,不支持行级锁；"></a>MyISAM默认用的是表级锁,不支持行级锁；</h5><ul>
-<li><p>范围查询的时候默认给表上read🔒(共享锁)</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lock tables students read <span class="operator">|</span> write;</span><br></pre></td></tr></table></figure>
+<p>棋盘问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparseArray</span> </span>&#123;</span><br><span class="line">    <span class="comment">//编写的五子棋程序中，有存盘退出和续上盘的功能</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> chessArr1[][]= <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">11</span>][<span class="number">11</span>];</span><br><span class="line">        chessArr1[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">        chessArr1[<span class="number">2</span>][<span class="number">4</span>] = <span class="number">2</span>;</span><br><span class="line">        chessArr1[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//输出原始的二维数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] row : chessArr1)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> data : row)&#123;</span><br><span class="line">                    System.out.printf(<span class="string">&quot;%d\t&quot;</span>,data);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//原始数组有多少个数</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">11</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">11</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArr1[i][j] != <span class="number">0</span>) &#123;</span><br><span class="line">                    sum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//创建稀疏数组</span></span><br><span class="line">        <span class="keyword">int</span> sparseArr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[sum+<span class="number">1</span>][<span class="number">3</span>];</span><br><span class="line">        sparseArr[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">        sparseArr[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">11</span>;</span><br><span class="line">        sparseArr[<span class="number">0</span>][<span class="number">2</span>] = sum;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出稀疏数组</span></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">11</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArr1[i][j] != <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    sparseArr[count][<span class="number">0</span>] = i;</span><br><span class="line">                    sparseArr[count][<span class="number">1</span>] = j;</span><br><span class="line">                    sparseArr[count][<span class="number">2</span>] = chessArr1[i][j];</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//保存为文件</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">&quot;D:\\My文档\\IDEAdemo\\hexo-boot-2.3.0\\algorithm&quot;</span>+File.separator+<span class="string">&quot;chess.data&quot;</span>);</span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">        OutputStreamWriter write = <span class="keyword">new</span> OutputStreamWriter(fos, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">&quot;稀疏数组：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sparseArr.length; i++) &#123;</span><br><span class="line">            System.out.printf(<span class="string">&quot;%d\t%d\t%d\t\n&quot;</span>, sparseArr[i][<span class="number">0</span>], sparseArr[i][<span class="number">1</span>], sparseArr[i][<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (i == sparseArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">                write.append(sparseArr[i][<span class="number">0</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">1</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">2</span>]);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                write.append(sparseArr[i][<span class="number">0</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">1</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">2</span>] + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;写入文件中...&quot;</span>);</span><br><span class="line">        write.close();</span><br><span class="line">        fos.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//重新生成一个新chess数组</span></span><br><span class="line">        <span class="keyword">int</span> chessArr2[][] = <span class="keyword">new</span> <span class="keyword">int</span>[sparseArr[<span class="number">0</span>][<span class="number">0</span>]][sparseArr[<span class="number">0</span>][<span class="number">1</span>]];</span><br><span class="line">        <span class="comment">//读取稀疏赋值给新chesss数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;sparseArr.length; i++) &#123;</span><br><span class="line">            chessArr2[sparseArr[i][<span class="number">0</span>]][sparseArr[i][<span class="number">1</span>]] = sparseArr[i][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;打开文件中...&quot;</span>);</span><br><span class="line">        Desktop.getDesktop().open(file);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;------------------------------先读取_chess.data&quot;</span>);</span><br><span class="line">        <span class="comment">// 创建 FileReader 对象</span></span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line"></span><br><span class="line">        InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(fis, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">while</span> (reader.ready()) &#123;</span><br><span class="line">            sb.append((<span class="keyword">char</span>) reader.read());<span class="comment">// 转成char加到StringBuffer对象中</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        reader.close();<span class="comment">// 关闭读取流</span></span><br><span class="line">        fis.close();<span class="comment">// 关闭输入流,释放系统资源</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;恢复后的数组&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] row : chessArr2) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> data : row)&#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;%d\t&quot;</span>,data);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>write🔒（排他锁）</p>
-<p>上锁之后读和写都要等 </p>
-</li>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itguangit/article/details/50063513">java 中 printf，print，println，区别及用法详解</a></li>
 </ul>
-</li>
-<li><h5 id="InnoDB默认用的是行级锁，也支持表级锁；"><a href="#InnoDB默认用的是行级锁，也支持表级锁；" class="headerlink" title="InnoDB默认用的是行级锁，也支持表级锁；"></a>InnoDB默认用的是行级锁，也支持表级锁；</h5><ul>
-<li><p>手动上锁，只对该行上锁；</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> students_innodb <span class="keyword">where</span> id<span class="operator">=</span><span class="number">3</span> lock <span class="keyword">in</span> share mode;</span><br></pre></td></tr></table></figure>
-
-<p>共享锁可以兼容；</p>
-<p>当查找不走索引的时候上的是表级锁；</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827142925274.png" alt="image-20210827142925274" style="zoom:67%;" /></li>
-</ul>
-</li>
-</ul>
-<h4 id="那是不是锁越细越多越好？"><a href="#那是不是锁越细越多越好？" class="headerlink" title="那是不是锁越细越多越好？"></a>那是不是锁越细越多越好？</h4><p>🔒越多花费的资源越多；在数据较少的情况下用非聚集索引MyISAM很快</p>
-<h4 id="MyISAM适合的场景"><a href="#MyISAM适合的场景" class="headerlink" title="MyISAM适合的场景"></a>MyISAM适合的场景</h4><ol>
-<li>频繁执行全表count语句；</li>
-<li>对数据进行增删改的频率不高，查询非常频繁；</li>
-<li>没有事务；</li>
-</ol>
-<h4 id="InnoDB适合的场景"><a href="#InnoDB适合的场景" class="headerlink" title="InnoDB适合的场景"></a>InnoDB适合的场景</h4><ol>
-<li>增删改查都比较频繁；</li>
-<li>可靠性要求较高，要求支持事务；</li>
-</ol>
-<h4 id="数据库🔒的分类："><a href="#数据库🔒的分类：" class="headerlink" title="数据库🔒的分类："></a>数据库🔒的分类：</h4><ul>
-<li>按照粒度划分：表级锁，行级锁，页级🔒；</li>
-<li>按照级别划分：共享锁、排它锁；</li>
-<li>按照枷锁方式：自动锁、显式锁；</li>
-<li>按操作划分：DML锁、DDL锁；</li>
-<li>按使用方式划分：乐观锁，悲观锁；</li>
-</ul>
-<p>悲观锁:一般用数据库自己带的锁；</p>
-<p>乐观锁:使用数据版本控制，只有在增删改查的时候才会去判断冲突；</p>
-<h4 id="数据库事务的四大特征：ACID"><a href="#数据库事务的四大特征：ACID" class="headerlink" title="数据库事务的四大特征：ACID"></a>数据库事务的四大特征：ACID</h4><ul>
-<li>A原子性(Atomic)</li>
-<li>一致性（Consistency）</li>
-<li><strong>隔离性(Isolation)</strong></li>
-<li>持久性（Durability)</li>
-</ul>
-<h4 id="事务隔离级别以及各级别下的并发访问问题"><a href="#事务隔离级别以及各级别下的并发访问问题" class="headerlink" title="事务隔离级别以及各级别下的并发访问问题"></a>事务隔离级别以及各级别下的并发访问问题</h4><p>MySQL默认是repeatable-read Orcal默认是read-committed</p>
-<ul>
-<li>更新 丢失———mysql所有事务隔离级别在数据库层面上均可避免；<ul>
-<li>eg:存钱失败</li>
-</ul>
-</li>
-<li>脏读——设置read-committed事务隔离级别以上可避免；<ul>
-<li>指的是一个session读取了另一个未提交的事务，另一个事务回滚之后造成翻车；</li>
-<li>解决：set session transaction level read committed;</li>
-</ul>
-</li>
-<li>不可重复读——repeatable-read事务隔离级别以上可避免；<ul>
-<li>多次查询结果变化了超出预期；</li>
-</ul>
-</li>
-<li> 幻读——serializable事务隔离级别可避免； </li>
-<li>Serializable 是最高的事务隔离级别，在该级别下，事务串行化顺序执行，可以避免脏读、不可重复读与幻读。但是这种事务隔离级别效率低下，比较耗数据库性能，一般不使用。</li>
-</ul>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827153216400.png" alt="image-20210827153216400" style="zoom:67%;" />
-
-<h4 id="当前读和快照读"><a href="#当前读和快照读" class="headerlink" title="当前读和快照读"></a>当前读和快照读</h4> <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827154029335.png" alt="image-20210827154029335" style="zoom:67%;" />
-
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827160905898.png" alt="image-20210827160905898"></p>
-<h4 id="RR级别下如何避免幻读"><a href="#RR级别下如何避免幻读" class="headerlink" title="RR级别下如何避免幻读"></a>RR级别下如何避免幻读</h4><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161106338.png" alt="image-20210827161106338"></p>
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161358934.png" alt="image-20210827161358934"></p>
-<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210827161434810.png" alt="image-20210827161434810"></p>
 <!--more-->
 
-<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>讲的很透彻的一篇好文：<a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/ffc11869bfea5f6793631f9b30369be0.html">理解事务的 4 种隔离级别</a></p>
 
     </div>
 
@@ -381,7 +307,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wendaoit.github.io/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/" title="数据库学习1">https://wendaoit.github.io/2021/08/27/20210827-数据库学习1/</a>
+    <a href="https://wendaoit.github.io/2021/08/31/2021-08-31-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" title="算法学习">https://wendaoit.github.io/2021/08/31/2021-08-31-算法学习/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -401,9 +327,9 @@
 		</div>
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i># 数据库</a>
-              <a href="/tags/%F0%9F%94%92/" rel="tag"><i class="fa fa-tag"></i># 🔒</a>
-              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"><i class="fa fa-tag"></i># 并发</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i># 数组</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i># 算法</a>
+              <a href="/tags/print/" rel="tag"><i class="fa fa-tag"></i># print</a>
           </div>
 
         
@@ -412,13 +338,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/27/2021-08-27-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/" rel="prev" title="数据库学习">
-      <i class="fa fa-chevron-left"></i> 数据库学习
+    <a href="/2021/08/30/2021-08-30-JUC/" rel="prev" title="JUC">
+      <i class="fa fa-chevron-left"></i> JUC
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E6%B3%95review/" rel="next" title="数据库语法review">
-      数据库语法review <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -478,7 +401,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM-%E4%B8%8EInnoDB%E5%85%B3%E4%BA%8E%E9%94%81%E6%96%B9%E9%9D%A2%E5%BE%97%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">MyISAM 与InnoDB关于锁方面得区别是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#MyISAM%E9%BB%98%E8%AE%A4%E7%94%A8%E7%9A%84%E6%98%AF%E8%A1%A8%E7%BA%A7%E9%94%81-%E4%B8%8D%E6%94%AF%E6%8C%81%E8%A1%8C%E7%BA%A7%E9%94%81%EF%BC%9B"><span class="nav-number">1.1.</span> <span class="nav-text">MyISAM默认用的是表级锁,不支持行级锁；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#InnoDB%E9%BB%98%E8%AE%A4%E7%94%A8%E7%9A%84%E6%98%AF%E8%A1%8C%E7%BA%A7%E9%94%81%EF%BC%8C%E4%B9%9F%E6%94%AF%E6%8C%81%E8%A1%A8%E7%BA%A7%E9%94%81%EF%BC%9B"><span class="nav-number">1.2.</span> <span class="nav-text">InnoDB默认用的是行级锁，也支持表级锁；</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%A3%E6%98%AF%E4%B8%8D%E6%98%AF%E9%94%81%E8%B6%8A%E7%BB%86%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">那是不是锁越细越多越好？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM%E9%80%82%E5%90%88%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.</span> <span class="nav-text">MyISAM适合的场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB%E9%80%82%E5%90%88%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">4.</span> <span class="nav-text">InnoDB适合的场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%F0%9F%94%92%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">数据库🔒的分类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9AACID"><span class="nav-number">6.</span> <span class="nav-text">数据库事务的四大特征：ACID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%90%84%E7%BA%A7%E5%88%AB%E4%B8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">事务隔离级别以及各级别下的并发访问问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E8%AF%BB%E5%92%8C%E5%BF%AB%E7%85%A7%E8%AF%BB"><span class="nav-number">8.</span> <span class="nav-text">当前读和快照读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RR%E7%BA%A7%E5%88%AB%E4%B8%8B%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%B9%BB%E8%AF%BB"><span class="nav-number">9.</span> <span class="nav-text">RR级别下如何避免幻读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other"><span class="nav-number">10.</span> <span class="nav-text">Other</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Others"><span class="nav-number">1.</span> <span class="nav-text">Others:</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -662,7 +585,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/27/20210827-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A01/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/31/2021-08-31-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/',]
       });
       });
   </script>
