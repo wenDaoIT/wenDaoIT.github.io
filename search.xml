@@ -1053,6 +1053,11 @@ System.out.println(node.)
         <tag>Lambda</tag>
         <tag>锁</tag>
         <tag>多线程</tag>
+        <tag>set</tag>
+        <tag>map</tag>
+        <tag>list</tag>
+        <tag>queue</tag>
+        <tag>stack</tag>
       </tags>
   </entry>
   <entry>
@@ -1078,6 +1083,70 @@ System.out.println(node.)
         <tag>数组</tag>
         <tag>算法</tag>
         <tag>print</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>spring框架Review</title>
+    <url>/2021/09/01/20210901-springReview/</url>
+    <content><![CDATA[<h4 id="Spring家族"><a href="#Spring家族" class="headerlink" title="Spring家族"></a><center>Spring家族</center></h4><span id="more"></span>
+
+<p>脑图在文末</p>
+<h4 id="IOC控制反转原理"><a href="#IOC控制反转原理" class="headerlink" title="IOC控制反转原理"></a>IOC控制反转原理</h4><ul>
+<li>​    上层决定下层而不是下层决定上层</li>
+</ul>
+<p>DI依赖注入 4种方式</p>
+<ul>
+<li>原理把底层类作为参数传递给上层类，实现上层对下层的“控制”；</li>
+</ul>
+<ol>
+<li>Setter</li>
+<li>Interface</li>
+<li>Constructor构造方法</li>
+<li>Annotation注解</li>
+</ol>
+<p>DL依赖查找（已抛弃）</p>
+<h5 id="IOC、DI、DL的关系"><a href="#IOC、DI、DL的关系" class="headerlink" title="IOC、DI、DL的关系"></a>IOC、DI、DL的关系</h5><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901092920536.png" alt="image-20210901092920536"></p>
+<h4 id="IOC容器"><a href="#IOC容器" class="headerlink" title="IOC容器"></a>IOC容器</h4><h5 id="IOC容器的优点"><a href="#IOC容器的优点" class="headerlink" title="IOC容器的优点"></a>IOC容器的优点</h5><ul>
+<li>从上往下查找Config自动向上new依赖对象；</li>
+</ul>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901093856919.png" alt="image-20210901093856919"></p>
+<p>I think应用程序是由各个组件组成的；</p>
+<h4 id="BEAN"><a href="#BEAN" class="headerlink" title="BEAN"></a>BEAN</h4><h5 id="BeanFactory与ApplicationContext"><a href="#BeanFactory与ApplicationContext" class="headerlink" title="BeanFactory与ApplicationContext"></a>BeanFactory与ApplicationContext</h5><h5 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h5><p>功能更强大</p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901094836005.png" alt="image-20210901094836005"></p>
+<p>bean的配置方式</p>
+<ul>
+<li>xml<bean></li>
+<li>java.class @Configuration</li>
+<li>@Autowired根据bean的名称装配</li>
+</ul>
+<p>getBean</p>
+<h5 id="SpringBean的作用域"><a href="#SpringBean的作用域" class="headerlink" title="SpringBean的作用域"></a>SpringBean的作用域</h5><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901100641979.png" alt="image-20210901100641979"></p>
+<h5 id="SpringBean的生命周期"><a href="#SpringBean的生命周期" class="headerlink" title="SpringBean的生命周期"></a>SpringBean的生命周期</h5><ol>
+<li>实例化 Instantiation</li>
+<li>属性赋值 Populate</li>
+<li>初始化 Initialization</li>
+<li>销毁 Destruction</li>
+</ol>
+<p>创建过程（与AOP相关）</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901100731525.png" alt="image-20210901100731525" style="zoom:67%;" />
+
+<p>销毁过程<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901101148173.png" alt="image-20210901101148173"></p>
+<h4 id="SpringAOP"><a href="#SpringAOP" class="headerlink" title="SpringAOP"></a>SpringAOP</h4><pre><code>  &lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901102025734.png&quot; alt=&quot;image-20210901102025734&quot; style=&quot;zoom:67%;&quot; /&gt;
+</code></pre>
+<h5 id="AOP的三种织入方式"><a href="#AOP的三种织入方式" class="headerlink" title="AOP的三种织入方式"></a>AOP的三种织入方式</h5><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901102134952.png" alt="image-20210901102134952"></p>
+<h5 id="WWW"><a href="#WWW" class="headerlink" title="WWW"></a>WWW</h5><p>AOP主要名词概念 <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210901105055247.png" alt="image-20210901105055247" style="zoom:67%;" /></p>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h4><ul>
+<li><a href="https://www.cnblogs.com/zrtqsk/p/3735273.html">Spring Bean 的生命周期（非常详细）</a></li>
+<li><a href="https://mm.edrawsoft.cn/template/22342">java 学习重点之 spring 家族脑图</a></li>
+</ul>
+<!--more-->
+
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
       </tags>
   </entry>
 </search>
