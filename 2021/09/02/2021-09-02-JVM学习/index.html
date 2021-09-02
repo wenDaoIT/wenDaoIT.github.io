@@ -22,30 +22,48 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一个记录的blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="问道IT">
-<meta property="og:url" content="https://wendaoit.github.io/page/4/index.html">
+  <meta name="description" content="JVM体系预览 Class loader是否加载class文件，识别开头 cafe baba   jre就是java run environment 灰色代表线程私有，内存占用很少；（不存在垃圾回收机制） 四种ClassLoader    双亲委派机制：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM学习">
+<meta property="og:url" content="https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="一个记录的blog">
+<meta property="og:description" content="JVM体系预览 Class loader是否加载class文件，识别开头 cafe baba   jre就是java run environment 灰色代表线程私有，内存占用很少；（不存在垃圾回收机制） 四种ClassLoader    双亲委派机制：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902163158773.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902162308851.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164122286.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164409710.png">
+<meta property="og:image" content="c:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20210902165519962.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902170127712.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171411560.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171754599.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173802047.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173626117.png">
+<meta property="article:published_time" content="2021-09-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-02T17:12:44.235Z">
 <meta property="article:author" content="zxh">
+<meta property="article:tag" content="堆">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/page/4/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>问道IT</title>
+  <title>JVM学习 | 问道IT</title>
   
 
 
@@ -197,13 +215,14 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
@@ -215,10 +234,9 @@
       <meta itemprop="name" content="问道IT">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/" class="post-title-link" itemprop="url">公司融资知识科普</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          JVM学习
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -227,32 +245,30 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-20 15:19:01" itemprop="dateCreated datePublished" datetime="2021-08-20T15:19:01+08:00">2021-08-20</time>
+              <time title="创建时间：2021-09-02 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-02T00:00:00+08:00">2021-09-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 14:56:27" itemprop="dateModified" datetime="2021-08-25T14:56:27+08:00">2021-08-25</time>
+                <time title="修改时间：2021-09-03 01:12:44" itemprop="dateModified" datetime="2021-09-03T01:12:44+08:00">2021-09-03</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%AC%E5%8F%B8/" itemprop="url" rel="index"><span itemprop="name">公司</span></a>
-                </span>
-            </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>53</span>
+              <span>269</span>
             </span>
 
         </div>
@@ -264,298 +280,108 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <center>双创科普知识</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/20/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <h3 id="JVM体系预览"><a href="#JVM体系预览" class="headerlink" title="JVM体系预览"></a>JVM体系预览</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png" alt="image-20210902152852901"></p>
+<p>Class loader是否加载class文件，识别开头 cafe baba</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902163158773.png" alt="image-20210902163158773" style="zoom:67%;" />
+
+<p>jre就是java run environment</p>
+<p>灰色代表线程私有，内存占用很少；（不存在垃圾回收机制）</p>
+<h3 id="四种ClassLoader"><a href="#四种ClassLoader" class="headerlink" title="四种ClassLoader"></a>四种ClassLoader</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902162308851.png" alt="image-20210902162308851" style="zoom:67%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164122286.png" alt="image-20210902164122286" style="zoom:67%;" />
+
+<h5 id="双亲委派机制："><a href="#双亲委派机制：" class="headerlink" title="双亲委派机制："></a>双亲委派机制：</h5><ul>
+<li>一般去父类找已经编译好的，找不到再自己做；（沙箱安全机制）</li>
+</ul>
+<h3 id="Native-Interface"><a href="#Native-Interface" class="headerlink" title="Native Interface"></a>Native Interface</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164409710.png" alt="image-20210902164409710"></p>
+<img src="C:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20210902165519962.png" alt="image-20210902165519962" style="zoom:67%;" />
+
+<h3 id="PC-Register寄存器"><a href="#PC-Register寄存器" class="headerlink" title="PC Register寄存器"></a>PC Register寄存器</h3><ul>
+<li>每个线程的PCR指向下一个指令的指针</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902170127712.png" alt="image-20210902170127712" style="zoom:50%;" /></li>
+</ul>
+<h3 id="Method-Area-方法区"><a href="#Method-Area-方法区" class="headerlink" title="Method Area 方法区"></a>Method Area 方法区</h3><p>存储每个类的模板信息————绝对不是放方法的地方<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171411560.png" alt="image-20210902171411560" style="zoom:50%;" /></p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171754599.png" alt="image-20210902171754599" style="zoom:67%;" />
+
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>栈管内存，堆管存储；</p>
+<ul>
+<li>栈帧保存哪些东东？<ul>
+<li>8中基本类型变量+对象的引用变量+实例方法</li>
+</ul>
+</li>
+</ul>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173802047.png" alt="image-20210902173802047" style="zoom:67%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173626117.png" alt="image-20210902173626117" style="zoom:67%;" />
+
+
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/">
+  </div>
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
-      <meta itemprop="name" content="zxh">
-      <meta itemprop="description" content="一个记录的blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="问道IT">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/" class="post-title-link" itemprop="url">链表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-20 09:32:25" itemprop="dateCreated datePublished" datetime="2021-08-20T09:32:25+08:00">2021-08-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-26 17:08:29" itemprop="dateModified" datetime="2021-08-26T17:08:29+08:00">2021-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>338</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center>链表</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84Day2/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/" title="JVM学习">https://wendaoit.github.io/2021/09/02/2021-09-02-JVM学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
     
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
     
-    
+</div>
+
+			
+		</div>
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E5%A0%86/" rel="tag"><i class="fa fa-tag"></i># 堆</a>
+              <a href="/tags/%E6%A0%88/" rel="tag"><i class="fa fa-tag"></i># 栈</a>
+              <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i># JVM</a>
+              <a href="/tags/JAVA/" rel="tag"><i class="fa fa-tag"></i># JAVA</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
-      <meta itemprop="name" content="zxh">
-      <meta itemprop="description" content="一个记录的blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="问道IT">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/" class="post-title-link" itemprop="url">数组、stack、queue</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-19 14:22:12" itemprop="dateCreated datePublished" datetime="2021-08-19T14:22:12+08:00">2021-08-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-26 17:08:14" itemprop="dateModified" datetime="2021-08-26T17:08:14+08:00">2021-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>253</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center>摘要：数组、stack、queue</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0Day1/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
-      <meta itemprop="name" content="zxh">
-      <meta itemprop="description" content="一个记录的blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="问道IT">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">IDEA快捷键</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-11 16:20:15" itemprop="dateCreated datePublished" datetime="2021-08-11T16:20:15+08:00">2021-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 14:19:13" itemprop="dateModified" datetime="2021-08-31T14:19:13+08:00">2021-08-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IDEA/" itemprop="url" rel="index"><span itemprop="name">IDEA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>133</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/01/20210901-springReview/" rel="prev" title="spring框架Review">
+      <i class="fa fa-chevron-left"></i> spring框架Review
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
 
 
 
@@ -608,6 +434,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E4%BD%93%E7%B3%BB%E9%A2%84%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">JVM体系预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8DClassLoader"><span class="nav-number">2.</span> <span class="nav-text">四种ClassLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">双亲委派机制：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Native-Interface"><span class="nav-number">3.</span> <span class="nav-text">Native Interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PC-Register%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">PC Register寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-Area-%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">5.</span> <span class="nav-text">Method Area 方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">6.</span> <span class="nav-text">Stack</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -785,6 +612,16 @@
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/',]
+      });
+      });
+  </script>
 
   
   
