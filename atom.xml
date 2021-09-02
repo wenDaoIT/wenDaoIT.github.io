@@ -6,7 +6,7 @@
   <link href="https://wendaoit.github.io/atom.xml" rel="self"/>
   
   <link href="https://wendaoit.github.io/"/>
-  <updated>2021-09-02T17:12:44.235Z</updated>
+  <updated>2021-09-02T17:16:24.494Z</updated>
   <id>https://wendaoit.github.io/</id>
   
   <author>
@@ -21,22 +21,17 @@
     <link href="https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/"/>
     <id>https://wendaoit.github.io/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/</id>
     <published>2021-09-01T16:00:00.000Z</published>
-    <updated>2021-09-02T17:12:44.235Z</updated>
+    <updated>2021-09-02T17:16:24.494Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="JVM体系预览"><a href="#JVM体系预览" class="headerlink" title="JVM体系预览"></a>JVM体系预览</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png" alt="image-20210902152852901"></p><p>Class loader是否加载class文件，识别开头 cafe baba</p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902163158773.png" alt="image-20210902163158773" style="zoom:67%;" /><p>jre就是java run environment</p><p>灰色代表线程私有，内存占用很少；（不存在垃圾回收机制）</p><h3 id="四种ClassLoader"><a href="#四种ClassLoader" class="headerlink" title="四种ClassLoader"></a>四种ClassLoader</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902162308851.png" alt="image-20210902162308851" style="zoom:67%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164122286.png" alt="image-20210902164122286" style="zoom:67%;" /><h5 id="双亲委派机制："><a href="#双亲委派机制：" class="headerlink" title="双亲委派机制："></a>双亲委派机制：</h5><ul><li>一般去父类找已经编译好的，找不到再自己做；（沙箱安全机制）</li></ul><h3 id="Native-Interface"><a href="#Native-Interface" class="headerlink" title="Native Interface"></a>Native Interface</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164409710.png" alt="image-20210902164409710"></p><img src="C:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20210902165519962.png" alt="image-20210902165519962" style="zoom:67%;" /><h3 id="PC-Register寄存器"><a href="#PC-Register寄存器" class="headerlink" title="PC Register寄存器"></a>PC Register寄存器</h3><ul><li>每个线程的PCR指向下一个指令的指针</li><li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902170127712.png" alt="image-20210902170127712" style="zoom:50%;" /></li></ul><h3 id="Method-Area-方法区"><a href="#Method-Area-方法区" class="headerlink" title="Method Area 方法区"></a>Method Area 方法区</h3><p>存储每个类的模板信息————绝对不是放方法的地方<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171411560.png" alt="image-20210902171411560" style="zoom:50%;" /></p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171754599.png" alt="image-20210902171754599" style="zoom:67%;" /><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>栈管内存，堆管存储；</p><ul><li>栈帧保存哪些东东？<ul><li>8中基本类型变量+对象的引用变量+实例方法</li></ul></li></ul><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173802047.png" alt="image-20210902173802047" style="zoom:67%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173626117.png" alt="image-20210902173626117" style="zoom:67%;" />]]></content>
+    <content type="html"><![CDATA[<span id="more"></span><h3 id="JVM体系预览"><a href="#JVM体系预览" class="headerlink" title="JVM体系预览"></a>JVM体系预览</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png" alt="image-20210902152852901"></p><p>Class loader是否加载class文件，识别开头 cafe baba</p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902163158773.png" alt="image-20210902163158773" style="zoom:67%;" /><p>jre就是java run environment</p><p>灰色代表线程私有，内存占用很少；（不存在垃圾回收机制）</p><h3 id="四种ClassLoader"><a href="#四种ClassLoader" class="headerlink" title="四种ClassLoader"></a>四种ClassLoader</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902162308851.png" alt="image-20210902162308851" style="zoom:67%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164122286.png" alt="image-20210902164122286" style="zoom:67%;" /><h5 id="双亲委派机制："><a href="#双亲委派机制：" class="headerlink" title="双亲委派机制："></a>双亲委派机制：</h5><ul><li>一般去父类找已经编译好的，找不到再自己做；（沙箱安全机制）</li></ul><h3 id="Native-Interface"><a href="#Native-Interface" class="headerlink" title="Native Interface"></a>Native Interface</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164409710.png" alt="image-20210902164409710"></p><img src="C:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20210902165519962.png" alt="image-20210902165519962" style="zoom:67%;" /><h3 id="PC-Register寄存器"><a href="#PC-Register寄存器" class="headerlink" title="PC Register寄存器"></a>PC Register寄存器</h3><ul><li>每个线程的PCR指向下一个指令的指针</li><li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902170127712.png" alt="image-20210902170127712" style="zoom:50%;" /></li></ul><h3 id="Method-Area-方法区"><a href="#Method-Area-方法区" class="headerlink" title="Method Area 方法区"></a>Method Area 方法区</h3><p>存储每个类的模板信息————绝对不是放方法的地方<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171411560.png" alt="image-20210902171411560" style="zoom:50%;" /></p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171754599.png" alt="image-20210902171754599" style="zoom:67%;" /><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>栈管内存，堆管存储；</p><ul><li>栈帧保存哪些东东？<ul><li>8中基本类型变量+对象的引用变量+实例方法</li></ul></li></ul><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173802047.png" alt="image-20210902173802047" style="zoom:67%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173626117.png" alt="image-20210902173626117" style="zoom:67%;" /><!--more-->]]></content>
     
     
-    <summary type="html">&lt;h3 id=&quot;JVM体系预览&quot;&gt;&lt;a href=&quot;#JVM体系预览&quot; class=&quot;headerlink&quot; title=&quot;JVM体系预览&quot;&gt;&lt;/a&gt;JVM体系预览&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png&quot; alt=&quot;image-20210902152852901&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Class loader是否加载class文件，识别开头 cafe baba&lt;/p&gt;
-&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902163158773.png&quot; alt=&quot;image-20210902163158773&quot; style=&quot;zoom:67%;&quot;&gt;
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
 
-&lt;p&gt;jre就是java run environment&lt;/p&gt;
-&lt;p&gt;灰色代表线程私有，内存占用很少；（不存在垃圾回收机制）&lt;/p&gt;
-&lt;h3 id=&quot;四种ClassLoader&quot;&gt;&lt;a href=&quot;#四种ClassLoader&quot; class=&quot;headerlink&quot; title=&quot;四种ClassLoader&quot;&gt;&lt;/a&gt;四种ClassLoader&lt;/h3&gt;&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902162308851.png&quot; alt=&quot;image-20210902162308851&quot; style=&quot;zoom:67%;&quot;&gt;
-
-&lt;img src=&quot;https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902164122286.png&quot; alt=&quot;image-20210902164122286&quot; style=&quot;zoom:67%;&quot;&gt;
-
-&lt;h5 id=&quot;双亲委派机制：&quot;&gt;&lt;a href=&quot;#双亲委派机制：&quot; class=&quot;headerlink&quot; title=&quot;双亲委派机制：&quot;&gt;&lt;/a&gt;双亲委派机制：&lt;/h5&gt;</summary>
+&lt;h3 id=&quot;JVM体系预览&quot;&gt;&lt;a href=&quot;#JVM体系预览&quot; class=&quot;headerlink&quot; title=&quot;JVM体系预览&quot;&gt;&lt;/a&gt;JVM体系预览&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://2haoton</summary>
+      
     
     
     
