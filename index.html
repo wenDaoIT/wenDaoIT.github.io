@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-03 01:16:24" itemprop="dateModified" datetime="2021-09-03T01:16:24+08:00">2021-09-03</time>
+                <time title="修改时间：2021-09-03 18:08:14" itemprop="dateModified" datetime="2021-09-03T18:08:14+08:00">2021-09-03</time>
               </span>
 
           <br>
@@ -243,7 +243,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>269</span>
+              <span>613</span>
             </span>
 
         </div>
@@ -257,7 +257,8 @@
       
           <span id="more"></span>
 
-<h3 id="JVM体系预览"><a href="#JVM体系预览" class="headerlink" title="JVM体系预览"></a>JVM体系预览</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png" alt="image-20210902152852901"></p>
+<h3 id="JVM体系预览"><a href="#JVM体系预览" class="headerlink" title="JVM体系预览"></a>JVM体系预览</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png" alt="image-20210902152852901" style="zoom:67%;" />
+
 <p>Class loader是否加载class文件，识别开头 cafe baba</p>
 <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902163158773.png" alt="image-20210902163158773" style="zoom:67%;" />
 
@@ -287,10 +288,60 @@
 </ul>
 </li>
 </ul>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173802047.png" alt="image-20210902173802047" style="zoom:67%;" />
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173802047.png" alt="image-20210902173802047" style="zoom: 50%;" />
 
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173626117.png" alt="image-20210902173626117" style="zoom:67%;" />
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902173626117.png" alt="image-20210902173626117" style="zoom: 50%;" />
 
+ <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903141446327.png" alt="栈中储存的东西" style="zoom: 67%;" />
+
+<h5 id="Java-lang-StackOverflowError-栈内存溢出"><a href="#Java-lang-StackOverflowError-栈内存溢出" class="headerlink" title="Java.lang.StackOverflowError 栈内存溢出"></a>Java.lang.StackOverflowError 栈内存溢出</h5><h3 id="栈堆和方法区的交互关系"><a href="#栈堆和方法区的交互关系" class="headerlink" title="栈堆和方法区的交互关系"></a>栈堆和方法区的交互关系</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903142507858.png" alt="image-20210903142507858" style="zoom:67%;" />
+
+<h3 id="堆heap"><a href="#堆heap" class="headerlink" title="堆heap"></a>堆heap</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903143020583.png" alt="image-20210903143020583" style="zoom:67%;" />
+
+<ul>
+<li><h4 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h4><ul>
+<li>YOUNY/NEW 8:1:1</li>
+</ul>
+<ol>
+<li><p>伊甸园区</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903160020976.png" alt="image-20210903160020976" style="zoom: 67%;" /></li>
+<li><p>幸存者0区</p>
+</li>
+<li><p>幸存者1区</p>
+</li>
+</ol>
+</li>
+<li><h4 id="老年代-Old-Tenure"><a href="#老年代-Old-Tenure" class="headerlink" title="老年代     Old/Tenure"></a>老年代     Old/Tenure</h4></li>
+<li><h4 id="永久代-元空间-Perm"><a href="#永久代-元空间-Perm" class="headerlink" title="永久代/元空间      Perm"></a>永久代/元空间      Perm</h4><ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903154500064.png" alt="image-20210903154500064"></li>
+</ul>
+</li>
+</ul>
+<p>逻辑上新生养老元空间，物理上只有新生+养老</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903154731209.png" alt="image-20210903154731209" style="zoom:67%;" />
+
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903153757676.png" alt="image-20210903153757676" style="zoom: 50%;" />
+
+<h4 id="Java8之后永久代和元空间的变化"><a href="#Java8之后永久代和元空间的变化" class="headerlink" title="Java8之后永久代和元空间的变化"></a>Java8之后永久代和元空间的变化</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903155348328.png" alt="image-20210903155348328" style="zoom:50%;" />
+
+<h4 id="堆参数调优"><a href="#堆参数调优" class="headerlink" title="堆参数调优"></a>堆参数调优</h4><p>实际生产中Xms 和 Xmx必须调成一样，防止</p>
+<p>最大分配的物理内存和初始化的内存设置成一样大小，避免GC和应用程序争抢内存，峰值和峰谷忽高忽低</p>
+<h5 id="GC详细日志解读"><a href="#GC详细日志解读" class="headerlink" title="GC详细日志解读"></a>GC详细日志解读</h5><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903165929128.png" alt="image-20210903165929128"></p>
+<h6 id="11个参数的意思"><a href="#11个参数的意思" class="headerlink" title="11个参数的意思"></a>11个参数的意思</h6><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903172405616.png" alt="image-20210903172405616"></p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903172135941.png" alt="image-20210903172135941"></p>
+<p>GC是什么</p>
+<h5 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h5><h6 id="次数上频繁收集Young区"><a href="#次数上频繁收集Young区" class="headerlink" title="次数上频繁收集Young区"></a>次数上频繁收集Young区</h6><h6 id="次数上较少收集Old区"><a href="#次数上较少收集Old区" class="headerlink" title="次数上较少收集Old区"></a>次数上较少收集Old区</h6><h6 id="基本不动元空间"><a href="#基本不动元空间" class="headerlink" title="基本不动元空间"></a>基本不动元空间</h6><h4 id="GC4大算法优缺点"><a href="#GC4大算法优缺点" class="headerlink" title="GC4大算法优缺点"></a>GC4大算法优缺点</h4><ol>
+<li>引用计数法(一般不用)<ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903173817688.png" alt="image-20210903173817688" style="zoom:67%;" /></li>
+</ul>
+</li>
+<li>复制算法（copying）<ul>
+<li>年轻代中</li>
+</ul>
+</li>
+<li>标记清除（Mark-Sweep）</li>
+<li>标记压缩(Mark-Compact)</li>
+</ol>
 <!--more-->
 
 
@@ -876,7 +927,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
