@@ -1207,7 +1207,9 @@ System.out.println(node.)
   <entry>
     <title>JVM学习</title>
     <url>/2021/09/02/2021-09-02-JVM%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<center></center>
+
+<span id="more"></span>
 
 <h3 id="JVM体系预览"><a href="#JVM体系预览" class="headerlink" title="JVM体系预览"></a>JVM体系预览</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902152852901.png" alt="image-20210902152852901" style="zoom:67%;" />
 
@@ -1289,9 +1291,14 @@ System.out.println(node.)
 </li>
 <li>复制算法（copying）<ul>
 <li>年轻代中</li>
+<li>不会产生内存碎片</li>
+<li>占用double内存</li>
 </ul>
 </li>
-<li>标记清除（Mark-Sweep）</li>
+<li>标记清除（Mark-Sweep）<ul>
+<li>老年</li>
+</ul>
+</li>
 <li>标记压缩(Mark-Compact)</li>
 </ol>
 <!--more-->
