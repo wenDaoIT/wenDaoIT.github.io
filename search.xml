@@ -1296,11 +1296,36 @@ System.out.println(node.)
 </ul>
 </li>
 <li>标记清除（Mark-Sweep）<ul>
-<li>老年</li>
+<li>老年代</li>
+<li>两次扫描，耗时严重；不连续，会产生内存碎片</li>
+<li>不需要额外空间</li>
 </ul>
 </li>
-<li>标记压缩(Mark-Compact)</li>
+<li>标记压缩(Mark-Compact)<ul>
+<li>老年代，耗时严重；</li>
+<li><img src="C:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20210904141549770.png" alt="image-20210904141549770" style="zoom:67%;" /></li>
+<li>标记-清除-压缩</li>
+</ul>
+</li>
 </ol>
+<p>综合</p>
+<p>小总结<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210904141900014.png" alt="image-20210904141900014" style="zoom:67%;" /></p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210904143900525.png" alt="image-20210904143900525"></p>
+<h3 id="JMM——JAVA内存模型"><a href="#JMM——JAVA内存模型" class="headerlink" title="JMM——JAVA内存模型"></a>JMM——JAVA内存模型</h3><ol>
+<li>原子性</li>
+<li>可见性（通知机制）<ul>
+<li>volatile</li>
+</ul>
+</li>
+<li>有序性</li>
+</ol>
+<p>cpu&gt;内存&gt;硬盘</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210905110511766.png" alt="内存关系" style="zoom: 50%;" />
+
+<p>i think开发中比较重要的 static(只编译一次) &gt; 构造方法块 &gt; 构造方法</p>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F?id=java-%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3">Java 内存区域详解</a></li>
+</ul>
 <!--more-->
 
 ]]></content>
