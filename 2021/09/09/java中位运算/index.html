@@ -22,30 +22,20 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="线段树（区间树）  ​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的">
+  <meta name="description" content="java 中位运算 ^,&amp;,, 总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线段树（区间树）">
-<meta property="og:url" content="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
+<meta property="og:title" content="位运算">
+<meta property="og:url" content="https://wendaoit.github.io/2021/09/09/java%E4%B8%AD%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="线段树（区间树）  ​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的">
+<meta property="og:description" content="java 中位运算 ^,&amp;,, 总结">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png">
-<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png">
-<meta property="article:published_time" content="2021-08-23T06:28:59.989Z">
-<meta property="article:modified_time" content="2021-08-26T09:17:28.657Z">
+<meta property="article:published_time" content="2021-09-09T06:29:04.459Z">
+<meta property="article:modified_time" content="2021-09-09T07:20:09.545Z">
 <meta property="article:author" content="zxh">
-<meta property="article:tag" content="二叉树">
-<meta property="article:tag" content="链表">
-<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png">
 
-<link rel="canonical" href="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/09/09/java%E4%B8%AD%E4%BD%8D%E8%BF%90%E7%AE%97/">
 
 
 <script id="page-configurations">
@@ -58,7 +48,7 @@
   };
 </script>
 
-  <title>线段树（区间树） | 问道IT</title>
+  <title>位运算 | 问道IT</title>
   
 
 
@@ -217,7 +207,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/09/09/java%E4%B8%AD%E4%BD%8D%E8%BF%90%E7%AE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
@@ -230,7 +220,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          线段树（区间树）
+          位运算
         </h1>
 
         <div class="post-meta">
@@ -239,23 +229,17 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-08-23 14:28:59" itemprop="dateCreated datePublished" datetime="2021-08-23T14:28:59+08:00">2021-08-23</time>
+              <time title="创建时间：2021-09-09 14:29:04 / 修改时间：15:20:09" itemprop="dateCreated datePublished" datetime="2021-09-09T14:29:04+08:00">2021-09-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-26 17:17:28" itemprop="dateModified" datetime="2021-08-26T17:17:28+08:00">2021-08-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
                 </span>
             </span>
 
@@ -272,7 +256,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>268</span>
+              <span>1.9k</span>
             </span>
 
         </div>
@@ -284,40 +268,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center>线段树（区间树）</center>
+        <center>java 中位运算 ^,&,<<,>>,<<<,>>> 总结</center>
 
-<p>​        为什么要有线段树？比如现在有一个数组，要计算和查赵这个数组中某个区间的值的和，那么它的时间复杂度就是O(n),要遍历数组；而如果使用树结构，他的时间复杂度为O(logn)；差距还是很大的</p>
 <span id="more"></span>
 
-<h3 id="什么是线段树？"><a href="#什么是线段树？" class="headerlink" title="什么是线段树？"></a>什么是线段树？</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823134438439.png" alt="image-20210823134438439" style="zoom:50%;" />
+<h3 id="位运算都是基于二进制的"><a href="#位运算都是基于二进制的" class="headerlink" title="位运算都是基于二进制的"></a>位运算都是基于二进制的</h3><h4 id="1-亦或运算-，针对二进制，相同的为-0，不同的为-1"><a href="#1-亦或运算-，针对二进制，相同的为-0，不同的为-1" class="headerlink" title="1.^(亦或运算) ，针对二进制，相同的为 0，不同的为 1"></a><strong>1.^(亦或运算) ，</strong>针对二进制，相同的为 0，不同的为 1</h4><blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;2^3运算的结果是 :&quot;</span>+(<span class="number">2</span>^<span class="number">3</span>));</span><br><span class="line">    <span class="comment">//打印的结果是:   2^3运算的结果是 :1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>2 =======&gt;0010</p>
+<p>3 =======&gt;0011</p>
+<p>2^3 就为 0001，结果就是 1</p>
+<h4 id="2-amp-（与运算）-针对二进制，只要有一个为-0，就为-0"><a href="#2-amp-（与运算）-针对二进制，只要有一个为-0，就为-0" class="headerlink" title="2.&amp;（与运算） 针对二进制，只要有一个为 0，就为 0"></a><strong>2.&amp;（与运算）</strong> 针对二进制，只要有一个为 0，就为 0</h4><p>还是上述的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     System.out.println (<span class="string">&quot;2&amp;3 运算的结果是 :&quot;</span>+(<span class="number">2</span>&amp;<span class="number">3</span>));</span><br><span class="line">     <span class="comment">// 打印的结果是:  2&amp;3 运算的结果是 :2</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
-<li><p>​    线段树不是完全二叉树<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210823135312682.png" alt="image-20210823135312682" style="zoom:50%;" /></p>
-</li>
-<li><p>线段树也是平衡二叉树</p>
-</li>
+<p>0010 &amp; 0011 =0010 也就是2</p>
+<h4 id="3-lt-lt-向左位移"><a href="#3-lt-lt-向左位移" class="headerlink" title="3.&lt;&lt;(向左位移)"></a><strong>3.&lt;&lt;(向左位移)</strong></h4><h5 id="针对二进制，转换成二进制后向左移动-3-位，后面用-0-补齐"><a href="#针对二进制，转换成二进制后向左移动-3-位，后面用-0-补齐" class="headerlink" title="针对二进制，转换成二进制后向左移动 3 位，后面用 0 补齐"></a>针对二进制，转换成二进制后向左移动 3 位，后面用 0 补齐</h5><blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     System.out.println (<span class="string">&quot;2&lt;&lt;3 运算的结果是 :&quot;</span>+(<span class="number">2</span>&lt;&lt;<span class="number">3</span>));</span><br><span class="line">     <span class="comment">// 打印的结果是:  2&lt;&lt;3 运算的结果是 :16</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>0010 左移三位 10000  相当于2*2^3 =16</p>
+</blockquote>
+<h4 id="4-gt-gt-向右位移"><a href="#4-gt-gt-向右位移" class="headerlink" title="4.&gt;&gt;(向右位移)"></a><strong>4.&gt;&gt;(向右位移)</strong></h4><p>针对二进制，转换成二进制后向右移动 3 位，</p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     System.out.println (<span class="string">&quot;2&gt;&gt;3 运算的结果是 :&quot;</span>+(<span class="number">2</span>&gt;&gt;<span class="number">3</span>));</span><br><span class="line">     <span class="comment">// 打印的结果是:  2&gt;&gt;3 运算的结果是 :0</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="5-gt-gt-gt-无符号右移"><a href="#5-gt-gt-gt-无符号右移" class="headerlink" title="5.&gt;&gt;&gt;(无符号右移)"></a><strong>5.&gt;&gt;&gt;(无符号右移)</strong></h4><p>无符号右移，忽略符号位，空位都以 0 补齐</p>
+<p>10 进制转二进制的时候，因为二进制数一般分 8 位、 16 位、32 位以及 64 位 表示一个十进制数，所以在转换过程中，最高位会补零。</p>
+<p>在计算机中负数采用二进制的补码表示，10 进制转为二进制得到的是原码，将原码按位取反得到的是反码，反码加 1 得到补码</p>
+<p>二进制的最高位是符号位，0 表示正，1 表示负。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;与&gt;&gt;唯一的不同是它无论原来的最左边是什么数，统统都用<span class="number">0</span>填充。</span><br><span class="line">——比如，<span class="keyword">byte</span>是<span class="number">8</span>位的，<span class="number">-1</span>表示为<span class="keyword">byte</span>型是<span class="number">11111111</span>(补码表示法）</span><br><span class="line">b&gt;&gt;&gt;<span class="number">4</span>就是无符号右移<span class="number">4</span>位，即<span class="number">00001111</span>，这样结果就是<span class="number">15</span>。</span><br></pre></td></tr></table></figure>
+
+<p>下面看代码</p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">16</span>的<span class="number">2</span>进制表示 <span class="number">0001</span> <span class="number">0000</span></span><br><span class="line"></span><br><span class="line">&gt; <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">&gt;    System.out.println (<span class="string">&quot;16&gt;&gt;2 运算的结果是 :&quot;</span>+((<span class="number">16</span>)&gt;&gt;<span class="number">2</span>));</span><br><span class="line">&gt;    <span class="comment">// 打印的结果是:  16&gt;&gt;2 运算的结果是 :4</span></span><br><span class="line">&gt; &#125;</span><br><span class="line"></span><br><span class="line">&gt; <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">&gt;      System.out.println (<span class="string">&quot;-16&gt;&gt;2 运算的结果是 :&quot;</span>+((-<span class="number">16</span>)&gt;&gt;<span class="number">2</span>));</span><br><span class="line">&gt;      <span class="comment">// 打印的结果是:  -16&gt;&gt;2 运算的结果是 :-4</span></span><br><span class="line">&gt;    &#125;</span><br><span class="line"></span><br><span class="line">&gt; <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">&gt;      System.out.println (<span class="string">&quot;16&gt;&gt;&gt;2 运算的结果是 :&quot;</span>+((<span class="number">16</span>)&gt;&gt;&gt;<span class="number">2</span>));</span><br><span class="line">&gt;      <span class="comment">// 打印的结果是:  16&gt;&gt;&gt;2 运算的结果是 :4</span></span><br><span class="line">&gt;    &#125;</span><br><span class="line"></span><br><span class="line">&gt; <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">&gt;     System.out.println (<span class="string">&quot;-16&gt;&gt;&gt;2 运算的结果是 :&quot;</span>+((-<span class="number">16</span>)&gt;&gt;&gt;<span class="number">2</span>));</span><br><span class="line">&gt;     <span class="comment">// 打印的结果是:  -16&gt;&gt;&gt;2 运算的结果是 :1073741820</span></span><br><span class="line">&gt;    &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<p>可见正数做 &gt;&gt;&gt; 运算的时候和 &gt;&gt; 是一样的。区别在于负数运算</p>
+<h3 id="others："><a href="#others：" class="headerlink" title="others："></a>others：</h3><ul>
+<li>参考上一篇文章HashMap底层原理 </li>
 </ul>
-<h3 id="用数组实现，开辟空间，定义左子树和右子树"><a href="#用数组实现，开辟空间，定义左子树和右子树" class="headerlink" title="用数组实现，开辟空间，定义左子树和右子树"></a>用数组实现，开辟空间，定义左子树和右子树</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824101136411.png" alt="image-20210824101136411" style="zoom:50%;" />
-
-<h3 id="创建线段树："><a href="#创建线段树：" class="headerlink" title="创建线段树："></a>创建线段树：<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093203026.png" style="zoom:50%;" /></h3><h3 id="线段树的区间查询操作"><a href="#线段树的区间查询操作" class="headerlink" title="线段树的区间查询操作"></a>线段树的区间查询操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824093607084.png" alt="image-20210824093607084" style="zoom:50%;" />
-
-<h3 id="线段树的更新操作"><a href="#线段树的更新操作" class="headerlink" title="线段树的更新操作"></a>线段树的更新操作</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095553046.png" alt="image-20210824095553046" style="zoom:80%;" />
-
-<p>​    Lazy更新</p>
-<h4 id="链式动态线段树"><a href="#链式动态线段树" class="headerlink" title="链式动态线段树"></a>链式动态线段树</h4><p>不浪费空间</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210824095756869.png" alt="image-20210824095756869" style="zoom:50%;" />
-
-
-
-
-
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
-<li>leetcode第303题区域和检查</li>
-<li>leetcode第307题区域和检查美版UPDATe</li>
-<li>树状数组（了解）BIT</li>
-<li>RMQ问题</li>
-</ul>
-<!-- more -->
+<!--more-->
     </div>
 
     
@@ -342,7 +332,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/" title="线段树（区间树）">https://wendaoit.github.io/2021/08/23/线段树/</a>
+    <a href="https://wendaoit.github.io/2021/09/09/java%E4%B8%AD%E4%BD%8D%E8%BF%90%E7%AE%97/" title="位运算">https://wendaoit.github.io/2021/09/09/java中位运算/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -362,9 +352,7 @@
 		</div>
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i># 二叉树</a>
-              <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"><i class="fa fa-tag"></i># 链表</a>
-              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i># 线段树</a>
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i># Java</a>
           </div>
 
         
@@ -373,13 +361,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/23/%E5%A0%86%E5%92%8C%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="prev" title="堆和优先队列">
-      <i class="fa fa-chevron-left"></i> 堆和优先队列
+    <a href="/2021/09/05/JAVA%E4%B8%AD%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="JAVA中单引号和双引号的区别">
+      <i class="fa fa-chevron-left"></i> JAVA中单引号和双引号的区别
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/24/Trie/" rel="next" title="Trie前缀树">
-      Trie前缀树 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -439,7 +424,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是线段树？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">特点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%BC%80%E8%BE%9F%E7%A9%BA%E9%97%B4%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%B7%A6%E5%AD%90%E6%A0%91%E5%92%8C%E5%8F%B3%E5%AD%90%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">用数组实现，开辟空间，定义左子树和右子树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">创建线段树：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">线段树的区间查询操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">线段树的更新操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E5%8A%A8%E6%80%81%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">6.1.</span> <span class="nav-text">链式动态线段树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">7.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">8.</span> <span class="nav-text">Others:</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E9%83%BD%E6%98%AF%E5%9F%BA%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">位运算都是基于二进制的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BA%A6%E6%88%96%E8%BF%90%E7%AE%97-%EF%BC%8C%E9%92%88%E5%AF%B9%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%8C%E7%9B%B8%E5%90%8C%E7%9A%84%E4%B8%BA-0%EF%BC%8C%E4%B8%8D%E5%90%8C%E7%9A%84%E4%B8%BA-1"><span class="nav-number">1.1.</span> <span class="nav-text">1.^(亦或运算) ，针对二进制，相同的为 0，不同的为 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-amp-%EF%BC%88%E4%B8%8E%E8%BF%90%E7%AE%97%EF%BC%89-%E9%92%88%E5%AF%B9%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%8C%E5%8F%AA%E8%A6%81%E6%9C%89%E4%B8%80%E4%B8%AA%E4%B8%BA-0%EF%BC%8C%E5%B0%B1%E4%B8%BA-0"><span class="nav-number">1.2.</span> <span class="nav-text">2.&amp;（与运算） 针对二进制，只要有一个为 0，就为 0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-lt-lt-%E5%90%91%E5%B7%A6%E4%BD%8D%E7%A7%BB"><span class="nav-number">1.3.</span> <span class="nav-text">3.&lt;&lt;(向左位移)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%8C%E8%BD%AC%E6%8D%A2%E6%88%90%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%90%8E%E5%90%91%E5%B7%A6%E7%A7%BB%E5%8A%A8-3-%E4%BD%8D%EF%BC%8C%E5%90%8E%E9%9D%A2%E7%94%A8-0-%E8%A1%A5%E9%BD%90"><span class="nav-number">1.3.1.</span> <span class="nav-text">针对二进制，转换成二进制后向左移动 3 位，后面用 0 补齐</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-gt-gt-%E5%90%91%E5%8F%B3%E4%BD%8D%E7%A7%BB"><span class="nav-number">1.4.</span> <span class="nav-text">4.&gt;&gt;(向右位移)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-gt-gt-gt-%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB"><span class="nav-number">1.5.</span> <span class="nav-text">5.&gt;&gt;&gt;(无符号右移)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#others%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">others：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -623,7 +608,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/08/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/09/09/java%E4%B8%AD%E4%BD%8D%E8%BF%90%E7%AE%97/',]
       });
       });
   </script>
