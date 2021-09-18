@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-18 00:00:00 / 修改时间：16:51:55" itemprop="dateCreated datePublished" datetime="2021-09-18T00:00:00+08:00">2021-09-18</time>
+              <time title="创建时间：2021-09-18 00:00:00 / 修改时间：16:53:13" itemprop="dateCreated datePublished" datetime="2021-09-18T00:00:00+08:00">2021-09-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,7 +258,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>需要储备的知识点</p>
+          <span id="more"></span>
+
+<p>需要储备的知识点</p>
 <p>Java 中的变量根据不同的标准可以分为两类，以其<strong>引用的数据类型</strong>的不同来划分可分为 “原始数据类型变量和引用数据类型变量”，以其<strong>作用范围</strong>的不同来区分可分为 “局部变量，实例变量和静态变量”。</p>
 <p><strong>实例方法和普通方法</strong></p>
 <h3 id="程序-进程-线程"><a href="#程序-进程-线程" class="headerlink" title="程序| 进程 | 线程"></a>程序| 进程 | 线程</h3><ul>
@@ -268,18 +270,48 @@
 <li>进程：是并发执行的程序在执行过程中分配和管理资源的基本单位。</li>
 <li>线程：线程有时又被称为轻权进程或轻量级进程，也是 CPU 调度的一个基本单位。线程之间共用一个进程的内存空存空间 (即 jvm 堆内存)，各个线程也有自己独立专有的内存空间 (即 jvm 栈帧空间)。看下图就明白了</li>
 </ul>
-<h3 id="首先确定一下jkd1-8之后的JVM内存模型"><a href="#首先确定一下jkd1-8之后的JVM内存模型" class="headerlink" title="首先确定一下jkd1.8之后的JVM内存模型"></a>首先确定一下jkd1.8之后的JVM内存模型</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20180225003503739" alt="JVM内存模型" style="zoom:50%;"><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210918141601102.png" style="zoom:50%;"></p>
-<h4 id="方法变量内存分配图"><a href="#方法变量内存分配图" class="headerlink" title="方法变量内存分配图"></a>方法变量内存分配图</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20190226181808168.jpg" alt="img" style="zoom: 50%;">
+<h3 id="首先确定一下jkd1-8之后的JVM内存模型"><a href="#首先确定一下jkd1-8之后的JVM内存模型" class="headerlink" title="首先确定一下jkd1.8之后的JVM内存模型"></a>首先确定一下jkd1.8之后的JVM内存模型</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20180225003503739" alt="JVM内存模型" style="zoom:50%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210918141601102.png" style="zoom:50%;" /></p>
+<h4 id="方法变量内存分配图"><a href="#方法变量内存分配图" class="headerlink" title="方法变量内存分配图"></a>方法变量内存分配图</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20190226181808168.jpg" alt="img" style="zoom: 50%;" />
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">static</span> BigWaterMelon bigWaterMelon_1 = <span class="keyword">new</span> BigWaterMelon(x);</span><br><span class="line">    <span class="keyword">int</span> y = <span class="number">20</span>;</span><br><span class="line">    BigWaterMelon bigWaterMelon_2 = <span class="keyword">new</span> BigWaterMelon(y);</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Fruit fruit = <span class="keyword">new</span> Fruit();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">int</span> z = <span class="number">30</span>;</span><br><span class="line">        BigWaterMelon bigWaterMelon_3 = <span class="keyword">new</span> BigWaterMelon(z);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> k = <span class="number">100</span>;</span><br><span class="line">                setWeight(k);</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="function"><span class="keyword">void</span> <span class="title">setWeight</span><span class="params">(<span class="keyword">int</span> waterMelonWeight)</span> </span>&#123;</span><br><span class="line">                fruit.bigWaterMelon_2.weight = waterMelonWeight;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BigWaterMelon</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BigWaterMelon</span><span class="params">(<span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.weight = weight;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> weight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/18/JVM%E5%88%86%E5%9D%97%E5%B0%8F%E6%80%BB%E7%BB%93/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+
+<p>结合上图可得：</p>
+<ul>
+<li>每个 Java 方法在被调用的时候都会创建一个栈帧，并入栈。一旦完成调用，则出栈。所有的的栈帧都出栈后，线程也就完成了使命。</li>
+</ul>
+<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><ul>
+<li>本地方法栈为虚拟机使用到的 native 方法服务</li>
+</ul>
+<h4 id="JAVA-Stack"><a href="#JAVA-Stack" class="headerlink" title="JAVA Stack"></a>JAVA Stack</h4><p>​    栈中有栈帧，栈帧内存: </p>
+<ul>
+<li>8 中基本类型变量 （byte(8)、short(16)、int(32)、long(64)、float(12)、double(64)、char(16)、boolean；）</li>
+<li>对象的引用变量(Fruit fruit ) 、</li>
+<li>实例方法(方法出口)、</li>
+<li>局部变量表；</li>
+<li>操作数栈(程序计数器)、</li>
+</ul>
+<h5 id="Java-lang-StackOverflowError-栈内存溢出"><a href="#Java-lang-StackOverflowError-栈内存溢出" class="headerlink" title="Java.lang.StackOverflowError 栈内存溢出"></a>Java.lang.StackOverflowError 栈内存溢出</h5><h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>一个JVM只存在一个堆内存，堆内存的大小是可以调节的。</p>
+<ul>
+<li>储存：运行时常量池(字符串拼接得到的P141)、<strong>实例变量</strong>eg:new Fruit、(也叫成员变量)、</li>
+<li>两个区域：新生代（8：1：1）、老年代（）</li>
+</ul>
+<h4 id="PCR"><a href="#PCR" class="headerlink" title="PCR"></a>PCR</h4><ul>
+<li>​    每个线程一块</li>
+</ul>
+<h3 id="元空间（以前的永久代-方法区）"><a href="#元空间（以前的永久代-方法区）" class="headerlink" title="元空间（以前的永久代/方法区）"></a>元空间（以前的永久代/方法区）</h3><ul>
+<li><p>Caused by: java.lang.OutOfMemoryError: Metaspace</p>
+</li>
+<li><p><strong>储存信息</strong>：</p>
+<ul>
+<li>类加载器读取了类文件后，需要把<strong>类的模板</strong>FruitClass（不是Fruit.class）、方法模板（构造方法）、常变量放到元空间中；</li>
+<li>编译产生的文件</li>
+<li>静态变量</li>
+</ul>
+</li>
+</ul>
+<!--more-->
+
+
       
     </div>
 
@@ -587,7 +619,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-05 12:08:59" itemprop="dateModified" datetime="2021-09-05T12:08:59+08:00">2021-09-05</time>
+                <time title="修改时间：2021-09-10 17:45:53" itemprop="dateModified" datetime="2021-09-10T17:45:53+08:00">2021-09-10</time>
               </span>
 
           <br>
