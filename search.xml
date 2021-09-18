@@ -1295,13 +1295,9 @@ System.out.println(node.)
 <p>并发 | 并行</p>
 <ul>
 <li><h6 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">State</span></span>&#123;</span><br><span class="line">	NEW,<span class="comment">//新建</span></span><br><span class="line">    RUNNABLE,<span class="comment">//可运行</span></span><br><span class="line">    BLOCK,<span class="comment">//wait(),sleep(),</span></span><br><span class="line">   	WAITING,<span class="comment">//不见不散</span></span><br><span class="line">    TIME_WAITING,<span class="comment">//过时不候</span></span><br><span class="line">    TERMINATED;	<span class="comment">//已终止</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-<li><h6 id="Lambda-Express"><a href="#Lambda-Express" class="headerlink" title="Lambda  Express"></a>Lambda  Express</h6><ol>
-<li><p>拷贝小括号，写死右箭头，落地大括号；() -&gt;{sout};</p>
+<li><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210910161050744.png" alt="image-20210910161050744"></p>
 </li>
-<li><p>```java<br>@FunctionalInterface</p>
-<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="number">3</span>. default</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>. 静态方法实现</span><br><span class="line"></span><br><span class="line">```java</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
+<li><h6 id="Lambda-Express"><a href="#Lambda-Express" class="headerlink" title="Lambda  Express"></a>Lambda  Express</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 拷贝小括号，写死右箭头，落地大括号；() -&gt;&#123;sout&#125;;</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>   <span class="meta">@FunctionalInterface</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> <span class="keyword">default</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> 静态方法实现</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h4><h5 id="精准顺序访问控制（自己上锁）"><a href="#精准顺序访问控制（自己上锁）" class="headerlink" title="精准顺序访问控制（自己上锁）"></a>精准顺序访问控制（自己上锁）</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShareData</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">1</span>;<span class="comment">//A:1,B:2,C:3</span></span><br><span class="line">    <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="keyword">private</span> Condition c1 = lock.newCondition();</span><br><span class="line">    <span class="keyword">private</span> Condition c2 = lock.newCondition();</span><br><span class="line">    <span class="keyword">private</span> Condition c3 = lock.newCondition();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printc1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.判断</span></span><br><span class="line">            <span class="keyword">while</span> (number != <span class="number">1</span>)&#123;</span><br><span class="line">                c1.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.干活</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;\t&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.通知</span></span><br><span class="line">            number = <span class="number">2</span>;</span><br><span class="line">            <span class="comment">//通知第2个</span></span><br><span class="line">            c2.signal();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printc2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.判断</span></span><br><span class="line">            <span class="keyword">while</span> (number != <span class="number">2</span>)&#123;</span><br><span class="line">                c2.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.干活</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;\t&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.通知</span></span><br><span class="line">            number = <span class="number">3</span>;</span><br><span class="line">            <span class="comment">//如何通知第3个</span></span><br><span class="line">            c3.signal();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printc3</span><span class="params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.判断</span></span><br><span class="line">            <span class="keyword">while</span> (number != <span class="number">3</span>)&#123;</span><br><span class="line">                c3.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.干活</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">15</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;\t&quot;</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.通知</span></span><br><span class="line">            number = <span class="number">1</span>;</span><br><span class="line">            <span class="comment">//如何通知第1个</span></span><br><span class="line">            c1.signal();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 备注：多线程之间按顺序调用，实现A-&gt;B-&gt;C</span></span><br><span class="line"><span class="comment"> * 三个线程启动，要求如下：</span></span><br><span class="line"><span class="comment"> * AA打印5次，BB打印10次，CC打印15次</span></span><br><span class="line"><span class="comment"> * 接着</span></span><br><span class="line"><span class="comment"> * AA打印5次，BB打印10次，CC打印15次</span></span><br><span class="line"><span class="comment"> * 来10轮</span></span><br><span class="line"><span class="comment"> *      1.高内聚低耦合前提下，线程操作资源类</span></span><br><span class="line"><span class="comment"> *      2.判断/干活/通知</span></span><br><span class="line"><span class="comment"> *      3.多线程交互中，防止虚假唤醒(判断只能用while，不能用if)</span></span><br><span class="line"><span class="comment"> *      4.标志位（主要控制）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConditionDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ShareData shareData = <span class="keyword">new</span> ShareData();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                shareData.printc1();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                shareData.printc2();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">                shareData.printc3();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;C&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1399,6 +1395,7 @@ System.out.println(node.)
 ]]></content>
       <categories>
         <category>JUC</category>
+        <category>JAVA</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -1415,6 +1412,97 @@ System.out.println(node.)
         <tag>list</tag>
         <tag>queue</tag>
         <tag>stack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HashMap原理</title>
+    <url>/2021/09/07/HashMap%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<center>HashMap底层原理</center>
+
+<span id="more"></span>
+
+<h3 id="HashMap底层原理"><a href="#HashMap底层原理" class="headerlink" title="HashMap底层原理"></a>HashMap底层原理</h3><p>​        JDK1.8 之前 HashMap 底层是 <strong>数组和链表</strong> 结合在一起使用也就是 <strong>链表散列</strong>。</p>
+<p>​        <strong>HashMap</strong> <strong>通过</strong> <strong>key</strong> <strong>的</strong> <strong>hashCode</strong> <strong>经****过扰动函数处理过后得到</strong> <strong>hash</strong> <strong>值，然后通过</strong> (n <strong>-</strong> 1) &amp; hash <strong>判断当前元素存放的位置（这里的</strong> <strong>n</strong> *<em>指的是数组的</em>***长度）；</p>
+<p>​        <strong>所谓扰动函数指的就是</strong> <strong>HashMap</strong> <strong>的</strong> <strong>hash</strong> <strong>方法。使用</strong> <strong>hash</strong> <strong>方法也就是扰动函数是为了防止一些实现比较差的****hashCode()</strong> <strong>方法 换句话说使用扰动函数之后可以减少碰撞。</strong></p>
+<p><strong>JDK 1.8 HashMap</strong> <strong>的</strong> <strong>hash</strong> <strong>方法源码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="comment">// key.hashCode()：返回散列值也就是hashcode </span></span><br><span class="line">    <span class="comment">// ^ ：按位异或 </span></span><br><span class="line">    <span class="comment">// &gt;&gt;&gt;:无符号右移，忽略符号位，空位都以0补齐 </span></span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>小总结：hashMap在确定元素位置时，先调用native hashcode()算出一个值，然后再和它本身 右移16位得到的 值进行 异或运算 返回一个hash值，最后用这个值和数组长度减一进行与运算确定元素位置；</p>
+<h3 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h3><ul>
+<li>如果数组长度变化，hashmap的索引值也会变化</li>
+<li>🙇</li>
+</ul>
+<!--more-->]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>HashMap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JVM内存分配小总结</title>
+    <url>/2021/09/18/JVM%E5%88%86%E5%9D%97%E5%B0%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>需要储备的知识点</p>
+<p>Java 中的变量根据不同的标准可以分为两类，以其<strong>引用的数据类型</strong>的不同来划分可分为 “原始数据类型变量和引用数据类型变量”，以其<strong>作用范围</strong>的不同来区分可分为 “局部变量，实例变量和静态变量”。</p>
+<p><strong>实例方法和普通方法</strong></p>
+<h3 id="程序-进程-线程"><a href="#程序-进程-线程" class="headerlink" title="程序| 进程 | 线程"></a>程序| 进程 | 线程</h3><ul>
+<li> JVM 是一份本地化的程序，本质上是可执行的文件，是静态的概念。程序运行起来成为进程，是动态的概念。</li>
+<li>JAVA进程（ java 程序）：一个 JVM 实例其实就是 JVM 跑起来的进程。</li>
+<li>各个 JVM 实例之间是相互隔离的。eg：登录了多个QQ</li>
+<li>进程：是并发执行的程序在执行过程中分配和管理资源的基本单位。</li>
+<li>线程：线程有时又被称为轻权进程或轻量级进程，也是 CPU 调度的一个基本单位。线程之间共用一个进程的内存空存空间 (即 jvm 堆内存)，各个线程也有自己独立专有的内存空间 (即 jvm 栈帧空间)。看下图就明白了</li>
+</ul>
+<h3 id="首先确定一下jkd1-8之后的JVM内存模型"><a href="#首先确定一下jkd1-8之后的JVM内存模型" class="headerlink" title="首先确定一下jkd1.8之后的JVM内存模型"></a>首先确定一下jkd1.8之后的JVM内存模型</h3><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20180225003503739" alt="JVM内存模型" style="zoom:50%;" /><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210918141601102.png" style="zoom:50%;" /></p>
+<h4 id="方法变量内存分配图"><a href="#方法变量内存分配图" class="headerlink" title="方法变量内存分配图"></a>方法变量内存分配图</h4><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20190226181808168.jpg" alt="img" style="zoom: 50%;" />
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">static</span> BigWaterMelon bigWaterMelon_1 = <span class="keyword">new</span> BigWaterMelon(x);</span><br><span class="line">    <span class="keyword">int</span> y = <span class="number">20</span>;</span><br><span class="line">    BigWaterMelon bigWaterMelon_2 = <span class="keyword">new</span> BigWaterMelon(y);</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Fruit fruit = <span class="keyword">new</span> Fruit();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">int</span> z = <span class="number">30</span>;</span><br><span class="line">        BigWaterMelon bigWaterMelon_3 = <span class="keyword">new</span> BigWaterMelon(z);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> k = <span class="number">100</span>;</span><br><span class="line">                setWeight(k);</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="function"><span class="keyword">void</span> <span class="title">setWeight</span><span class="params">(<span class="keyword">int</span> waterMelonWeight)</span> </span>&#123;</span><br><span class="line">                fruit.bigWaterMelon_2.weight = waterMelonWeight;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BigWaterMelon</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BigWaterMelon</span><span class="params">(<span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.weight = weight;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> weight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合上图可得：</p>
+<ul>
+<li>每个 Java 方法在被调用的时候都会创建一个栈帧，并入栈。一旦完成调用，则出栈。所有的的栈帧都出栈后，线程也就完成了使命。</li>
+</ul>
+<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><ul>
+<li>本地方法栈为虚拟机使用到的 native 方法服务</li>
+</ul>
+<h4 id="JAVA-Stack"><a href="#JAVA-Stack" class="headerlink" title="JAVA Stack"></a>JAVA Stack</h4><p>​    栈中有栈帧，栈帧内存: </p>
+<ul>
+<li>8 中基本类型变量 （byte(8)、short(16)、int(32)、long(64)、float(12)、double(64)、char(16)、boolean；）</li>
+<li>对象的引用变量(Fruit fruit ) 、</li>
+<li>实例方法(方法出口)、</li>
+<li>局部变量表；</li>
+<li>操作数栈(程序计数器)、</li>
+</ul>
+<h5 id="Java-lang-StackOverflowError-栈内存溢出"><a href="#Java-lang-StackOverflowError-栈内存溢出" class="headerlink" title="Java.lang.StackOverflowError 栈内存溢出"></a>Java.lang.StackOverflowError 栈内存溢出</h5><h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>一个JVM只存在一个堆内存，堆内存的大小是可以调节的。</p>
+<ul>
+<li>储存：运行时常量池(字符串拼接得到的P141)、<strong>实例变量</strong>eg:new Fruit、(也叫成员变量)、</li>
+<li>两个区域：新生代（8：1：1）、老年代（）</li>
+</ul>
+<h4 id="PCR"><a href="#PCR" class="headerlink" title="PCR"></a>PCR</h4><ul>
+<li>​    每个线程一块</li>
+</ul>
+<h3 id="元空间（以前的永久代-方法区）"><a href="#元空间（以前的永久代-方法区）" class="headerlink" title="元空间（以前的永久代/方法区）"></a>元空间（以前的永久代/方法区）</h3><ul>
+<li><p>Caused by: java.lang.OutOfMemoryError: Metaspace</p>
+</li>
+<li><p><strong>储存信息</strong>：</p>
+<ul>
+<li>类加载器读取了类文件后，需要把<strong>类的模板</strong>FruitClass（不是Fruit.class）、方法模板（构造方法）、常变量放到元空间中；</li>
+<li>编译产生的文件</li>
+<li>静态变量</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>JAVA基础</tag>
       </tags>
   </entry>
 </search>
