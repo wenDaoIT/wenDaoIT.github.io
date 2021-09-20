@@ -1585,4 +1585,54 @@ System.out.println(node.)
         <tag>JAVA</tag>
       </tags>
   </entry>
+  <entry>
+    <title>今天又GET一个🏊‍的小技能</title>
+    <url>/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/</url>
+    <content><![CDATA[<center>持续get，持续更新ing</center>
+
+<span id="more"></span>
+
+<p>想要哪个教程在评论区留言，或者联系我，我看到会更新一些教程</p>
+<p>2021/09/21  为了备份我博客参考的一些网站，防止404了</p>
+<ul>
+<li>发现并学会使用Web cilpper插件（暂时备份在GitHub）</li>
+</ul>
+<!--more-->
+
+]]></content>
+      <categories>
+        <category>技能</category>
+      </categories>
+      <tags>
+        <tag>小技能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态规划 背包问题</title>
+    <url>/2021/09/21/20210921-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<center>祝大家中秋节快乐</center>
+
+<span id="more"></span>
+
+<p>今天学习了，动态规划 解决了背包问题</p>
+<p>感觉这个有点绕，所以写一下子</p>
+<p>[网上只找到一篇图解讲的非常好的；]</p>
+<ul>
+<li>[(<a href="https://blog.csdn.net/bohu83/article/details/91453227">《算法图解》-9 动态规划 背包问题，行程最优化_bohu83 的博客 - CSDN 博客_动态规划背包问题算法</a>)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//代码</span></span><br><span class="line"><span class="keyword">package</span> com.demo;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">大前提：因为书包初始容量大于0，物品也不会是0件，所以i，j,从1开始</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicPlanning</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//物品的重量</span></span><br><span class="line">        <span class="keyword">int</span>[] w=&#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        <span class="comment">//物品的价值</span></span><br><span class="line">        <span class="keyword">int</span>[] val=&#123;<span class="number">1500</span>,<span class="number">3000</span>,<span class="number">2000</span>&#125;;</span><br><span class="line">        <span class="comment">//背包的容量</span></span><br><span class="line">        <span class="keyword">int</span> m=<span class="number">5</span>;</span><br><span class="line">        <span class="comment">//  物品的个数</span></span><br><span class="line">        <span class="keyword">int</span> n=val.length;</span><br><span class="line">        <span class="comment">//v[i][j]表示在前i个物品能装入容量为J的背包的最大价格；</span></span><br><span class="line">        <span class="keyword">int</span> [][] v = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>][m+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> [][] path = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>][m+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//因为书包初始容量大于0，物品也不会是0件，所以i，j,从1开始</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;v.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;v[<span class="number">0</span>].length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (w[i-<span class="number">1</span>]&gt;j)&#123;</span><br><span class="line">                    v[i][j] = v[i-<span class="number">1</span>][j];</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//                    v[i][j] = Math.max(v[i-1][j],val[i-1]+v[i-1][j-w[i-1]]);</span></span><br><span class="line">                    <span class="keyword">if</span> (v[i-<span class="number">1</span>][j]&lt;val[i-<span class="number">1</span>]+v[i-<span class="number">1</span>][j-w[i-<span class="number">1</span>]])&#123;</span><br><span class="line">                        v[i][j] = val[i-<span class="number">1</span>]+v[i-<span class="number">1</span>][j-w[i-<span class="number">1</span>]];</span><br><span class="line">                        path[i][j] = <span class="number">1</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        v[i][j]=v[i-<span class="number">1</span>][j];</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;v.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;v[i].length;j++)&#123;</span><br><span class="line">                System.out.print(v[i][j]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        System.out.println(&quot;===========================&quot;);</span></span><br><span class="line"><span class="comment">//        for (int i=0;i&lt;path.length;i++)&#123;</span></span><br><span class="line"><span class="comment">//            for (int j=0;j&lt;path[i].length;j++)&#123;</span></span><br><span class="line"><span class="comment">//                if (path[i][j]==1)&#123;</span></span><br><span class="line"><span class="comment">//                    System.out.printf(&quot;第%d个物品放入背包&quot;,i);</span></span><br><span class="line"><span class="comment">//                    System.out.println();</span></span><br><span class="line"><span class="comment">//                &#125;</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">//逆序</span></span><br><span class="line">        <span class="keyword">int</span> i = path.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = path[<span class="number">0</span>].length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i&gt;<span class="number">0</span>&amp;&amp; j &gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (path[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;第%d个物品放入背包&quot;</span>,i);</span><br><span class="line">                j -= w[i-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li>更多源码见我的GitHub</li>
+</ul>
+<!--more-->]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
 </search>
