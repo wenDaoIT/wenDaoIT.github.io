@@ -152,6 +152,14 @@ show status like &#39;%slow_queries%&#39;
 <h3 id="Method-Area-方法区"><a href="#Method-Area-方法区" class="headerlink" title="Method Area 方法区"></a>Method Area 方法区</h3><p>存储每个类的模板信息————绝对不是放方法的地方<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171411560.png" alt="image-20210902171411560" style="zoom:50%;" /></p>
 <img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210902171754599.png" alt="image-20210902171754599" style="zoom:67%;" />
 
+
+
+
+
+
+
+
+
 <h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>栈管内存，堆管存储；</p>
 <ul>
 <li>栈帧保存哪些东东？<ul>
@@ -200,8 +208,7 @@ show status like &#39;%slow_queries%&#39;
 <h5 id="GC详细日志解读"><a href="#GC详细日志解读" class="headerlink" title="GC详细日志解读"></a>GC详细日志解读</h5><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903165929128.png" alt="image-20210903165929128"></p>
 <h6 id="11个参数的意思"><a href="#11个参数的意思" class="headerlink" title="11个参数的意思"></a>11个参数的意思</h6><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903172405616.png" alt="image-20210903172405616"></p>
 <p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903172135941.png" alt="image-20210903172135941"></p>
-<p>GC是什么</p>
-<h5 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h5><h6 id="次数上频繁收集Young区"><a href="#次数上频繁收集Young区" class="headerlink" title="次数上频繁收集Young区"></a>次数上频繁收集Young区</h6><h6 id="次数上较少收集Old区"><a href="#次数上较少收集Old区" class="headerlink" title="次数上较少收集Old区"></a>次数上较少收集Old区</h6><h6 id="基本不动元空间"><a href="#基本不动元空间" class="headerlink" title="基本不动元空间"></a>基本不动元空间</h6><h4 id="GC4大算法优缺点"><a href="#GC4大算法优缺点" class="headerlink" title="GC4大算法优缺点"></a>GC4大算法优缺点</h4><ol>
+<h3 id="GC是什么"><a href="#GC是什么" class="headerlink" title="GC是什么"></a>GC是什么</h3><h5 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h5><h6 id="次数上频繁收集Young区"><a href="#次数上频繁收集Young区" class="headerlink" title="次数上频繁收集Young区"></a>次数上频繁收集Young区</h6><h6 id="次数上较少收集Old区"><a href="#次数上较少收集Old区" class="headerlink" title="次数上较少收集Old区"></a>次数上较少收集Old区</h6><h6 id="基本不动元空间"><a href="#基本不动元空间" class="headerlink" title="基本不动元空间"></a>基本不动元空间</h6><h4 id="GC4大算法优缺点"><a href="#GC4大算法优缺点" class="headerlink" title="GC4大算法优缺点"></a>GC4大算法优缺点</h4><ol>
 <li>引用计数法(一般不用)<ul>
 <li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210903173817688.png" alt="image-20210903173817688" style="zoom:67%;" /></li>
 </ul>
@@ -499,7 +506,7 @@ show status like &#39;%slow_queries%&#39;
 <span id="more"></span>
 
 <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ol>
-<li>定义：也是一种动态数据结构 ，是一种链表</li>
+<li>定义：也是一种动态数据结构 ；</li>
 </ol>
 <p><img src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/image-20210821130645690.png" alt="image-20210821130645690"></p>
 <p>一个节点也是二叉树、null也是二叉树</p>
@@ -514,7 +521,7 @@ show status like &#39;%slow_queries%&#39;
 <ol>
 <li><p>前序遍历</p>
 </li>
-<li><p>```java<br>System.out.println(node.)<br>traverse(node.right);<br>traverse(node.left);</p>
+<li><p>```java<br> System.out.println(node.)<br> traverse(node.right);<br> traverse(node.left);</p>
 <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 中序遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    traverse(node.<span class="attribute">left</span>);</span><br><span class="line">    System<span class="selector-class">.out</span><span class="selector-class">.println</span>(node.)</span><br><span class="line">    traverse(node.<span class="attribute">right</span>);</span><br></pre></td></tr></table></figure></li>
 </ol>
 <ul>
@@ -777,23 +784,50 @@ System.out.println(node.)
 </ul>
 <h5 id="Java-lang-StackOverflowError-栈内存溢出"><a href="#Java-lang-StackOverflowError-栈内存溢出" class="headerlink" title="Java.lang.StackOverflowError 栈内存溢出"></a>Java.lang.StackOverflowError 栈内存溢出</h5><h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>一个JVM只存在一个堆内存，堆内存的大小是可以调节的。</p>
 <ul>
-<li>储存：运行时常量池(字符串拼接得到的P141)、<strong>实例变量</strong>eg:new Fruit、(也叫成员变量)、</li>
+<li>储存：运行时常量池(字符串拼接得到的P141)、<strong>实例变量</strong>eg:new Fruit、(也叫成员变量)、静态变量</li>
 <li>两个区域：新生代（8：1：1）、老年代（）</li>
 </ul>
 <h4 id="PCR"><a href="#PCR" class="headerlink" title="PCR"></a>PCR</h4><ul>
-<li>​    每个线程一块</li>
+<li><p>​    Java 虚拟机可以支持多个线程同时执行，<strong>每个线程都有自己的程序计数器</strong>。在任何时刻，每个线程都只会执行一个方法的代码，这个方法称为该线程的当前方法（current method）。</p>
+<p>如果线程正在执行的是 Java 方法（不是 native 的），则程序计数器记录的是正在执行的 Java 虚拟机字节码指令的地址。如果正在执行的是本地（native）方法，那么计数器的值是空的（undefined）。</p>
+</li>
 </ul>
 <h3 id="元空间（以前的永久代-方法区）"><a href="#元空间（以前的永久代-方法区）" class="headerlink" title="元空间（以前的永久代/方法区）"></a>元空间（以前的永久代/方法区）</h3><ul>
 <li><p>Caused by: java.lang.OutOfMemoryError: Metaspace</p>
 </li>
 <li><p><strong>储存信息</strong>：</p>
 <ul>
-<li>类加载器读取了类文件后，需要把<strong>类的模板</strong>FruitClass（不是Fruit.class）、方法模板（构造方法）、常变量放到元空间中；</li>
-<li>编译产生的文件</li>
-<li>静态变量</li>
+<li>类加载器读取了类文件后，需要把Class metadata（类元数据）、方法模板（构造方法）、常变量放到元空间中；</li>
 </ul>
 </li>
 </ul>
+<h3 id="Java-中有哪几种常量池？"><a href="#Java-中有哪几种常量池？" class="headerlink" title="Java 中有哪几种常量池？"></a>Java 中有哪几种常量池？</h3><p>class 文件常量池、运行时常量池、字符串常量池。</p>
+<h4 id="class-文件常量池"><a href="#class-文件常量池" class="headerlink" title="class 文件常量池"></a>class 文件常量池</h4><p>class 文件常量池（class constant pool）属于 class 文件的其中一项，class 类文件包含：类的版本、常量池、访问标志、字段表集合、方法表等信息。</p>
+<p>常量池用于存放编译期间生成的各种字面量（Literal）和符号引用（Symbolic References）。</p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/20210704163359946.png"></p>
+<h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><p>class 文件常量池是在类被编译成 class 文件时生成的。而当类被加载到内存中后，JVM 就会将 class 文件常量池中的内容存放到运行时常量池中。</p>
+<p>Java 虚拟机规范中对运行时常量池的定义如下：</p>
+<blockquote>
+<p>A run-time constant pool is a per-class or per-interface run-time representation of the constant_pool table in a class file.</p>
+<p>运行时常量池是 class 文件中每一个类或接口的常量池表（constant_pool table）的运行时表示形式。</p>
+</blockquote>
+<p>因此，根据规范定义，可以说运行时常量池是 class 文件常量池的运行时表示，每个类在运行时都有自己的一个独立的运行时常量池。</p>
+<h4 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h4><p>简单来说，HotSpot VM 里的字符串常量池（StringTable）是个哈希表，全局只有一份，被所有的类共享。</p>
+<p>StringTable 具体存储的是 String 对象的引用，而不是 String 对象实例自身。String 对象实例在 JDK 6 及之前是在永久代里，从 JDK 7 开始放在堆里。</p>
+<p>根据 Java 虚拟机规范的定义，堆是存储 Java 对象的地方，其他地方是不会有 Java 对象实体的，如果有的话，根据规范定义，这些地方也要算堆的一部分。</p>
+<h2 id="jdk1-8之后永久代的变化"><a href="#jdk1-8之后永久代的变化" class="headerlink" title="jdk1.8之后永久代的变化"></a>jdk1.8之后永久代的变化</h2><p>永久代在 Java 8 被移除。根据官方提案的描述，移除的主要动机是：要将 JRockit 和 Hotspot 进行融合，而 JRockit 并没有永久代。</p>
+<p>而据我们所了解的，还有另外一个重要原因是永久代本身也存在较多的问题，经常出现 OOM，还出过不少 bug。</p>
+<p>根据官方提案的描述，永久代主要存储了三种数据： </p>
+<p>1）<strong>Class metadata（类元数据）</strong>，也就是方法区中包含的数据，除了编译生成的字节码被放在 native memory（本地内存）。</p>
+<p>2）<strong>interned Strings</strong>，也就是字符串常量池中驻留引用的字符串对象，字符串常量池只驻留引用，而实际对象是在永久代中。</p>
+<p>3）<strong>class static variables</strong>，类静态变量。</p>
+<p>移除永久代后，interned Strings 和 class static variables 被移动了堆中，Class metadata 被移动到了后来的元空间。</p>
+<h2 id="为什么引入元空间？"><a href="#为什么引入元空间？" class="headerlink" title="为什么引入元空间？"></a>为什么引入元空间？</h2><p>在 Java 8 之前，Java 虚拟机使用永久代来存放类元信息，通过 - XX:PermSize、-XX:MaxPermSize 来控制这块内存的大小，随着动态类加载的情况越来越多，这块内存变得不太可控，到底设置多大合适是每个开发者要考虑的问题。</p>
+<p>如果设置小了，容易出现内存溢出；如果设置大了，又有点浪费，尽管不会实质分配这么大的物理内存。</p>
+<p>而元空间可以较好的解决内存设置多大的问题：当我们没有指定 -XX:MaxMetaspaceSize 时，元空间可以动态的调整使用的内存大小，以容纳不断增加的类。</p>
+<h2 id="元空间（metaspace）"><a href="#元空间（metaspace）" class="headerlink" title="元空间（metaspace）"></a>元空间（metaspace）</h2><p>元空间在 Java 8 移除永久代后被引入，用来代替永久代，本质和永久代类似，都是对方法区的实现。不过元空间与永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存（native memory）。</p>
+<p>元空间主要用于存储 Class metadata（类元数据），根据其命名其实也看得出来。</p>
+<p>可以通过 -XX:MaxMetaspaceSize 参数来限制元空间的大小，如果没有设置该参数，则元空间默认限制为机器内存。</p>
 <!--more-->
 
 ]]></content>
@@ -1554,11 +1588,25 @@ System.out.println(node.)
 <p>保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。</p>
 <p><strong>HashTable:</strong> 同步操作，读写安全，不允许储存null</p>
 <p><strong>TreeMap:</strong> 红黑树（自平衡的排序二叉树）</p>
-<p>数组和链表对比</p>
-<ul>
+<h3 id="数组和链表对比"><a href="#数组和链表对比" class="headerlink" title="数组和链表对比"></a>数组和链表对比</h3><ul>
 <li>链表不用扩容，增删方便；</li>
 <li>数组查找快，链表要遍历；</li>
 </ul>
+<p>/*</p>
+<h3 id="集合的工具类-Collections"><a href="#集合的工具类-Collections" class="headerlink" title="* 集合的工具类 (Collections):"></a>* 集合的工具类 (Collections):</h3><p> * 笔试题：说出 Collection 与 Collections 的区别？<br> *   1.Collection 是一个单列集合的跟接口，Collections 是操作集合对象的一个工具类<br> * Collections 常见方法：<br> *   1. 对 list 进行排序：<br> *     sort(List<T> list)<br> *     sort(List<T> list, Comparator c)<br> *   2. 对 list 进行二分查找：<br> *     binarySearch(List<? extends Comparable<? super T>> list, T key)
+ \*     binarySearch(List<? extends T> list, T key, Comparator<? super T> c)
+ \*   3. 对集合取最大值或最小值
+ \*     max(Collection<? extends T> coll)
+ \*     max(Collection<? extends T> coll, Comparator<? super T> comp)
+ \*     min(Collection<? extends T> coll)
+ \*     min(Collection<? extends T> coll, Comparator<? super T> comp)
+ \*   4. 对 list 集合进行反转
+ \*     reverse(List<?> list<br> *   5. 可以将不同步的集合变成同步的集合<br> *     synchronizedCollection(Collection<T> c)<br> *     synchronizedList(List<T> list)<br> *     synchronizedMap(Map&lt;K,V&gt; m)<br> *     synchronizedSet(Set<T> s)<br> * </p>
+<p> * */</p>
+<h3 id="数组的工具类-Arrays"><a href="#数组的工具类-Arrays" class="headerlink" title="数组的工具类 (Arrays)"></a>数组的工具类 (Arrays)</h3><p> *    1. 复制数组：<br> *     copyOf(boolean[] original, int newLength)<br> *      original: 源数组<br> *      newLength: 新数组长度<br> *<br> *    2. 复制部分数组<br> *     copyOfRange<br> *    3. 比较两个数组是否相同<br> *     equals(int[],int[])<br> *    4. 将数组变成集合<br> *     List aslist(T[])</p>
+<p>​    5、返回成字符串toString()；</p>
+<p><strong>Java 中 &amp;&amp; 和 &amp;</strong> </p>
+<p>都是表示<strong>与的逻辑运算符</strong>，都表示逻辑运输符 and，当两边的表达式都为 true 的时候，整个运算结果才为 true，否则为 false。 &amp;&amp; 的短路功能，当第一个表达式的值为 false 的时候，则不再计算第二个表达式；&amp; 则两个表达式都执行。</p>
 <p>持续更新ing</p>
 <!--more-->
 
