@@ -244,7 +244,7 @@ show status like &#39;%slow_queries%&#39;
 <li>有序性</li>
 </ol>
 <p>cpu&gt;内存&gt;硬盘</p>
-<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210905110511766.png" alt="内存关系" style="zoom: 50%;" />
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210905110511766.png" alt="内存关系" style="zoom: 80%;" />
 
 <p>i think开发中比较重要的 static(只编译一次) &gt; 构造方法块 &gt; 构造方法</p>
 <h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
@@ -1603,10 +1603,11 @@ System.out.println(node.)
  \*   4. 对 list 集合进行反转
  \*     reverse(List<?> list<br> *   5. 可以将不同步的集合变成同步的集合<br> *     synchronizedCollection(Collection<T> c)<br> *     synchronizedList(List<T> list)<br> *     synchronizedMap(Map&lt;K,V&gt; m)<br> *     synchronizedSet(Set<T> s)<br> * </p>
 <p> * */</p>
-<h3 id="数组的工具类-Arrays"><a href="#数组的工具类-Arrays" class="headerlink" title="数组的工具类 (Arrays)"></a>数组的工具类 (Arrays)</h3><p> *    1. 复制数组：<br> *     copyOf(boolean[] original, int newLength)<br> *      original: 源数组<br> *      newLength: 新数组长度<br> *<br> *    2. 复制部分数组<br> *     copyOfRange<br> *    3. 比较两个数组是否相同<br> *     equals(int[],int[])<br> *    4. 将数组变成集合<br> *     List aslist(T[])</p>
-<p>​    5、返回成字符串toString()；</p>
-<p><strong>Java 中 &amp;&amp; 和 &amp;</strong> </p>
-<p>都是表示<strong>与的逻辑运算符</strong>，都表示逻辑运输符 and，当两边的表达式都为 true 的时候，整个运算结果才为 true，否则为 false。 &amp;&amp; 的短路功能，当第一个表达式的值为 false 的时候，则不再计算第二个表达式；&amp; 则两个表达式都执行。</p>
+<h3 id="数组的工具类-Arrays"><a href="#数组的工具类-Arrays" class="headerlink" title="数组的工具类 (Arrays)"></a>数组的工具类 (Arrays)</h3><p> *    1. 复制数组：<br> *     copyOf(boolean[] original, int newLength)<br> *      original: 源数组</p>
+<p> *      newLength: 新数组长度<br> *    2. 复制部分数组<br> *     copyOfRange<br> *    3. 比较两个数组是否相同<br> *     equals(int[],int[])<br> *    4. 将数组变成集合<br> *     List aslist(T[])</p>
+<p>*    5、返回成字符串toString()；</p>
+<p>*    6.Array.sort()</p>
+<h3 id="Java-中-amp-amp-和-amp"><a href="#Java-中-amp-amp-和-amp" class="headerlink" title="Java 中 &amp;&amp; 和 &amp;"></a><strong>Java 中 &amp;&amp; 和 &amp;</strong></h3><p>都是表示<strong>与的逻辑运算符</strong>，都表示逻辑运输符 and，当两边的表达式都为 true 的时候，整个运算结果才为 true，否则为 false。 &amp;&amp; 的短路功能，当第一个表达式的值为 false 的时候，则不再计算第二个表达式；&amp; 则两个表达式都执行。</p>
 <p>持续更新ing</p>
 <!--more-->
 
@@ -1643,7 +1644,11 @@ System.out.println(node.)
 <p>想要哪个教程在评论区留言，或者联系我，我看到会更新一些教程</p>
 <p>2021/09/21  为了备份我博客参考的一些网站，防止404了</p>
 <ul>
-<li>发现并学会使用Web cilpper插件（暂时备份在GitHub）</li>
+<li>发现并学会使用Web cilpper插件，备份网站内容到（暂时备份在GitHub）</li>
+</ul>
+<p>2021/10/03</p>
+<ul>
+<li>linux使用ab 可以进行测试，（模拟大规模并发操作）</li>
 </ul>
 <!--more-->
 
@@ -1681,6 +1686,41 @@ System.out.println(node.)
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis6框架学习</title>
+    <url>/2021/09/07/2021-09-07-Redis/</url>
+    <content><![CDATA[<center>NoSQL</center>
+
+<span id="more"></span>
+
+<p>Nosql</p>
+<p>串行–</p>
+<p> Redis</p>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li>数据类型丰富</li>
+<li>支持持久化存储</li>
+<li>支持主从</li>
+<li>支持分片 </li>
+</ul>
+<p>CAP的3进2</p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>查找常用API redisdoc.com</p>
+<ul>
+<li>KEY </li>
+<li>String</li>
+<li>List</li>
+</ul>
+<center></center>
+
+<!--more-->
+
+]]></content>
+      <categories>
+        <category>-高并发 -框架</category>
+      </categories>
+      <tags>
+        <tag>Redis，框架</tag>
       </tags>
   </entry>
 </search>
