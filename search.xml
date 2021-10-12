@@ -10,7 +10,15 @@
 <p>棋盘问题</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparseArray</span> </span>&#123;</span><br><span class="line">    <span class="comment">//编写的五子棋程序中，有存盘退出和续上盘的功能</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> chessArr1[][]= <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">11</span>][<span class="number">11</span>];</span><br><span class="line">        chessArr1[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">        chessArr1[<span class="number">2</span>][<span class="number">4</span>] = <span class="number">2</span>;</span><br><span class="line">        chessArr1[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//输出原始的二维数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] row : chessArr1)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> data : row)&#123;</span><br><span class="line">                    System.out.printf(<span class="string">&quot;%d\t&quot;</span>,data);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//原始数组有多少个数</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">11</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">11</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArr1[i][j] != <span class="number">0</span>) &#123;</span><br><span class="line">                    sum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//创建稀疏数组</span></span><br><span class="line">        <span class="keyword">int</span> sparseArr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[sum+<span class="number">1</span>][<span class="number">3</span>];</span><br><span class="line">        sparseArr[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">        sparseArr[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">11</span>;</span><br><span class="line">        sparseArr[<span class="number">0</span>][<span class="number">2</span>] = sum;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出稀疏数组</span></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">11</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArr1[i][j] != <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    sparseArr[count][<span class="number">0</span>] = i;</span><br><span class="line">                    sparseArr[count][<span class="number">1</span>] = j;</span><br><span class="line">                    sparseArr[count][<span class="number">2</span>] = chessArr1[i][j];</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//保存为文件</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">&quot;D:\\My文档\\IDEAdemo\\hexo-boot-2.3.0\\algorithm&quot;</span>+File.separator+<span class="string">&quot;chess.data&quot;</span>);</span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">        OutputStreamWriter write = <span class="keyword">new</span> OutputStreamWriter(fos, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">&quot;稀疏数组：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sparseArr.length; i++) &#123;</span><br><span class="line">            System.out.printf(<span class="string">&quot;%d\t%d\t%d\t\n&quot;</span>, sparseArr[i][<span class="number">0</span>], sparseArr[i][<span class="number">1</span>], sparseArr[i][<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (i == sparseArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">                write.append(sparseArr[i][<span class="number">0</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">1</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">2</span>]);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                write.append(sparseArr[i][<span class="number">0</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">1</span>] + <span class="string">&quot;,&quot;</span> + sparseArr[i][<span class="number">2</span>] + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;写入文件中...&quot;</span>);</span><br><span class="line">        write.close();</span><br><span class="line">        fos.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//重新生成一个新chess数组</span></span><br><span class="line">        <span class="keyword">int</span> chessArr2[][] = <span class="keyword">new</span> <span class="keyword">int</span>[sparseArr[<span class="number">0</span>][<span class="number">0</span>]][sparseArr[<span class="number">0</span>][<span class="number">1</span>]];</span><br><span class="line">        <span class="comment">//读取稀疏赋值给新chesss数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;sparseArr.length; i++) &#123;</span><br><span class="line">            chessArr2[sparseArr[i][<span class="number">0</span>]][sparseArr[i][<span class="number">1</span>]] = sparseArr[i][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;打开文件中...&quot;</span>);</span><br><span class="line">        Desktop.getDesktop().open(file);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;------------------------------先读取_chess.data&quot;</span>);</span><br><span class="line">        <span class="comment">// 创建 FileReader 对象</span></span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line"></span><br><span class="line">        InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(fis, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">while</span> (reader.ready()) &#123;</span><br><span class="line">            sb.append((<span class="keyword">char</span>) reader.read());<span class="comment">// 转成char加到StringBuffer对象中</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        reader.close();<span class="comment">// 关闭读取流</span></span><br><span class="line">        fis.close();<span class="comment">// 关闭输入流,释放系统资源</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;恢复后的数组&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] row : chessArr2) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> data : row)&#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;%d\t&quot;</span>,data);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h4 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h4><ul>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>首先思考：</p>
+<ol>
+<li>如何把这个数组变成二叉树？（定义根节点及其子节点）</li>
+<li>遍历从哪里出发？</li>
+<li>用递归还是非递归？每次递归做了什么？</li>
+<li>节点有什么变化</li>
+<li>最后考虑如何输出</li>
+</ol>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
 <li><a href="https://blog.csdn.net/itguangit/article/details/50063513">java 中 printf，print，println，区别及用法详解</a></li>
 </ul>
 <!--more-->
@@ -592,7 +600,26 @@ System.out.println(node.)
 
 
 
-<p>小总结：hashMap在确定元素位置时，先调用native hashcode()算出一个值，然后再和它本身 右移16位得到的 值进行 异或运算 返回一个hash值，最后用这个值和数组长度减一进行与运算确定元素位置；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*** Returns a power of two size for the given target capacity. */</span> </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">int</span> n = cap - <span class="number">1</span>; </span><br><span class="line"> n |= n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line"> n |= n &gt;&gt;&gt; <span class="number">2</span>;</span><br><span class="line"> n |= n &gt;&gt;&gt; <span class="number">4</span>;</span><br><span class="line"> n |= n &gt;&gt;&gt; <span class="number">8</span>;</span><br><span class="line"> n |= n &gt;&gt;&gt; <span class="number">16</span>;</span><br><span class="line"> <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>小总结：hashMap在确定元素位置时，先调用 hashcode()算出一个值，然后再和它本身 右移16位得到的 值进行 异或运算 返回一个hash值，最后用这个值和数组长度减一进行与运算确定元素位置；</p>
+<p>补充：</p>
+<ol>
+<li><p>ArrayList 的扩容机制：</p>
+<p>三个构造器：</p>
+<ul>
+<li>无参构造器，返回一个默认大小为10的容器</li>
+<li>一个参数构造器，返回指定大小的数组</li>
+<li>还有一个是将collection转换成arraylst，再将值复制一份；</li>
+</ul>
+</li>
+<li><p>int newCapacity = oldCapacity + (oldCapacity&gt;&gt; 1); 是最重要的一条语句，oldCapacity 为原来的容量，oldCapacity &gt;&gt; 1 表示向右移一位，相当于除以 2，即 newCapacity 是原来容量的 1.5 倍。如果扩大 1.5 倍后还不够，则直接将其扩大至 minCapacity 大小。判断 newCapacity 是否 超过了最大容量 MAX_ARRAY_SIZE ，</p>
+</li>
+<li><p>将原来数据复制到扩容后的数组中。elementData [size++] = e; 将新加入元素添加至数组中。（费空间时间）</p>
+</li>
+</ol>
 <h3 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h3><ul>
 <li>如果数组长度变化，hashmap的索引值也会变化</li>
 <li>🙇</li>
@@ -1601,7 +1628,7 @@ System.out.println(node.)
  \*     min(Collection<? extends T> coll)
  \*     min(Collection<? extends T> coll, Comparator<? super T> comp)
  \*   4. 对 list 集合进行反转
- \*     reverse(List<?> list<br> *   5. 可以将不同步的集合变成同步的集合<br> *     synchronizedCollection(Collection<T> c)<br> *     synchronizedList(List<T> list)<br> *     synchronizedMap(Map&lt;K,V&gt; m)<br> *     synchronizedSet(Set<T> s)<br> * </p>
+ \*     reverse(List<?> list<br> *   5. 可以将不同步的集合变成同步的集合<br> *     synchronizedCollection(Collection<T> c)<br> *     synchronizedList(List<T> list)<br> *     synchronizedMap(Map&lt;K,V&gt; m)<br> *     synchronizedSet(Set<T> s)</p>
 <p> * */</p>
 <h3 id="数组的工具类-Arrays"><a href="#数组的工具类-Arrays" class="headerlink" title="数组的工具类 (Arrays)"></a>数组的工具类 (Arrays)</h3><p> *    1. 复制数组：<br> *     copyOf(boolean[] original, int newLength)<br> *      original: 源数组</p>
 <p> *      newLength: 新数组长度<br> *    2. 复制部分数组<br> *     copyOfRange<br> *    3. 比较两个数组是否相同<br> *     equals(int[],int[])<br> *    4. 将数组变成集合<br> *     List aslist(T[])</p>
@@ -1976,6 +2003,45 @@ System.out.println(node.)
       </categories>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图的搜索方式</title>
+    <url>/2021/10/10/20211010-%E5%9B%BE%E7%9A%84%E6%90%9C%E7%B4%A2%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<center>二叉树是一种特殊的图</center>
+
+<span id="more"></span>
+
+<p>二叉树的遍历方式</p>
+<ul>
+<li><p>深度优先（FILO栈）</p>
+<ul>
+<li>前序遍历（根左右）：访问根结点，再访问左子树、再访问右子树。</li>
+<li>中序遍历（左根右）：先访问左子树，再访问根结点、再访问右子树。</li>
+<li>后续遍历（左右根）：先访问左子树，再访问右子树，再访问根结点。</li>
+</ul>
+</li>
+<li><p>广度优先（FIFO队列）</p>
+<ul>
+<li>层序遍历</li>
+</ul>
+</li>
+</ul>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li><p><a href="https://blog.csdn.net/tjh625/article/details/82628196">https://blog.csdn.net/tjh625/article/details/82628196</a></p>
+</li>
+<li><p><a href="https://cloud.tencent.com/developer/article/1785964">https://cloud.tencent.com/developer/article/1785964</a></p>
+</li>
+<li><p><a href="https://liweiwei1419.gitee.io/leetcode-algo/2017/10/01/leetcode-solution/queue-1/#">https://liweiwei1419.gitee.io/leetcode-algo/2017/10/01/leetcode-solution/queue-1/#</a>!</p>
+</li>
+</ul>
+<!--more-->]]></content>
+      <categories>
+        <category>-算法 -数据结构</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>遍历</tag>
       </tags>
   </entry>
 </search>
