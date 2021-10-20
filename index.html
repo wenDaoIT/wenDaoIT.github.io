@@ -203,6 +203,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/10/20/Java%20%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/20/Java%20%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Java 常见的几种JVM内存溢出及解决方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-20 00:00:00 / 修改时间：15:44:14" itemprop="dateCreated datePublished" datetime="2021-10-20T00:00:00+08:00">2021-10-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">-JVM</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<p>Java 常见的几种JVM内存溢出及解决方法</p>
+<p><strong>【情况一】：</strong><br>java.lang.OutOfMemoryError:Javaheapspace：这种是 java 堆内存不够，一个原因是真不够（如递归的层数太多等），另一个原因是程序中有死循环；<br>如果是 java 堆内存不够的话，可以通过调整 JVM 下面的配置来解决：<br>-Xms3072m<br>-Xmx3072m<br><strong>【情况二】：</strong><br>java.lang.OutOfMemoryError:GCoverheadlimitexceeded<br>【解释】：JDK6 新增错误类型，当 GC 为释放很小空间占用大量时间时抛出；一般是因为堆太小，导致异常的原因，没有足够的内存。<br>【解决方案】：<br>1、查看系统是否有使用大内存的代码或死循环；<br>2、通过添加 JVM 配置，来限制使用内存：<br>-XX:-UseGCOverheadLimit<br><strong>【情况三】：</strong><br>java.lang.OutOfMemoryError:PermGenspace：这种是 P 区内存不够，可通过调整 JVM 的配置：<br>-XX:MaxPermSize=128m<br>-XXermSize=128m<br>【注】：<br>JVM 的 Perm 区主要用于存放 Class 和 Meta 信息的，Class 在被 Loader 时就会被放到 PermGenspace，这个区域成为年老代，GC 在主程序运行期间不会对年老区进行清理，默认是 64M 大小，当程序需要加载的对象比较多时，超过 64M 就会报这部分内存溢出了，需要加大内存分配，一般 128m 足够。<br><strong>【情况四】：</strong><br>java.lang.OutOfMemoryError:Directbuffermemory<br>调整 - XX:MaxDirectMemorySize = 参数，如添加 JVM 配置：<br>-XX:MaxDirectMemorySize=128m<br>【情况五】：<br>java.lang.OutOfMemoryError:unabletocreatenewnativethread<br>【原因】：Stack 空间不足以创建额外的线程，要么是创建的线程过多，要么是 Stack 空间确实小了。<br>【解决】：由于 JVM 没有提供参数设置总的 stack 空间大小，但可以设置单个线程栈的大小；而系统的用户空间一共是 3G，除了 Text/Data/BSS/MemoryMapping 几个段之外，Heap 和 Stack 空间的总量有限，是此消彼长的。因此遇到这个错误，可以通过两个途径解决：1. 通过 - Xss 启动参数减少单个线程栈大小，这样便能开更多线程（当然不能太小，太小会出现 StackOverflowError）；2. 通过 - Xms-Xmx 两参数减少 Heap 大小，将内存让给 Stack（前提是保证 Heap 空间够用）。<br><strong>【情况六】：</strong><br>java.lang.StackOverflowError<br>【原因】：这也内存溢出错误的一种，即线程栈的溢出，要么是方法调用层次过多（比如存在无限递归调用），要么是线程栈太小。<br>【解决】：优化程序设计，减少方法调用层次；调整 - Xss 参数增加线程栈大小。</p>
+<!--more-->
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/10/10/20211010-%E5%9B%BE%E7%9A%84%E6%90%9C%E7%B4%A2%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -641,94 +719,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
-      <meta itemprop="name" content="zxh">
-      <meta itemprop="description" content="一个记录的blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="问道IT">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/" class="post-title-link" itemprop="url">今天又GET一个🏊‍的小技能</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-18 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-18T00:00:00+08:00">2021-09-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-03 15:04:34" itemprop="dateModified" datetime="2021-10-03T15:04:34+08:00">2021-10-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">技能</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>150</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center>持续get，持续更新ing</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -801,14 +791,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -875,13 +865,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">42k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">37 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
 </div>
 
         

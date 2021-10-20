@@ -1387,8 +1387,11 @@ System.out.println(node.)
 </li>
 <li>标志位</li>
 </ol>
-<p>并发 | 并行</p>
-<ul>
+<h4 id="并发-并行"><a href="#并发-并行" class="headerlink" title="并发 | 并行"></a>并发 | 并行</h4><ul>
+<li><p>并发，指的是多个事情，在同一时间段内同时发生了。并行的多个任务之间是不互相抢占资源的、只有在多 CPU 的情况中，才会发生并行。</p>
+</li>
+<li><p>并行，指的是多个事情，在同一时间点上同时发生了。并发的多个任务之间是互相抢占资源的。 并发编程的目标是充分的利用处理器的每一个核，以达到最高的处理性能。</p>
+</li>
 <li><h6 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">State</span></span>&#123;</span><br><span class="line">	NEW,<span class="comment">//新建</span></span><br><span class="line">    RUNNABLE,<span class="comment">//可运行</span></span><br><span class="line">    BLOCK,<span class="comment">//wait(),sleep(),</span></span><br><span class="line">   	WAITING,<span class="comment">//不见不散</span></span><br><span class="line">    TIME_WAITING,<span class="comment">//过时不候</span></span><br><span class="line">    TERMINATED;	<span class="comment">//已终止</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
 <li><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20210910161050744.png" alt="image-20210910161050744"></p>
 </li>
@@ -1677,6 +1680,7 @@ System.out.println(node.)
 <ul>
 <li>linux使用ab 可以进行测试，（模拟大规模并发操作）</li>
 </ul>
+<p>提升编程效率的软件</p>
 <!--more-->
 
 ]]></content>
@@ -2042,6 +2046,21 @@ System.out.println(node.)
       <tags>
         <tag>二叉树</tag>
         <tag>遍历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 常见的几种JVM内存溢出及解决方法</title>
+    <url>/2021/10/20/Java%20%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<p>Java 常见的几种JVM内存溢出及解决方法</p>
+<p><strong>【情况一】：</strong><br>java.lang.OutOfMemoryError:Javaheapspace：这种是 java 堆内存不够，一个原因是真不够（如递归的层数太多等），另一个原因是程序中有死循环；<br>如果是 java 堆内存不够的话，可以通过调整 JVM 下面的配置来解决：<br>-Xms3072m<br>-Xmx3072m<br><strong>【情况二】：</strong><br>java.lang.OutOfMemoryError:GCoverheadlimitexceeded<br>【解释】：JDK6 新增错误类型，当 GC 为释放很小空间占用大量时间时抛出；一般是因为堆太小，导致异常的原因，没有足够的内存。<br>【解决方案】：<br>1、查看系统是否有使用大内存的代码或死循环；<br>2、通过添加 JVM 配置，来限制使用内存：<br>-XX:-UseGCOverheadLimit<br><strong>【情况三】：</strong><br>java.lang.OutOfMemoryError:PermGenspace：这种是 P 区内存不够，可通过调整 JVM 的配置：<br>-XX:MaxPermSize=128m<br>-XXermSize=128m<br>【注】：<br>JVM 的 Perm 区主要用于存放 Class 和 Meta 信息的，Class 在被 Loader 时就会被放到 PermGenspace，这个区域成为年老代，GC 在主程序运行期间不会对年老区进行清理，默认是 64M 大小，当程序需要加载的对象比较多时，超过 64M 就会报这部分内存溢出了，需要加大内存分配，一般 128m 足够。<br><strong>【情况四】：</strong><br>java.lang.OutOfMemoryError:Directbuffermemory<br>调整 - XX:MaxDirectMemorySize = 参数，如添加 JVM 配置：<br>-XX:MaxDirectMemorySize=128m<br>【情况五】：<br>java.lang.OutOfMemoryError:unabletocreatenewnativethread<br>【原因】：Stack 空间不足以创建额外的线程，要么是创建的线程过多，要么是 Stack 空间确实小了。<br>【解决】：由于 JVM 没有提供参数设置总的 stack 空间大小，但可以设置单个线程栈的大小；而系统的用户空间一共是 3G，除了 Text/Data/BSS/MemoryMapping 几个段之外，Heap 和 Stack 空间的总量有限，是此消彼长的。因此遇到这个错误，可以通过两个途径解决：1. 通过 - Xss 启动参数减少单个线程栈大小，这样便能开更多线程（当然不能太小，太小会出现 StackOverflowError）；2. 通过 - Xms-Xmx 两参数减少 Heap 大小，将内存让给 Stack（前提是保证 Heap 空间够用）。<br><strong>【情况六】：</strong><br>java.lang.StackOverflowError<br>【原因】：这也内存溢出错误的一种，即线程栈的溢出，要么是方法调用层次过多（比如存在无限递归调用），要么是线程栈太小。<br>【解决】：优化程序设计，减少方法调用层次；调整 - Xss 参数增加线程栈大小。</p>
+<!--more-->]]></content>
+      <categories>
+        <category>-JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
       </tags>
   </entry>
 </search>
