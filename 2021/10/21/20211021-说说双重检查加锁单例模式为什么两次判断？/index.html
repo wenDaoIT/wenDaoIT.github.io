@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一个记录的blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="问道IT">
-<meta property="og:url" content="https://wendaoit.github.io/categories/JAVA%E5%9F%BA%E7%A1%80/JAVA/%E9%9D%A2%E8%AF%95/index.html">
+  <meta name="description" content="今天面试被问到这道题没说出来，复盘一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说双重检查加锁单例模式为什么两次判断？">
+<meta property="og:url" content="https://wendaoit.github.io/2021/10/21/20211021-%E8%AF%B4%E8%AF%B4%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E5%8A%A0%E9%94%81%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E5%88%A4%E6%96%AD%EF%BC%9F/index.html">
 <meta property="og:site_name" content="问道IT">
-<meta property="og:description" content="一个记录的blog">
+<meta property="og:description" content="今天面试被问到这道题没说出来，复盘一下">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-21T16:16:24.826Z">
 <meta property="article:author" content="zxh">
+<meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wendaoit.github.io/categories/JAVA%E5%9F%BA%E7%A1%80/JAVA/%E9%9D%A2%E8%AF%95/">
+<link rel="canonical" href="https://wendaoit.github.io/2021/10/21/20211021-%E8%AF%B4%E8%AF%B4%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E5%8A%A0%E9%94%81%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E5%88%A4%E6%96%AD%EF%BC%9F/">
 
 
 <script id="page-configurations">
@@ -40,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: 面试 | 问道IT</title>
+  <title>说说双重检查加锁单例模式为什么两次判断？ | 问道IT</title>
   
 
 
@@ -197,51 +200,164 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">面试
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/10/21/20211021-%E8%AF%B4%E8%AF%B4%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E5%8A%A0%E9%94%81%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E5%88%A4%E6%96%AD%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          说说双重检查加锁单例模式为什么两次判断？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-21 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-21T00:00:00+08:00">2021-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-22 00:16:24" itemprop="dateModified" datetime="2021-10-22T00:16:24+08:00">2021-10-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95-JAVA/" itemprop="url" rel="index"><span itemprop="name">-面试 -JAVA</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <center>  今天面试被问到这道题没说出来，复盘一下</center>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<span id="more"></span>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-09-19T00:00:00+08:00"
-              content="2021-09-19">
-          09-19
-        </time>
-      </div>
+<p>先上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton singleton = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//第一次校验singleton是否为空</span></span><br><span class="line">        <span class="keyword">if</span>(singleton==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class)&#123;</span><br><span class="line">                <span class="comment">//第二次校验singleton是否为空</span></span><br><span class="line">                <span class="keyword">if</span>(singleton==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+<span class="string">&quot; : &quot;</span>+Singleton.getInstance().hashCode());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/09/19/20210919-JAVA%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/" itemprop="url">
-            <span itemprop="name">JAVA必备知识整理</span>
-          </a>
-      </div>
+<h3 id="为什么是双重校验锁实现单例模式呢？"><a href="#为什么是双重校验锁实现单例模式呢？" class="headerlink" title="为什么是双重校验锁实现单例模式呢？"></a>为什么是双重校验锁实现单例模式呢？</h3><ol>
+<li><p><strong>第一次校验：</strong> 也就是第一个 if（singleton==null），由于单例模式只要一次创建实例即可，所以当创建了一个实例之后，再次调用 getInstance 方法就不必要进入同步代码块，不用竞争锁。直接返回前面创建的实例即可。</p>
+</li>
+<li><p>第二次校验：第个校验是防止二次创建实例，假如有一种情况，当 singleton 还未被创建时，线程 t1 调用 getInstance 方法，由于第一次判断 singleton==null，此时线程 t1 准备继续执行，但是由于资源被线程 t2 抢占了，此时 t2 页调用 getInstance 方法。</p>
+<p>​            同样的，由于 singleton 并没有实例化，t2 同样可以通过第一个 if，然后继续往下执行，同步代码块，第二个 if 也通过，然后 t2 线程创建了一个实例 singleton。</p>
+<p>​            此时 t2 线程完成任务，资源又回到 t1 线程，t1 此时也进入同步代码块，如果没有这个第二个 if，那么，t1 就也会创建一个 singleton 实例，那么，就会出现创建多个实例的情况，但是加上第二个 if，就可以完全避免这个多线程导致多次创建实例的问题。</p>
+</li>
+</ol>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h3><ul>
+<li>感觉面试还是紧张了，稍微想一下其实就明白了；</li>
+</ul>
+<!--more-->
 
-    </header>
-  </article>
 
     </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
   </div>
-  
-  
-  
+</div>
 
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/10/21/20211021-%E8%AF%B4%E8%AF%B4%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E5%8A%A0%E9%94%81%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E5%88%A4%E6%96%AD%EF%BC%9F/" title="说说双重检查加锁单例模式为什么两次判断？">https://wendaoit.github.io/2021/10/21/20211021-说说双重检查加锁单例模式为什么两次判断？/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+			
+		</div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i># 面试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/20/Java%20%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="prev" title="Java 常见的几种JVM内存溢出及解决方法">
+      <i class="fa fa-chevron-left"></i> Java 常见的几种JVM内存溢出及解决方法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -295,6 +411,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E9%87%8D%E6%A0%A1%E9%AA%8C%E9%94%81%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%91%A2%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么是双重校验锁实现单例模式呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">2.</span> <span class="nav-text">Others:</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -478,7 +595,7 @@
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/categories/JAVA%E5%9F%BA%E7%A1%80/JAVA/%E9%9D%A2%E8%AF%95/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/10/21/20211021-%E8%AF%B4%E8%AF%B4%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E5%8A%A0%E9%94%81%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E5%88%A4%E6%96%AD%EF%BC%9F/',]
       });
       });
   </script>

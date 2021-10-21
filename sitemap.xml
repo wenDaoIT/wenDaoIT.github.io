@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wendaoit.github.io/2021/10/21/20211021-%E8%AF%B4%E8%AF%B4%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E5%8A%A0%E9%94%81%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E5%88%A4%E6%96%AD%EF%BC%9F/</loc>
+    
+    <lastmod>2021-10-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wendaoit.github.io/2021/08/30/2021-08-30-JUC/</loc>
+    
+    <lastmod>2021-10-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wendaoit.github.io/2021/10/20/Java%20%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2021-10-21</lastmod>
@@ -10,13 +24,6 @@
   
   <url>
     <loc>https://wendaoit.github.io/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/</loc>
-    
-    <lastmod>2021-10-16</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wendaoit.github.io/2021/08/30/2021-08-30-JUC/</loc>
     
     <lastmod>2021-10-16</lastmod>
     
@@ -833,6 +840,13 @@
   
   <url>
     <loc>https://wendaoit.github.io/categories/JVM/</loc>
+    <lastmod>2021-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wendaoit.github.io/categories/%E9%9D%A2%E8%AF%95-JAVA/</loc>
     <lastmod>2021-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
