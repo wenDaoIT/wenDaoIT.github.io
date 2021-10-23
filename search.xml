@@ -1681,6 +1681,18 @@ System.out.println(node.)
 <li>linux使用ab 可以进行测试，（模拟大规模并发操作）</li>
 </ul>
 <p>提升编程效率的软件</p>
+<p>2021/10/23</p>
+<ul>
+<li>初衷是为了：找到一个手机、平板、PC三端同步的todo清单软件</li>
+<li>了解到Microsoft 自家出了todo，下载下来试了下，好用</li>
+<li>打开的界面<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211023113732578.png" alt="image-20211023113732578"></li>
+</ul>
+<p>优点：</p>
+<ol>
+<li>支持多端云同步；</li>
+<li>支持部分快捷键；</li>
+<li>我习惯固定在任务栏  WIN+1 快速冷启动 </li>
+</ol>
 <!--more-->
 
 ]]></content>
