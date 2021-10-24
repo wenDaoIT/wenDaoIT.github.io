@@ -153,6 +153,27 @@
   </entry>
   
   <entry>
+    <title>今天又GET一个🏊‍的小技能</title>
+    <link href="https://wendaoit.github.io/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
+    <id>https://wendaoit.github.io/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/</id>
+    <published>2021-09-17T16:00:00.000Z</published>
+    <updated>2021-10-24T14:56:14.105Z</updated>
+    
+    <content type="html"><![CDATA[<center>持续get，持续更新ing</center><span id="more"></span><p>想要哪个教程在评论区留言，或者联系我，我看到会更新一些教程</p><h4 id="2021-09-21-为了备份我博客参考的一些网站，防止404了"><a href="#2021-09-21-为了备份我博客参考的一些网站，防止404了" class="headerlink" title="2021/09/21  为了备份我博客参考的一些网站，防止404了"></a>2021/09/21  为了备份我博客参考的一些网站，防止404了</h4><ul><li>发现并学会使用Web cilpper插件，备份网站内容到（暂时备份在GitHub）</li></ul><h4 id="2021-10-03"><a href="#2021-10-03" class="headerlink" title="2021/10/03"></a>2021/10/03</h4><ul><li>linux使用ab 可以进行测试，（模拟大规模并发操作）</li></ul><h4 id="2021-10-23"><a href="#2021-10-23" class="headerlink" title="2021/10/23"></a>2021/10/23</h4><ul><li>初衷是为了：找到一个手机、平板、PC三端同步的todo清单软件</li><li>了解到Microsoft 自家出了todo，下载下来试了下，好用</li><li>打开的界面<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211023113732578.png" alt="image-20211023113732578"></li></ul><p>优点：</p><ol><li>支持多端云同步；</li><li>支持部分快捷键；</li><li>我习惯固定在任务栏  WIN+1 快速冷启动 </li></ol><h3 id="提升编程效率的软件"><a href="#提升编程效率的软件" class="headerlink" title="提升编程效率的软件"></a>提升编程效率的软件</h3><!--more-->]]></content>
+    
+    
+    <summary type="html">&lt;center&gt;持续get，持续更新ing&lt;/center&gt;</summary>
+    
+    
+    
+    <category term="技能" scheme="https://wendaoit.github.io/categories/%E6%8A%80%E8%83%BD/"/>
+    
+    
+    <category term="小技能" scheme="https://wendaoit.github.io/tags/%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JVM内存分配小总结</title>
     <link href="https://wendaoit.github.io/2021/09/18/JVM%E5%88%86%E5%9D%97%E5%B0%8F%E6%80%BB%E7%BB%93/"/>
     <id>https://wendaoit.github.io/2021/09/18/JVM%E5%88%86%E5%9D%97%E5%B0%8F%E6%80%BB%E7%BB%93/</id>
@@ -172,27 +193,6 @@
     <category term="JVM" scheme="https://wendaoit.github.io/tags/JVM/"/>
     
     <category term="JAVA基础" scheme="https://wendaoit.github.io/tags/JAVA%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>今天又GET一个🏊‍的小技能</title>
-    <link href="https://wendaoit.github.io/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
-    <id>https://wendaoit.github.io/2021/09/18/20210918-%E4%BB%8A%E5%A4%A9%E5%8F%88GET%E4%B8%80%E4%B8%AA%F0%9F%8F%8A%E2%80%8D%E7%9A%84%E5%B0%8F%E6%8A%80%E8%83%BD/</id>
-    <published>2021-09-17T16:00:00.000Z</published>
-    <updated>2021-10-23T04:00:25.169Z</updated>
-    
-    <content type="html"><![CDATA[<center>持续get，持续更新ing</center><span id="more"></span><p>想要哪个教程在评论区留言，或者联系我，我看到会更新一些教程</p><h4 id="2021-09-21-为了备份我博客参考的一些网站，防止404了"><a href="#2021-09-21-为了备份我博客参考的一些网站，防止404了" class="headerlink" title="2021/09/21  为了备份我博客参考的一些网站，防止404了"></a>2021/09/21  为了备份我博客参考的一些网站，防止404了</h4><ul><li>发现并学会使用Web cilpper插件，备份网站内容到（暂时备份在GitHub）</li></ul><h4 id="2021-10-03"><a href="#2021-10-03" class="headerlink" title="2021/10/03"></a>2021/10/03</h4><ul><li>linux使用ab 可以进行测试，（模拟大规模并发操作）</li></ul><h4 id="2021-10-23"><a href="#2021-10-23" class="headerlink" title="2021/10/23"></a>2021/10/23</h4><ul><li>初衷是为了：找到一个手机、平板、PC三端同步的todo清单软件</li><li>了解到Microsoft 自家出了todo，下载下来试了下，好用</li><li>打开的界面<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211023113732578.png" alt="image-20211023113732578"></li></ul><p>优点：</p><ol><li>支持多端云同步；</li><li>支持部分快捷键；</li><li>我习惯固定在任务栏  WIN+1 快速冷启动 </li></ol><h3 id="提升编程效率的软件"><a href="#提升编程效率的软件" class="headerlink" title="提升编程效率的软件"></a>提升编程效率的软件</h3><!--more-->]]></content>
-    
-    
-    <summary type="html">&lt;center&gt;持续get，持续更新ing&lt;/center&gt;</summary>
-    
-    
-    
-    <category term="技能" scheme="https://wendaoit.github.io/categories/%E6%8A%80%E8%83%BD/"/>
-    
-    
-    <category term="小技能" scheme="https://wendaoit.github.io/tags/%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
     
   </entry>
   
