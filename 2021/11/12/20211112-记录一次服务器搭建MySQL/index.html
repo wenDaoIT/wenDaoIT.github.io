@@ -30,8 +30,10 @@
 <meta property="og:description" content="技术坑:Linux  centos7 mysql navicate docker">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211112152206575.png">
+<meta property="og:image" content="http://hoxis-github-io.qiniudn.com/151212-mysql-root-state.png">
+<meta property="og:image" content="http://hoxis-github-io.qiniudn.com/151212-mysql-change-root-state.png">
 <meta property="article:published_time" content="2021-11-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-12T08:45:30.801Z">
+<meta property="article:modified_time" content="2021-11-25T02:55:38.991Z">
 <meta property="article:author" content="zxh">
 <meta property="article:tag" content="-实战 -mysql -docker -linux">
 <meta name="twitter:card" content="summary">
@@ -233,10 +235,16 @@
 
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-11-12 00:00:00 / 修改时间：16:45:30" itemprop="dateCreated datePublished" datetime="2021-11-12T00:00:00+08:00">2021-11-12</time>
+              <time title="创建时间：2021-11-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-12T00:00:00+08:00">2021-11-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-25 10:55:38" itemprop="dateModified" datetime="2021-11-25T10:55:38+08:00">2021-11-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -260,7 +268,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>4.2k</span>
             </span>
 
         </div>
@@ -285,7 +293,7 @@
 </li>
 <li><p>通过下面命令创建一个镜像</p>
 <ol>
-<li>```dockerfile<br>docker run -p 3306:3306 –name zxhmysql -v /mydata/mysql/log:/var/log/mysql -v /mydata/mysql/data:/var/lib64/mysql -v /mydata/mysql/conf:/etc/mysql -e MYSQL_ROOT_PASSWORD=（密码） -d mysql:8.0</li>
+<li>```dockerfile<br> docker run -p 3306:3306 –name zxhmysql -v /mydata/mysql/log:/var/log/mysql -v /mydata/mysql/data:/var/lib64/mysql -v /mydata/mysql/conf:/etc/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0</li>
 </ol>
 </li>
 <li><p>docker ps -a查看是否启动成功</p>
@@ -298,140 +306,29 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mydata/mysql/conf</span><br><span class="line">vi my.cnf</span><br></pre></td></tr></table></figure></li>
 <li><p>配置文件参考</p>
 <ol>
-<li><pre><code>[mysqld]
-####: for global
-user =mysql
-federated
-basedir =/usr/local/mysql
-datadir =/data/mysql/data
-server_id = 1250
-port =3306
-mysqlx_port = 33070
-character_set_server =utf8mb4
-collation_server=utf8mb4_bin
-log_timestamps =system
-default_time_zone =&#39;+8:00&#39;
-socket =/data/mysql/mysql.sock
-read_only = 0
-super_read_only = 0
-skip_name_resolve =on
-lower_case_table_names =1
-#secure_file_priv =/data/mysql/data
-open_files_limit =65536
-max_connections =2000
-thread_cache_size =256
-table_open_cache =4096 # 2000
-table_definition_cache =4096
-table_open_cache_instances =64
-wait_timeout =28800
-interactive_timeout =28800
-event_scheduler = 1
-max_allowed_packet =1024M
-init_connect =&#39;SET AUTOCOMMIT=1&#39;
-transaction_isolation =READ-COMMITTED
-lock_wait_timeout=3600
-default_authentication_plugin=mysql_native_password
-
-###: cache
-key_buffer_size = 64M
-sort_buffer_size  = 4M
-join_buffer_size  = 4M
-
-####: for binlog
-binlog_format =row
-log_bin =/data/mysql/logs/mysql-bin
-binlog_rows_query_log_events =off
-log_slave_updates =on
-#expire_logs_days =7
-binlog_expire_logs_seconds=604800
-binlog_cache_size =1G
-max_binlog_size =1G
-binlog_checksum =none
-sync_binlog =1
-slave-preserve-commit-order =ON
-log_bin_trust_function_creators=on  
-
-
-
-####:for error-log
-log_error =/data/mysql/logs/mysql.err
-general_log =off
-general_log_file =/data/mysql/logs/general.log
-
-####: for slow query log
-slow_query_log =on
-slow_query_log_file =/data/mysql/logs/slowquery.log
-long_query_time =1.000000
-log_queries_not_using_indexes =0
-
-####: for gtid
-#gtid_executed_compression_period =1000
-gtid_mode =on
-enforce_gtid_consistency =on
-
-####: for replication
-relay-log-index = /data/mysql/logs/relay-bin.index
-relay-log-info-file = /data/mysql/logs/relay-log.info
-relay-log = /data/mysql/logs/relay-bin
-log-slave-updates =1
-skip_slave_start =1
-master_info_repository =table
-relay_log_info_repository =table
-slave_parallel_type =logical_clock
-slave_parallel_workers =2
-
-####: for performance_schema
-performance_schema = 1
-performance_schema_instrument = &#39;%memory%=on&#39;
-performance_schema_instrument = &#39;%lock%=on&#39;
-performance_schema_digests_size =100000
-
-####: for innodb
-innodb_data_file_path =ibdata1:1024M:autoextend
-innodb_temp_data_file_path =ibtmp1:12M:autoextend
-innodb_buffer_pool_filename =ib_buffer_pool # ib_buffer_pool
-innodb_log_files_in_group =3
-innodb_log_file_size =256M # 50331648(48M)
-innodb_max_undo_log_size =256M
-innodb_undo_log_truncate =1
-innodb_undo_tablespaces =2
-innodb_file_per_table =on
-innodb_open_files =65535
-innodb_thread_concurrency =0 # 0
-innodb_read_io_threads =2
-innodb_write_io_threads =2
-innodb_purge_threads =1
-innodb_page_cleaners =1
-innodb_print_all_deadlocks =off
-innodb_lock_wait_timeout =20
-innodb_autoinc_lock_mode =2
-innodb_io_capacity =500
-innodb_io_capacity_max =1000
-
-#########################
-innodb_flush_method =O_DIRECT
-innodb_log_buffer_size =128M
-innodb_flush_log_at_trx_commit =1
-innodb_buffer_pool_size = 128M
-innodb_buffer_pool_instances = 2 
-#innodb_numa_interleave=on
-#####################################
-#######################
-[client]
-socket=/data/mysql/mysql.sock
-</code></pre>
-</li>
+<li>```<br>[mysqld]<br>####: for global<br>user =mysql<br>federated<br>basedir =/usr/local/mysql<br>datadir =/data/mysql/data<br>server_id = 1250<br>port =3306<br>mysqlx_port = 33070<br>character_set_server =utf8mb4<br>collation_server=utf8mb4_bin<br>log_timestamps =system<br>default_time_zone =’+8:00’<br>socket =/data/mysql/mysql.sock<br>read_only = 0<br>super_read_only = 0<br>skip_name_resolve =on<br>lower_case_table_names =1<br>#secure_file_priv =/data/mysql/data<br>open_files_limit =65536<br>max_connections =2000<br>thread_cache_size =256<br>table_open_cache =4096 # 2000<br>table_definition_cache =4096<br>table_open_cache_instances =64<br>wait_timeout =28800<br>interactive_timeout =28800<br>event_scheduler = 1<br>max_allowed_packet =1024M<br>init_connect =’SET AUTOCOMMIT=1’<br>transaction_isolation =READ-COMMITTED<br>lock_wait_timeout=3600<br>default_authentication_plugin=mysql_native_password###: cache<br>key_buffer_size = 64M<br>sort_buffer_size  = 4M<br>join_buffer_size  = 4M####: for binlog<br>binlog_format =row<br>log_bin =/data/mysql/logs/mysql-bin<br>binlog_rows_query_log_events =off<br>log_slave_updates =on<br>#expire_logs_days =7<br>binlog_expire_logs_seconds=604800<br>binlog_cache_size =1G<br>max_binlog_size =1G<br>binlog_checksum =none<br>sync_binlog =1<br>slave-preserve-commit-order =ON<br>log_bin_trust_function_creators=on  ####:for error-log<br>log_error =/data/mysql/logs/mysql.err<br>general_log =off<br>general_log_file =/data/mysql/logs/general.log####: for slow query log<br>slow_query_log =on<br>slow_query_log_file =/data/mysql/logs/slowquery.log<br>long_query_time =1.000000<br>log_queries_not_using_indexes =0####: for gtid<br>#gtid_executed_compression_period =1000<br>gtid_mode =on<br>enforce_gtid_consistency =on####: for replication<br>relay-log-index = /data/mysql/logs/relay-bin.index<br>relay-log-info-file = /data/mysql/logs/relay-log.info<br>relay-log = /data/mysql/logs/relay-bin<br>log-slave-updates =1<br>skip_slave_start =1<br>master_info_repository =table<br>relay_log_info_repository =table<br>slave_parallel_type =logical_clock<br>slave_parallel_workers =2####: for performance_schema<br>performance_schema = 1<br>performance_schema_instrument = ‘%memory%=on’<br>performance_schema_instrument = ‘%lock%=on’<br>performance_schema_digests_size =100000####: for innodb<br>innodb_data_file_path =ibdata1:1024M:autoextend<br>innodb_temp_data_file_path =ibtmp1:12M:autoextend<br>innodb_buffer_pool_filename =ib_buffer_pool # ib_buffer_pool<br>innodb_log_files_in_group =3<br>innodb_log_file_size =256M # 50331648(48M)<br>innodb_max_undo_log_size =256M<br>innodb_undo_log_truncate =1<br>innodb_undo_tablespaces =2<br>innodb_file_per_table =on<br>innodb_open_files =65535<br>innodb_thread_concurrency =0 # 0<br>innodb_read_io_threads =2<br>innodb_write_io_threads =2<br>innodb_purge_threads =1<br>innodb_page_cleaners =1<br>innodb_print_all_deadlocks =off<br>innodb_lock_wait_timeout =20<br>innodb_autoinc_lock_mode =2<br>innodb_io_capacity =500<br>innodb_io_capacity_max =1000#########################<br>innodb_flush_method =O_DIRECT<br>innodb_log_buffer_size =128M<br>innodb_flush_log_at_trx_commit =1<br>innodb_buffer_pool_size = 128M<br>innodb_buffer_pool_instances = 2<br>#innodb_numa_interleave=on<br>#####################################<br>#######################<br>[client]<br>socket=/data/mysql/mysql.sock<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">7.</span> docker <span class="keyword">restart</span> 容器ID</span><br><span class="line"></span><br><span class="line">   测试连接 </span><br><span class="line"></span><br><span class="line">#### MySQL允许远程连接</span><br><span class="line"></span><br><span class="line">项目中需要连接虚拟机上面的 MySQL 数据库，但是总是出错，怀疑本机是否有连接远程数据库的权限。</span><br><span class="line"></span><br><span class="line">执行命令：</span><br><span class="line"></span><br><span class="line">```<span class="keyword">sql</span></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; <span class="keyword">select</span> host,<span class="keyword">user</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
-<li><p>docker restart 容器ID</p>
-<p>测试连接 </p>
-</li>
 </ol>
+<p>查看结果是不是 root 用户仅允许本地（localhost）登录，下面这个截图就是这种情况：</p>
+<p><img src="http://hoxis-github-io.qiniudn.com/151212-mysql-root-state.png" alt="mysql-root-state"></p>
+<p>mysql-root-state</p>
+<p>是的话，就要修改它的 host 为 <code>%</code>，表示任意 IP 地址都可以登录。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> update <span class="keyword">user</span> <span class="keyword">set</span> host <span class="operator">=</span> <span class="string">&#x27;%&#x27;</span> <span class="keyword">where</span> <span class="keyword">user</span> <span class="operator">=</span> <span class="string">&#x27;root&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>执行完后可能提示 error。再 <code>mysql&gt; select host,user from user;</code> 查看下吧。</p>
+<p>root 对应的 host 成了 <code>%</code>，表示可以任意 IP 地址登录了。</p>
+<p><img src="http://hoxis-github-io.qiniudn.com/151212-mysql-change-root-state.png" alt="mysql-change-root-state"></p>
+<p>mysql-change-root-state</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> flush privileges;</span><br></pre></td></tr></table></figure>
+
+<p>把缓存 flush 掉，在使用 update 语句修改用户记录后，需要 FLUSH 语句告诉服务器重载授权表。</p>
 <h4 id="记录一些遇到的bug"><a href="#记录一些遇到的bug" class="headerlink" title="记录一些遇到的bug"></a>记录一些遇到的bug</h4><ol>
 <li>1130 - Host ‘118.114.228.223’ is not allowed to connect to this MySQL server</li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45675449/article/details/106866700">MySQL 报错：ERROR 1396 (HY000): Operation ALTER USER failed for root@localhost</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/adao21/p/9246569.html">MySQL 登录时出现 Access denied for user ‘root‘@‘localhost‘ (using password: YES) 无法打开的解决方法</a></li>
 <li>❗<a target="_blank" rel="noopener" href="https://blog.csdn.net/attackkk/article/details/104954941">docker 下 mysql 的密码设置</a></li>
+<li>[ERROR] [MY-010095] [Server] Failed to access directory for –secure-file-priv. Please make sure that directory exists and is accessible by MySQL Server. Supplied value : /var/lib/mysql-files</li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaogot/article/details/113694332">docker 实战之挂载方式部署 MySQL8  （公司实战）</a></li>
 </ol>
 <h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><!--more-->
@@ -572,20 +469,20 @@ socket=/data/mysql/mysql.sock
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -646,13 +543,13 @@ socket=/data/mysql/mysql.sock
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">52k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">46 分钟</span>
+    <span title="站点阅读时长">47 分钟</span>
 </div>
 
         
