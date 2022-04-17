@@ -57,6 +57,30 @@
       </tags>
   </entry>
   <entry>
+    <title>IDEA快捷键</title>
+    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
+
+<p>选中CTRL+shift+左右</p>
+<p>调整位置CTRL+shift+上下</p>
+<p>主方法psvm</p>
+<p>输出sout</p>
+<p>Ctrl+n 查找xxx底层类和方法</p>
+<p>Ctrl+/ 快速创建注释</p>
+<p>Ctrl+F9 重新编译</p>
+<p>弹出的方法大纲的快捷键是<br>MAC [Command + F12]<br>WIN [Ctrl + F12]</p>
+<p>ctrl+shift+L整理代码</p>
+<p>CTRL+shift+F全局搜索</p>
+<!-- more -->
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>-导航 -分享</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>错误日志</title>
     <url>/2021/12/14/%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97/</url>
     <content><![CDATA[<center>记错（已解决问题）</center>
@@ -139,6 +163,21 @@
 </ol>
 <h4 id="打哈欠、叹气、犯困、头晕眼花"><a href="#打哈欠、叹气、犯困、头晕眼花" class="headerlink" title="打哈欠、叹气、犯困、头晕眼花"></a>打哈欠、叹气、犯困、头晕眼花</h4><h4 id="头颈-前伸："><a href="#头颈-前伸：" class="headerlink" title="头颈    前伸："></a>头颈    前伸：</h4><p>正常生理结构上，人体脊柱颈椎段是有先前的曲度的。但是由于不良习惯，颈椎曲度会变直甚至反张。长期头颈前伸会引起身体前侧一些肌肉和筋膜的挛缩，会让面部结构出现下垂。</p>
 <ol>
+<li>关节松动</li>
+<li>软组织松解<ol>
+<li>胸锁乳突肌</li>
+<li>斜角肌</li>
+<li>上斜方肌</li>
+<li>风池穴</li>
+</ol>
+</li>
+<li>稳定训练<ol>
+<li>躺下 –&gt;歪头–&gt;抬头（感受胸锁乳突肌拉伸、肩膀必须放松）</li>
+</ol>
+</li>
+</ol>
+<p>日常的姿势再训练：</p>
+<ol>
 <li>动作①：挺胸廓。挺起胸廓，保持一分钟左右，慢慢放松，做3—4组。<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211115195422291.png" alt="image-20211115195422291" style="zoom: 25%;" /></li>
 <li>动作②：拉伸颈前侧。闭紧牙齿闭拢嘴巴，把下颌往上提，保持30—40秒，做3—4组。感到脖子前侧有牵拉感。与仰头区分开，注意把下巴往上提。</li>
 <li>动作③：头悬气球。想象头上有个气球拎着你拎着你拎着你拎着你～就这样拎着。寻找脑袋往上延伸，身体挺拔的感觉，日常保持此状态。</li>
@@ -154,6 +193,10 @@
 <li>开肩吸气（60秒/3组）</li>
 </ol>
 </li>
+</ol>
+<h4 id="小腿"><a href="#小腿" class="headerlink" title="小腿"></a>小腿</h4><ol>
+<li>解决各种小腿问题</li>
+<li></li>
 </ol>
 <h4 id="正确的坐姿"><a href="#正确的坐姿" class="headerlink" title="正确的坐姿"></a>正确的坐姿</h4><ol>
 <li>坐骨（屁股）位置高于膝盖（没有往后靠的感觉为止）</li>
@@ -192,6 +235,7 @@
 <li></li>
 </ol>
 <!--more-->
+
 ]]></content>
       <categories>
         <category>-日常 -生活</category>
@@ -2540,30 +2584,6 @@ System.out.println(node.)
       </categories>
       <tags>
         <tag>-JAVA基础 -多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA快捷键</title>
-    <url>/2021/08/11/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<h2 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a><center>IDEA快捷键</center></h2><span id="more"></span>
-
-<p>选中CTRL+shift+左右</p>
-<p>调整位置CTRL+shift+上下</p>
-<p>主方法psvm</p>
-<p>输出sout</p>
-<p>Ctrl+n 查找xxx底层类和方法</p>
-<p>Ctrl+/ 快速创建注释</p>
-<p>Ctrl+F9 重新编译</p>
-<p>弹出的方法大纲的快捷键是<br>MAC [Command + F12]<br>WIN [Ctrl + F12]</p>
-<p>ctrl+shift+L整理代码</p>
-<p>CTRL+shift+F全局搜索</p>
-<!-- more -->
-]]></content>
-      <categories>
-        <category>IDEA</category>
-      </categories>
-      <tags>
-        <tag>-导航 -分享</tag>
       </tags>
   </entry>
 </search>
