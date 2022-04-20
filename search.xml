@@ -71,6 +71,19 @@
 <p>弹出的方法大纲的快捷键是<br>MAC [Command + F12]<br>WIN [Ctrl + F12]</p>
 <p>ctrl+shift+L整理代码</p>
 <p>CTRL+shift+F全局搜索</p>
+<p>实习收获：</p>
+<ul>
+<li><p>IDEA快速开发：</p>
+<p>  \1. //TODO</p>
+<p>  \2. CTRL+shift+1/2/3快速标记  CTRL+1/2/3 快速跳转</p>
+<p>  \3. 查找 变量或者方法在代码中的使用find usages  ALT+F7</p>
+<p>  \4. CTRL+shift+alt+C  直接复制对应代码行数</p>
+<p>  \5. CTRL+SHIFT+N</p>
+<p>  \6. CTRL+E打开最近关闭的文件</p>
+<p>  \7. 删除行快捷键 ctrl+Y</p>
+<p>  \8. 清除无用import包快捷键 ctrl+alt+o</p>
+</li>
+</ul>
 <!-- more -->
 ]]></content>
       <categories>
