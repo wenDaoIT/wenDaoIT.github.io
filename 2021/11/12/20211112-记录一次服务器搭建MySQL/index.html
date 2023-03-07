@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="baidu-site-verification" content="code-0OTk3LxWZX" />
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="技术坑:Linux  centos7 mysql navicate docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次服务器搭建MySQL">
+<meta property="og:url" content="https://wendaoit.github.io/2021/11/12/20211112-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAMySQL/index.html">
+<meta property="og:site_name" content="问道IT">
+<meta property="og:description" content="技术坑:Linux  centos7 mysql navicate docker">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211112152206575.png">
+<meta property="og:image" content="http://hoxis-github-io.qiniudn.com/151212-mysql-root-state.png">
+<meta property="og:image" content="http://hoxis-github-io.qiniudn.com/151212-mysql-change-root-state.png">
+<meta property="article:published_time" content="2021-11-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-07T06:53:39.070Z">
+<meta property="article:author" content="zxh">
+<meta property="article:tag" content="-实战 -mysql -docker -linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211112152206575.png">
+
+<link rel="canonical" href="https://wendaoit.github.io/2021/11/12/20211112-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAMySQL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>记录一次服务器搭建MySQL | 问道IT</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/click.js"></script>
+<link rel="alternate" href="/atom.xml" title="问道IT" type="application/atom+xml">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">问道IT</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">       敬畏      Stay Hungry Stay Foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wenDaoIT" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/11/12/20211112-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAMySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记录一次服务器搭建MySQL
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+				
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-12T00:00:00+00:00">2021-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-07 06:53:39" itemprop="dateModified" datetime="2023-03-07T06:53:39+00:00">2023-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql-docker-linux/" itemprop="url" rel="index"><span itemprop="name">-mysql -docker -linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center> 技术坑:Linux  centos7 mysql navicate docker</center>
+
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/763977251-sg/p/11837130.html">Centos7 系统安装 docker，并配置阿里云镜像加速器</a></p>
+<ol>
+<li><p>先在服务器上安装一个docker 根据官方文档</p>
+<p>​    docker pull MySQL:8.0</p>
+</li>
+<li><p>whereis mysql 查看安装位置</p>
+</li>
+<li><p>通过下面命令创建一个镜像</p>
+<ol>
+<li>```dockerfile<br> docker run -p 3306:3306 –name zxhmysql -v /mydata/mysql/log:/var/log/mysql -v /mydata/mysql/data:/var/lib64/mysql -v /mydata/mysql/conf:/etc/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0</li>
+</ol>
+</li>
+<li><p>docker ps -a查看是否启动成功</p>
+<ul>
+<li>这里有个坑 ，网上 旧版lib后面没有64  新版要添加</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211112152206575.png" alt="image-20211112152206575"></li>
+</ul>
+</li>
+<li><p>启动成功  改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mydata/mysql/conf</span><br><span class="line">vi my.cnf</span><br></pre></td></tr></table></figure></li>
+<li><p>配置文件参考</p>
+<ol>
+<li>```<br>[mysqld]<br>####: for global<br>user =mysql<br>federated<br>basedir =/usr/local/mysql<br>datadir =/data/mysql/data<br>server_id = 1250<br>port =3306<br>mysqlx_port = 33070<br>character_set_server =utf8mb4<br>collation_server=utf8mb4_bin<br>log_timestamps =system<br>default_time_zone =’+8:00’<br>socket =/data/mysql/mysql.sock<br>read_only = 0<br>super_read_only = 0<br>skip_name_resolve =on<br>lower_case_table_names =1<br>#secure_file_priv =/data/mysql/data<br>open_files_limit =65536<br>max_connections =2000<br>thread_cache_size =256<br>table_open_cache =4096 # 2000<br>table_definition_cache =4096<br>table_open_cache_instances =64<br>wait_timeout =28800<br>interactive_timeout =28800<br>event_scheduler = 1<br>max_allowed_packet =1024M<br>init_connect =’SET AUTOCOMMIT=1’<br>transaction_isolation =READ-COMMITTED<br>lock_wait_timeout=3600<br>default_authentication_plugin=mysql_native_password###: cache<br>key_buffer_size = 64M<br>sort_buffer_size  = 4M<br>join_buffer_size  = 4M####: for binlog<br>binlog_format =row<br>log_bin =/data/mysql/logs/mysql-bin<br>binlog_rows_query_log_events =off<br>log_slave_updates =on<br>#expire_logs_days =7<br>binlog_expire_logs_seconds=604800<br>binlog_cache_size =1G<br>max_binlog_size =1G<br>binlog_checksum =none<br>sync_binlog =1<br>slave-preserve-commit-order =ON<br>log_bin_trust_function_creators=on  ####:for error-log<br>log_error =/data/mysql/logs/mysql.err<br>general_log =off<br>general_log_file =/data/mysql/logs/general.log####: for slow query log<br>slow_query_log =on<br>slow_query_log_file =/data/mysql/logs/slowquery.log<br>long_query_time =1.000000<br>log_queries_not_using_indexes =0####: for gtid<br>#gtid_executed_compression_period =1000<br>gtid_mode =on<br>enforce_gtid_consistency =on####: for replication<br>relay-log-index = /data/mysql/logs/relay-bin.index<br>relay-log-info-file = /data/mysql/logs/relay-log.info<br>relay-log = /data/mysql/logs/relay-bin<br>log-slave-updates =1<br>skip_slave_start =1<br>master_info_repository =table<br>relay_log_info_repository =table<br>slave_parallel_type =logical_clock<br>slave_parallel_workers =2####: for performance_schema<br>performance_schema = 1<br>performance_schema_instrument = ‘%memory%=on’<br>performance_schema_instrument = ‘%lock%=on’<br>performance_schema_digests_size =100000####: for innodb<br>innodb_data_file_path =ibdata1:1024M:autoextend<br>innodb_temp_data_file_path =ibtmp1:12M:autoextend<br>innodb_buffer_pool_filename =ib_buffer_pool # ib_buffer_pool<br>innodb_log_files_in_group =3<br>innodb_log_file_size =256M # 50331648(48M)<br>innodb_max_undo_log_size =256M<br>innodb_undo_log_truncate =1<br>innodb_undo_tablespaces =2<br>innodb_file_per_table =on<br>innodb_open_files =65535<br>innodb_thread_concurrency =0 # 0<br>innodb_read_io_threads =2<br>innodb_write_io_threads =2<br>innodb_purge_threads =1<br>innodb_page_cleaners =1<br>innodb_print_all_deadlocks =off<br>innodb_lock_wait_timeout =20<br>innodb_autoinc_lock_mode =2<br>innodb_io_capacity =500<br>innodb_io_capacity_max =1000#########################<br>innodb_flush_method =O_DIRECT<br>innodb_log_buffer_size =128M<br>innodb_flush_log_at_trx_commit =1<br>innodb_buffer_pool_size = 128M<br>innodb_buffer_pool_instances = 2<br>#innodb_numa_interleave=on<br>#####################################<br>#######################<br>[client]<br>socket=/data/mysql/mysql.sock<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">7.</span> docker <span class="keyword">restart</span> 容器ID</span><br><span class="line"></span><br><span class="line">   测试连接 </span><br><span class="line"></span><br><span class="line">#### MySQL允许远程连接</span><br><span class="line"></span><br><span class="line">项目中需要连接虚拟机上面的 MySQL 数据库，但是总是出错，怀疑本机是否有连接远程数据库的权限。</span><br><span class="line"></span><br><span class="line">执行命令：</span><br><span class="line"></span><br><span class="line">```<span class="keyword">sql</span></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; <span class="keyword">select</span> host,<span class="keyword">user</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>查看结果是不是 root 用户仅允许本地（localhost）登录，下面这个截图就是这种情况：</p>
+<p><img src="http://hoxis-github-io.qiniudn.com/151212-mysql-root-state.png" alt="mysql-root-state"></p>
+<p>mysql-root-state</p>
+<p>是的话，就要修改它的 host 为 <code>%</code>，表示任意 IP 地址都可以登录。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> update <span class="keyword">user</span> <span class="keyword">set</span> host <span class="operator">=</span> <span class="string">&#x27;%&#x27;</span> <span class="keyword">where</span> <span class="keyword">user</span> <span class="operator">=</span> <span class="string">&#x27;root&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>执行完后可能提示 error。再 <code>mysql&gt; select host,user from user;</code> 查看下吧。</p>
+<p>root 对应的 host 成了 <code>%</code>，表示可以任意 IP 地址登录了。</p>
+<p><img src="http://hoxis-github-io.qiniudn.com/151212-mysql-change-root-state.png" alt="mysql-change-root-state"></p>
+<p>mysql-change-root-state</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> flush privileges;</span><br></pre></td></tr></table></figure>
+
+<p>把缓存 flush 掉，在使用 update 语句修改用户记录后，需要 FLUSH 语句告诉服务器重载授权表。</p>
+<h4 id="记录一些遇到的bug"><a href="#记录一些遇到的bug" class="headerlink" title="记录一些遇到的bug"></a>记录一些遇到的bug</h4><ol>
+<li>1130 - Host ‘118.114.228.223’ is not allowed to connect to this MySQL server</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45675449/article/details/106866700">MySQL 报错：ERROR 1396 (HY000): Operation ALTER USER failed for root@localhost</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/adao21/p/9246569.html">MySQL 登录时出现 Access denied for user ‘root‘@‘localhost‘ (using password: YES) 无法打开的解决方法</a></li>
+<li>❗<a target="_blank" rel="noopener" href="https://blog.csdn.net/attackkk/article/details/104954941">docker 下 mysql 的密码设置</a></li>
+<li>[ERROR] [MY-010095] [Server] Failed to access directory for –secure-file-priv. Please make sure that directory exists and is accessible by MySQL Server. Supplied value : /var/lib/mysql-files</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaogot/article/details/113694332">docker 实战之挂载方式部署 MySQL8  （公司实战）</a></li>
+</ol>
+<h4 id="Others："><a href="#Others：" class="headerlink" title="Others："></a>Others：</h4><!--more-->
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/11/12/20211112-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAMySQL/" title="记录一次服务器搭建MySQL">https://wendaoit.github.io/2021/11/12/20211112-记录一次服务器搭建MySQL/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+			
+		</div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%9E%E6%88%98-mysql-docker-linux/" rel="tag"><i class="fa fa-tag"></i># -实战 -mysql -docker -linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/27/20211027-Git%E5%A4%8D%E4%B9%A0/" rel="prev" title="Git复习">
+      <i class="fa fa-chevron-left"></i> Git复习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/15/20211115-%E5%85%B3%E4%BA%8E%E5%81%A5%E8%BA%AB/" rel="next" title="关于健身.....">
+      关于健身..... <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+  
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E9%81%87%E5%88%B0%E7%9A%84bug"><span class="nav-number">1.</span> <span class="nav-text">记录一些遇到的bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Others%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Others：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zxh"
+      src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">zxh</p>
+  <div class="site-description" itemprop="description">一个记录的blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wenDaoIT" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wenDaoIT" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1362449059@qq.com" title="E-Mail → mailto:1362449059@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	
+    </div>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1387581250&auto=0&height=66"></iframe>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zxh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">72k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:05</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/11/12/20211112-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAMySQL/',]
+      });
+      });
+  </script>
+
+  
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+  
+</body>
+</html>

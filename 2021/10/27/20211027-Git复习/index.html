@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="baidu-site-verification" content="code-0OTk3LxWZX" />
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wendaoit.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="系统的整理一下Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git复习">
+<meta property="og:url" content="https://wendaoit.github.io/2021/10/27/20211027-Git%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="问道IT">
+<meta property="og:description" content="系统的整理一下Git">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027202830969.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027204330960.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027210523876.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027205215099.png">
+<meta property="og:image" content="c:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20211027211605054.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028100945522.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028104132867.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028110717436.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028112659780.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028153432245.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028161839922.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029111113274.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029111543371.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029112355363.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029113034406.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029113647439.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029115150251.png">
+<meta property="og:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029115909354.png">
+<meta property="article:published_time" content="2021-10-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-07T06:53:39.066Z">
+<meta property="article:author" content="zxh">
+<meta property="article:tag" content="-Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027202830969.png">
+
+<link rel="canonical" href="https://wendaoit.github.io/2021/10/27/20211027-Git%E5%A4%8D%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Git复习 | 问道IT</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/click.js"></script>
+<link rel="alternate" href="/atom.xml" title="问道IT" type="application/atom+xml">
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">问道IT</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">       敬畏      Stay Hungry Stay Foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wenDaoIT" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wendaoit.github.io/2021/10/27/20211027-Git%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="一个记录的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="问道IT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+				
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-27 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-27T00:00:00+00:00">2021-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-07 06:53:39" itemprop="dateModified" datetime="2023-03-07T06:53:39+00:00">2023-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git-%E9%9D%A2%E8%AF%95-JAVA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">-Git -面试 -JAVA基础</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>系统的整理一下Git</center>
+
+<span id="more"></span>
+
+<h3 id="git的诞生"><a href="#git的诞生" class="headerlink" title="git的诞生"></a>git的诞生</h3><ul>
+<li>Linux之父linus 想开源使用代码仓库，又觉得当时的其他的不好用，种种原因下 自己花费15天 用C语言写了Git</li>
+<li>推荐读书《just for fun》linus的自传 ，很有意思</li>
+</ul>
+<h3 id="GIT诞生之前有个SVN"><a href="#GIT诞生之前有个SVN" class="headerlink" title="GIT诞生之前有个SVN"></a>GIT诞生之前有个SVN</h3><p>SVN:</p>
+<ul>
+<li>SVN 是一种集中式的版本控制工具。</li>
+<li>所有的客户端将自己的代码上传到中央服务器，中央服务器的版本数据库会保存上传的各个版本的代码，并进行统一管理。</li>
+<li> 这里注意，客户端本身是不存在版本数据库的，所以，如果中央服务器离线或宕机，则集中式版本控制则无法使用。SVN 是一个增量式的版本控制，它不会将整的保存下来，而只会记录下版本之间的差异，然后按照顺序更新或者恢复特定版本的数据。. 这使得服务端的存储量会非常低。</li>
+</ul>
+<p>git：</p>
+<ul>
+<li>GIT是一个分布式的版本控制工具</li>
+<li>每个人的PC都可以有一个版本库；有很好的容灾性；</li>
+</ul>
+<h3 id="先安装一个Windows版"><a href="#先安装一个Windows版" class="headerlink" title="先安装一个Windows版"></a>先安装一个Windows版</h3><p>按照官网安装即可</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>用户名+邮箱（最好跟gitee上一样）</p>
+<p>git config –global user.name “自己的用户名”</p>
+<p>git config –global user.email “自己的邮箱” </p>
+<p>最终在C:\Users\ZXH082600\.gitconfig生成一个配置文件</p>
+<h2 id="本地基操"><a href="#本地基操" class="headerlink" title="本地基操"></a>本地基操</h2><h3 id="初始化（创建版本库）"><a href="#初始化（创建版本库）" class="headerlink" title="初始化（创建版本库）"></a>初始化（创建版本库）</h3><h4 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h4><p>在当前文件夹下创建一个git仓库</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027202830969.png" alt="image-20211027202830969" style="zoom:80%;" />
+
+
+
+<p>在创建一个文件 a.txt</p>
+<p>ls -l 显示total 0   此时只是新建了一个文件，和git并没有关系</p>
+<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027204330960.png" alt="image-20211027204330960" style="zoom:80%;" />
+
+<h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><ol>
+<li><h4 id="git-status-查看文件状态"><a href="#git-status-查看文件状态" class="headerlink" title="git status 查看文件状态"></a>git status 查看文件状态</h4></li>
+<li><p>git add  <file>  将文件添加到 暂存区（生成index索引文件）</p>
+<ul>
+<li>如果报错<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027210523876.png" alt="image-20211027210523876"></li>
+<li>解决办法git config –global core.autocrlf false </li>
+</ul>
+</li>
+<li><p>git commit -m “注释” a.txt   (每次commit都必须写清楚注释)<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211027205215099.png" alt="image-20211027205215099"></p>
+</li>
+</ol>
+<h3 id="查看文件提交记录"><a href="#查看文件提交记录" class="headerlink" title="查看文件提交记录"></a>查看文件提交记录</h3><p>git log a.txt </p>
+<p>git log –pretty=oneline a.txt</p>
+<img src="C:/Users/ZXH082600/AppData/Roaming/Typora/typora-user-images/image-20211027211605054.png" alt="image-20211027211605054" style="zoom:80%;" />
+
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>git reset –hard HEAD^ </p>
+<p>git reset –hard HEAD^ ^^^   （^代表退几步）</p>
+<h3 id="版本穿梭"><a href="#版本穿梭" class="headerlink" title="版本穿梭"></a>版本穿梭</h3><p>git reflog a.txt 查看历史记录的版本号（很详细）</p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028100945522.png" alt="image-20211028100945522"></p>
+<p>git reset –hard ee58290 （指针指向版本号）</p>
+<p>git reset –hard HEAD~4(回退四步)</p>
+<h3 id="撤销修改内容（已修改未add的）"><a href="#撤销修改内容（已修改未add的）" class="headerlink" title="撤销修改内容（已修改未add的）"></a>撤销修改内容（已修改未add的）</h3><p>git checkout – a.txt</p>
+<h3 id="删除某个git文件"><a href="#删除某个git文件" class="headerlink" title="删除某个git文件"></a>删除某个git文件</h3><ol>
+<li> git rm c.txt</li>
+<li>git commit -m “del c.txt”</li>
+</ol>
+<h2 id="谈谈git的三个库（工-暂-本）"><a href="#谈谈git的三个库（工-暂-本）" class="headerlink" title="谈谈git的三个库（工 暂 本）"></a>谈谈git的三个库（工 暂 本）</h2><p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028104132867.png" alt="image-20211028104132867"></p>
+<h2 id="Gits实操之分支"><a href="#Gits实操之分支" class="headerlink" title="Gits实操之分支"></a>Gits实操之分支</h2><ul>
+<li>创建分支<ul>
+<li>git branch查看分支</li>
+<li>git branch 分支名</li>
+</ul>
+</li>
+<li>切换分支<ul>
+<li>git checkout 分支名</li>
+<li>git checkout -b 分支名（创建并切换，如果已存在会报错）</li>
+</ul>
+</li>
+<li>合并分支<ul>
+<li>先切换到主分支 git checkout master</li>
+<li>git merge 目标分支名</li>
+</ul>
+</li>
+<li>删除分支<ul>
+<li>先切换到主分支 git checkout master</li>
+<li>git branch -d 分支名</li>
+</ul>
+</li>
+</ul>
+<h2 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h2><ul>
+<li>冲突一般是指同一个文件同一位置的代码，在两个版本合并时版本管理软件无法判断该保留哪一个版本，因此会提示该文件发生冲突；</li>
+</ul>
+<h3 id="分支覆盖冲突"><a href="#分支覆盖冲突" class="headerlink" title="分支覆盖冲突"></a>分支覆盖冲突</h3><ul>
+<li><p>合并时冲突</p>
+<ul>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028110717436.png" alt="image-20211028110717436"></li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028112659780.png" alt="image-20211028112659780"></li>
+</ul>
+</li>
+<li><p>解决</p>
+<p>​    不可以将其他开发人员的代码 覆盖或者删除；（同步，全部保留；）</p>
+<ul>
+<li>git diff //可以找到发生冲突的文件和内容</li>
+<li>然后修改冲突文件的内容，再次git add 文件 和git commit (无文件名)提交后，后缀merging消失，说明冲突解决</li>
+</ul>
+</li>
+</ul>
+<h3 id="远程服务器冲突"><a href="#远程服务器冲突" class="headerlink" title="远程服务器冲突"></a>远程服务器冲突</h3><ul>
+<li>版本不一致 先pull一个最新版本的，diff 冲突文件中的冲突需要手动处理，再重新add/commit/push</li>
+</ul>
+<h3 id="idea拉取提交冲突"><a href="#idea拉取提交冲突" class="headerlink" title="idea拉取提交冲突"></a>idea拉取提交冲突</h3><h2 id="Gitee云上实操"><a href="#Gitee云上实操" class="headerlink" title="Gitee云上实操"></a>Gitee云上实操</h2><ul>
+<li>创建ssh key<ul>
+<li>ssh-keygen -t rsa -C 你自己用户邮箱</li>
+<li>成功的话会生成.ssh文件夹</li>
+</ul>
+</li>
+<li>打开pub文件。复制全部，复制到gitee公钥</li>
+<li>连通性测试 <ul>
+<li>ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#x74;&#101;&#101;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#x74;&#101;&#101;&#x2e;&#x63;&#111;&#109;</a></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>先在本地初始化创建一个git库  git init</li>
+<li>在gitee中创建一个同名空仓库</li>
+<li>本地操作提示，git remote与远程建立连接<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028153432245.png" alt="image-20211028153432245"></li>
+<li>从服务器拉最新的<ul>
+<li>git pull origin master</li>
+</ul>
+</li>
+<li>新员工入职从远程拉项目<ul>
+<li>git clone origin https:xxxxxx.git</li>
+<li>然后切换到工作目录，开始操作</li>
+</ul>
+</li>
+</ol>
+<h4 id="新员工入职，如何配合工作-取得代码"><a href="#新员工入职，如何配合工作-取得代码" class="headerlink" title="新员工入职，如何配合工作+取得代码"></a>新员工入职，如何配合工作+取得代码</h4><p>git一般工作流程</p>
+<p><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211028161839922.png" alt="image-20211028161839922"></p>
+<h5 id="重点：git-fetch-origin-master查看是否版本冲突"><a href="#重点：git-fetch-origin-master查看是否版本冲突" class="headerlink" title="重点：git fetch origin master查看是否版本冲突"></a>重点：git fetch origin master查看是否版本冲突</h5><ol>
+<li>up to date 版本一致，证明没人改过</li>
+<li>ahead of 你的比服务端新，可以提交</li>
+<li>behind 服务器有更改，<strong>不能直接push  必须先pull 最新的，然后把自己的代码加上再重新fetch</strong></li>
+<li>pull之后自己手动处理冲突然后再提交</li>
+</ol>
+<h3 id="邀请成员协同开发（被动等待邀请）"><a href="#邀请成员协同开发（被动等待邀请）" class="headerlink" title="邀请成员协同开发（被动等待邀请）"></a>邀请成员协同开发（被动等待邀请）</h3><p>要点击确认</p>
+<h3 id="跨团队协作fork（主动fork）"><a href="#跨团队协作fork（主动fork）" class="headerlink" title="跨团队协作fork（主动fork）"></a>跨团队协作fork（主动fork）</h3><p>请求外部专家帮助解决bug</p>
+<ol>
+<li>找到那个项目，点fork</li>
+<li>git clone /add/push等</li>
+<li>新建pull requests</li>
+<li>主项目端会收到审查和测试</li>
+<li>点文件查看diff</li>
+<li>合并分支</li>
+</ol>
+<h3 id="仓库删除"><a href="#仓库删除" class="headerlink" title="仓库删除"></a>仓库删除</h3><p>点击管理–&gt;删除项目—&gt;验证信息</p>
+<h2 id="IDEA整合"><a href="#IDEA整合" class="headerlink" title="IDEA整合"></a>IDEA整合</h2><h3 id="Git配置忽略文件"><a href="#Git配置忽略文件" class="headerlink" title="Git配置忽略文件"></a>Git配置忽略文件</h3><ol>
+<li>自己的用户目录下创建 git.ignore<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029111113274.png" alt="image-20211029111113274"></li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029111543371.png" alt="image-20211029111543371"></li>
+<li>规则<a target="_blank" rel="noopener" href="https://github.com/github/gitignore">https://github.com/github/gitignore</a><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029112355363.png" alt="image-20211029112355363" style="zoom:80%;" /></li>
+<li>设置找到git 配置</li>
+<li>安装gitee插件</li>
+<li>版本控制中有个gitee<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029113034406.png" alt="image-20211029113034406"></li>
+<li>创建一个普通maven项目</li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029113647439.png" alt="image-20211029113647439"></li>
+<li>add /commit<ul>
+<li>这里有个报错，跨平台问题；解决办法（<a target="_blank" rel="noopener" href="https://blog.csdn.net/iamlihongwei/article/details/107518398%EF%BC%89![image-20211029115025959](https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029115025959.png)">https://blog.csdn.net/iamlihongwei/article/details/107518398）![image-20211029115025959](https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029115025959.png)</a></li>
+</ul>
+</li>
+<li> 同步到云端，右击git，点share<img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029115150251.png" alt="image-20211029115150251" style="zoom:50%;" /></li>
+<li><img src="https://2haotong-1301561974.cos.ap-chengdu.myqcloud.com/image-20211029115909354.png" alt="image-20211029115909354"></li>
+</ol>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others:"></a>Others:</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1362941">参考TX Git Code Review 设置与使用</a></li>
+</ul>
+<!--more-->
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zxh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wendaoit.github.io/2021/10/27/20211027-Git%E5%A4%8D%E4%B9%A0/" title="Git复习">https://wendaoit.github.io/2021/10/27/20211027-Git复习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+		<div>
+			
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+			
+		</div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i># -Git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/27/20211027-%E7%BB%A7%E7%BB%AD%E5%AD%A6%E4%B9%A0JUC/" rel="prev" title="继续学习JUC">
+      <i class="fa fa-chevron-left"></i> 继续学习JUC
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/12/20211112-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAMySQL/" rel="next" title="记录一次服务器搭建MySQL">
+      记录一次服务器搭建MySQL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+  
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git%E7%9A%84%E8%AF%9E%E7%94%9F"><span class="nav-number">1.</span> <span class="nav-text">git的诞生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GIT%E8%AF%9E%E7%94%9F%E4%B9%8B%E5%89%8D%E6%9C%89%E4%B8%AASVN"><span class="nav-number">2.</span> <span class="nav-text">GIT诞生之前有个SVN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AAWindows%E7%89%88"><span class="nav-number">3.</span> <span class="nav-text">先安装一个Windows版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%9F%BA%E6%93%8D"><span class="nav-number"></span> <span class="nav-text">本地基操</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">初始化（创建版本库）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-init"><span class="nav-number">1.1.</span> <span class="nav-text">git init</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">提交文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-status-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-number">2.1.</span> <span class="nav-text">git status 查看文件状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">查看文件提交记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">4.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E7%A9%BF%E6%A2%AD"><span class="nav-number">5.</span> <span class="nav-text">版本穿梭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9%E5%86%85%E5%AE%B9%EF%BC%88%E5%B7%B2%E4%BF%AE%E6%94%B9%E6%9C%AAadd%E7%9A%84%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">撤销修改内容（已修改未add的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%9F%90%E4%B8%AAgit%E6%96%87%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">删除某个git文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%88%E8%B0%88git%E7%9A%84%E4%B8%89%E4%B8%AA%E5%BA%93%EF%BC%88%E5%B7%A5-%E6%9A%82-%E6%9C%AC%EF%BC%89"><span class="nav-number"></span> <span class="nav-text">谈谈git的三个库（工 暂 本）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gits%E5%AE%9E%E6%93%8D%E4%B9%8B%E5%88%86%E6%94%AF"><span class="nav-number"></span> <span class="nav-text">Gits实操之分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B2%E7%AA%81"><span class="nav-number"></span> <span class="nav-text">冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E8%A6%86%E7%9B%96%E5%86%B2%E7%AA%81"><span class="nav-number">1.</span> <span class="nav-text">分支覆盖冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%B2%E7%AA%81"><span class="nav-number">2.</span> <span class="nav-text">远程服务器冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#idea%E6%8B%89%E5%8F%96%E6%8F%90%E4%BA%A4%E5%86%B2%E7%AA%81"><span class="nav-number">3.</span> <span class="nav-text">idea拉取提交冲突</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gitee%E4%BA%91%E4%B8%8A%E5%AE%9E%E6%93%8D"><span class="nav-number"></span> <span class="nav-text">Gitee云上实操</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%91%98%E5%B7%A5%E5%85%A5%E8%81%8C%EF%BC%8C%E5%A6%82%E4%BD%95%E9%85%8D%E5%90%88%E5%B7%A5%E4%BD%9C-%E5%8F%96%E5%BE%97%E4%BB%A3%E7%A0%81"><span class="nav-number">0.1.</span> <span class="nav-text">新员工入职，如何配合工作+取得代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E7%82%B9%EF%BC%9Agit-fetch-origin-master%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81"><span class="nav-number">0.1.1.</span> <span class="nav-text">重点：git fetch origin master查看是否版本冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%80%E8%AF%B7%E6%88%90%E5%91%98%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91%EF%BC%88%E8%A2%AB%E5%8A%A8%E7%AD%89%E5%BE%85%E9%82%80%E8%AF%B7%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">邀请成员协同开发（被动等待邀请）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9Cfork%EF%BC%88%E4%B8%BB%E5%8A%A8fork%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">跨团队协作fork（主动fork）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%93%E5%BA%93%E5%88%A0%E9%99%A4"><span class="nav-number">3.</span> <span class="nav-text">仓库删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA%E6%95%B4%E5%90%88"><span class="nav-number"></span> <span class="nav-text">IDEA整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E9%85%8D%E7%BD%AE%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">Git配置忽略文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-number"></span> <span class="nav-text">Others:</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zxh"
+      src="https://1haotong-1301561974.cos.ap-beijing.myqcloud.com/wangcat.gif#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">zxh</p>
+  <div class="site-description" itemprop="description">一个记录的blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wenDaoIT" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wenDaoIT" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1362449059@qq.com" title="E-Mail → mailto:1362449059@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+	
+    </div>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1387581250&auto=0&height=66"></iframe>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zxh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">72k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:05</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://wendaoit.github.io/2021/10/27/20211027-Git%E5%A4%8D%E4%B9%A0/',]
+      });
+      });
+  </script>
+
+  
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+  
+</body>
+</html>
